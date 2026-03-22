@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quel est ton blocage vocal ? — Voice Essence Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-deep:  #1B4B3A;
+      --green-mid:   #2D7A5E;
+      --terra:       #C4845A;
+      --dark:        #2C2825;
+      --breath:      #F5F0E8;
+      --breath-mid:  #EDE5D6;
+      --green-ghost: #E1F5EE;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--breath);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 24px 0;
+    }
+    @media (max-width: 480px) { .page-wrapper { padding: 24px 16px 0; } }
+
+    /* ── TOP SECTION ── */
+    .top-section { text-align: center; margin-bottom: 32px; }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 12px;
+    }
+
+    .main-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(28px, 6vw, 36px);
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .main-headline em { font-style: italic; color: var(--green-deep); }
+
+    .subheadline {
+      font-weight: 300;
+      font-size: 14px;
+      color: #7A706A;
+      line-height: 1.65;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    /* ── QUIZ CARD ── */
+    .quiz-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 0.5px solid #D8CDB5;
+      padding: 32px 28px;
+      box-shadow: 0 4px 24px rgba(27,75,58,0.06);
+    }
+    @media (max-width: 480px) { .quiz-card { padding: 24px 20px; } }
+
+    /* ── LANGUAGE TOGGLE ── */
+    .lang-toggle {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-bottom: 24px;
+    }
+    .lang-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.15s;
+      border: 1px solid var(--green-deep);
+      line-height: 1;
+    }
+    .lang-btn.active        { background: var(--green-deep); color: #fff; }
+    .lang-btn:not(.active)  { background: transparent; color: var(--dark); }
+
+    /* ── PROGRESS BAR ── */
+    .progress-track {
+      height: 3px;
+      background: var(--breath-mid);
+      border-radius: 2px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--green-deep);
+      border-radius: 2px;
+      transition: width 0.35s ease;
+    }
+
+    /* ── QUESTION ── */
+    .question-counter {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #7A706A;
+      margin-bottom: 10px;
+    }
+    .question-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 3.5vw, 21px);
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.4;
+    }
+    .question-hint {
+      font-size: 12px;
+      font-style: italic;
+      color: #7A706A;
+      margin-top: 6px;
+    }
+
+    /* ── OPTIONS ── */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 16px 0 24px;
+    }
+    .option-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 15px;
+      border-radius: 10px;
+      border: 0.5px solid #D8CDB5;
+      background: #FAF8F4;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .option-card:hover { border-color: var(--green-deep); }
+    .option-card.selected {
+      border: 1.5px solid var(--green-deep);
+      background: var(--green-ghost);
+    }
+    .option-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 500;
+      flex-shrink: 0;
+      background: var(--breath-mid);
+      color: #7A706A;
+      transition: background 0.15s, color 0.15s;
+    }
+    .option-card.selected .option-badge { background: var(--green-deep); color: #fff; }
+    .option-text { font-size: 13px; color: var(--dark); line-height: 1.45; }
+
+    /* ── NAVIGATION ── */
+    .nav-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-back {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: var(--dark);
+      background: transparent;
+      border: 1px solid #D8CDB5;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+      margin-right: auto;
+    }
+    .btn-back:hover { border-color: var(--green-deep); }
+
+    .btn-next {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      background: var(--green-deep);
+      border: none;
+      padding: 11px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+    }
+    .btn-next:hover:not(:disabled) { background: var(--green-mid); }
+    .btn-next:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    /* ── RESULT SCREEN ── */
+    .result-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .badge-pill {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .badge-result { background: var(--green-ghost); color: #085041; }
+    .badge-pro    { background: #EDE8F8;            color: #26215C; }
+    .badge-stu    { background: #FAEEDA;            color: #412402; }
+
+    .result-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 24px;
+      color: var(--green-deep);
+      margin-bottom: 12px;
+    }
+    .result-body {
+      font-weight: 300;
+      font-size: 13px;
+      color: #7A706A;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .exercise-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #7A706A;
+      margin-bottom: 4px;
+    }
+    .exercise-box {
+      border-left: 3px solid var(--green-deep);
+      background: var(--breath-mid);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--dark);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .open-loop-box {
+      border: 0.5px solid var(--green-deep);
+      border-radius: 12px;
+      padding: 16px 18px;
+      background: #FAF8F4;
+    }
+    .open-loop-body {
+      font-size: 13px;
+      color: #7A706A;
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .btn-cta {
+      display: block;
+      width: 100%;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 13px;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      transition: opacity 0.15s;
+      text-align: center;
+    }
+    .btn-cta:hover   { opacity: 0.88; }
+    .btn-cta.standard { background: var(--green-deep); }
+    .btn-cta.course   { background: var(--terra); }
+
+    .guarantee-note {
+      font-size: 11px;
+      color: #A89E97;
+      text-align: center;
+      margin-top: 6px;
+    }
+    .btn-restart {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: #A89E97;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin: 14px auto 0;
+      text-align: center;
+    }
+    .btn-restart:hover { color: var(--dark); }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: #A89E97;
+      padding: 24px 0 40px;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- TOP SECTION -->
+  <div class="top-section">
+    <div class="eyebrow">Voice Essence Academy</div>
+    <h1 class="main-headline" id="main-headline"></h1>
+    <p class="subheadline" id="subheadline"></p>
+    <p id="credibility-line" style="
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      font-style: italic;
+      color: #7A706A;
+      margin: 0 auto 28px;
+      max-width: 440px;
+      line-height: 1.6;
+    ">
+      <span class="cred-fr">Créé par Mamselle Ruiz Coach — 25 ans d'expérience · plus de 1 000 voix accompagnées · méthode biomécanique personnalisée</span>
+      <span class="cred-es" style="display:none;">Creado por Mamselle Ruiz Coach — 25 años de experiencia · más de 1 000 voces acompañadas · método biomecánico personalizado</span>
+    </p>
+  </div>
+
+  <!-- QUIZ CARD -->
+  <div class="quiz-card">
+
+    <!-- Language toggle -->
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-fr" onclick="handleLangToggle('fr')">Français</button>
+      <button class="lang-btn"        id="btn-es" onclick="handleLangToggle('es')">Español</button>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="question-counter" id="question-counter"></div>
+      <div class="question-text"    id="question-text"></div>
+      <div class="question-hint"    id="question-hint" style="display:none"></div>
+      <div class="options-list"     id="options-container"></div>
+      <div class="nav-row">
+        <button class="btn-back" id="btn-back" onclick="handleBack()" style="display:none">← Retour</button>
+        <button class="btn-next" id="btn-next" onclick="handleNext()" disabled>Continuer</button>
+      </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="result-screen" style="display:none">
+      <div id="score-arc-container"></div>
+      <div class="result-badges">
+        <span class="badge-pill badge-result" id="result-badge-label"></span>
+        <span class="badge-pill badge-stu"    id="profile-badge"></span>
+      </div>
+      <div class="result-title" id="result-title"></div>
+      <div class="result-body"  id="result-body"></div>
+      <div class="exercise-label" id="exercise-label"></div>
+      <div class="exercise-box"   id="exercise-box"></div>
+      <div class="open-loop-box">
+        <div class="open-loop-body" id="open-loop-body"></div>
+        <button class="btn-cta standard" id="btn-cta"></button>
+        <div class="guarantee-note"     id="guarantee-note"></div>
+      </div>
+      <button class="btn-restart" id="btn-restart" onclick="handleRestart()"></button>
+    </div>
+
+  </div><!-- /quiz-card -->
+
+  <div class="footer">© 2026 Voice Essence Academy · Mamselle Ruiz Coach</div>
+</div><!-- /page-wrapper -->
+
+<script>
+// ================================================================
+// CONFIGURATION — replace these two URLs before deploying
+// ================================================================
+const PAYWALL_URL_STANDARD    = 'YOUR_STANDARD_PAYWALL_URL_HERE';
+const PAYWALL_URL_COURSE_ONLY = 'YOUR_COURSE_ONLY_PAYWALL_URL_HERE';
+
+// ================================================================
+// QUESTIONS
+// ================================================================
+const QUESTIONS = [
+  {
+    id: 0, type: 'single',
+    fr: {
+      text: "Pour commencer — comment utilises-tu ta voix principalement ?",
+      options: [
+        "Professionnellement : je coache, enseigne, thérapise ou prends la parole en public",
+        "Je crée du contenu : podcasts, vidéos, réseaux sociaux",
+        "Je chante : en amateur, en cours ou sur scène",
+        "Je veux simplement que ma voix me ressemble et me représente"
+      ]
+    },
+    es: {
+      text: "Para empezar — ¿cómo usas principalmente tu voz?",
+      options: [
+        "Profesionalmente: hago coaching, enseño, terapia o hablo en público",
+        "Creo contenido: podcasts, videos, redes sociales",
+        "Canto: amateur, en clases o en escenario",
+        "Simplemente quiero que mi voz me represente y suene como yo"
+      ]
+    }
+  },
+  {
+    id: 1, type: 'multi', maxSelect: 2,
+    fr: {
+      text: "Comment ta voix te limite-t-elle concrètement ?",
+      hint: "Sélectionne jusqu'à 2 réponses.",
+      options: [
+        "Elle se fatigue ou se voile rapidement",
+        "Elle manque de puissance ou de projection",
+        "Elle sonne tendue, serrée ou forcée",
+        "Elle change, tremble ou se ferme sous stress",
+        "Elle ne me représente pas — je ne me reconnais pas en elle"
+      ]
+    },
+    es: {
+      text: "¿Cómo te limita tu voz concretamente?",
+      hint: "Selecciona hasta 2 respuestas.",
+      options: [
+        "Se cansa o se oscurece rápidamente",
+        "Le falta potencia o proyección",
+        "Suena tensa, apretada o forzada",
+        "Cambia, tiembla o se cierra bajo estrés",
+        "No me representa — no me reconozco en ella"
+      ]
+    }
+  },
+  {
+    id: 2, type: 'single',
+    fr: {
+      text: "Dans quel contexte ça arrive le plus souvent ?",
+      options: [
+        "Lors de longues journées de travail vocal",
+        "En prise de parole publique ou moment important",
+        "À la caméra ou au micro",
+        "Quand je suis stressé·e ou sous pression émotionnelle"
+      ]
+    },
+    es: {
+      text: "¿En qué contexto ocurre más?",
+      options: [
+        "En largas jornadas de trabajo vocal",
+        "En presentaciones públicas o momentos importantes",
+        "Frente a cámara o micrófono",
+        "Cuando estoy bajo estrés o presión emocional"
+      ]
+    }
+  },
+  {
+    id: 3, type: 'multi', maxSelect: null,
+    fr: {
+      text: "Qu'as-tu déjà essayé pour améliorer ta voix ?",
+      hint: "Sélectionne tout ce qui s'applique.",
+      options: [
+        "Des vidéos YouTube ou exercices gratuits",
+        "Des cours particuliers ou un coach",
+        "Des exercices de souffle ou de respiration",
+        "Rien encore — je ne savais pas par où commencer"
+      ]
+    },
+    es: {
+      text: "¿Qué has intentado ya para mejorar tu voz?",
+      hint: "Selecciona todo lo que aplique.",
+      options: [
+        "Videos de YouTube o ejercicios gratuitos",
+        "Clases particulares o un coach",
+        "Ejercicios de respiración o diafragma",
+        "Nada todavía — no sabía por dónde empezar"
+      ]
+    }
+  },
+  {
+    id: 4, type: 'single',
+    fr: {
+      text: "Ce qui décrit le mieux ta frustration :",
+      options: [
+        "J'ai essayé des choses mais rien ne change vraiment",
+        "Je ne sais pas ce qui bloque exactement",
+        "Ma voix ne projette pas ce que je suis intérieurement",
+        "Ma voix est imprévisible — parfois ça marche, parfois non"
+      ]
+    },
+    es: {
+      text: "Lo que mejor describe tu frustración:",
+      options: [
+        "He probado cosas pero nada cambia realmente",
+        "No sé qué es exactamente lo que bloquea mi voz",
+        "Mi voz no proyecta lo que soy por dentro",
+        "Mi voz es impredecible — a veces funciona, a veces no"
+      ]
+    }
+  },
+  {
+    id: 5, type: 'single',
+    fr: {
+      text: "Ce que tu veux vraiment, c'est…",
+      options: [
+        "Une voix sans fatigue qui tient toute la journée",
+        "Comprendre la mécanique exacte de mon blocage et y remédier",
+        "Une voix qui me ressemble et me représente vraiment",
+        "Parler ou chanter sans peur ni blocage"
+      ]
+    },
+    es: {
+      text: "Lo que realmente quieres es…",
+      options: [
+        "Una voz sin fatiga que aguante todo el día",
+        "Entender la mecánica exacta de mi bloqueo y remediarlo",
+        "Una voz que me represente y suene como yo",
+        "Hablar o cantar sin miedo ni bloqueo"
+      ]
+    }
+  }
+];
+
+// ================================================================
+// SCORING MAPS
+// 0=mandibulaire  1=souffle  2=nerveux  3=identite
+// ================================================================
+const SINGLE_SCORE = {
+  2: [1, 2, 3, 0],
+  4: [0, 2, 3, 1],
+  5: [1, 0, 3, 2]
+};
+const MULTI_SCORE = {
+  1: [0, 1, 0, 2, 3],
+  3: [0, 0, 1, 3]
+};
+const RESULT_KEYS = ['mandibulaire', 'souffle', 'nerveux', 'identite'];
+
+// ================================================================
+// RESULTS DATA
+// ================================================================
+const RESULTS = {
+  fr: {
+    pro: {
+      mandibulaire: {
+        title: "Blocage Mandibulaire",
+        body: "Ta mâchoire accumule la tension de chaque session, chaque présentation, chaque moment chargé. Quand elle se serre — souvent inconsciemment — elle réduit ta résonance, force ta gorge à compenser, et crée une fatigue qui n'a rien à voir avec ton endurance. Ce n'est pas une fragilité. C'est un pattern biomécanique précis, et il se libère.",
+        exercise: "<strong>L'ouverture consciente :</strong> Pose deux doigts sur ta mâchoire, juste devant tes oreilles. Ouvre doucement — 2 cm seulement. Reste 10 secondes. Remarque si un côté est plus serré que l'autre. Ferme. Répète 3 fois.",
+        standardOpenLoop: "Ce quiz identifie le <strong>type</strong> de blocage. Pas ton expression personnelle.<br><br>Deux personnes avec un blocage mandibulaire peuvent avoir des patterns complètement différents dans leur corps. C'est pourquoi les exercices génériques ne fonctionnent pas — ils ne connaissent pas <em>ta</em> voix.<br><br>Le <strong>Protocole de Libération Vocale</strong> commence par ton diagnostic spécifique. 7 jours. Garantie de résultat.",
+        courseOpenLoop: "Tu veux comprendre la mécanique. C'est exactement ce que fait Le Protocole de Libération Vocale.<br><br>7 jours de travail calibré sur TON blocage spécifique — pas sur tout le monde. La mécanique, le pourquoi, et la méthode pour le libérer durablement.",
+        standardCta: "Découvrir Le Protocole — $47",
+        courseCta: "Accéder au Protocole de Libération Vocale — $47",
+        ctaSub: "Garantie 7 jours : aucune différence ressentie = remboursement intégral."
+      },
+      souffle: {
+        title: "Blocage du Souffle",
+        body: "Tu utilises une respiration compensatoire depuis longtemps — et ton corps s'y est adapté. Résultat : ta voix perd en puissance après 20-30 minutes, tu manques d'air au mauvais moment, et tu forces là où tu devrais avoir du flux. Ce n'est pas un manque d'endurance. C'est un pattern respiratoire qui se recalibre.",
+        exercise: "<strong>Le scan respiratoire :</strong> Pose une main sur la poitrine, une sur le ventre. Prends une respiration normale — sans forcer. Quelle main bouge en premier ? Si c'est celle de la poitrine, tu utilises une respiration haute compensatoire. C'est le point de départ.",
+        standardOpenLoop: "Ce quiz identifie le <strong>type</strong> de blocage. Pas ton expression personnelle.<br><br>Deux personnes avec un blocage du souffle peuvent avoir des patterns respiratoires complètement différents. C'est pourquoi les exercices génériques ne changent rien durablement.<br><br>Le <strong>Protocole de Libération Vocale</strong> identifie TON pattern spécifique en 7 jours.",
+        courseOpenLoop: "Tu veux comprendre la mécanique de ta respiration vocale. C'est précisément ce que Le Protocole enseigne.<br><br>Pas juste « respirez avec le ventre ». La biomécanique exacte de TON souffle — et comment le recalibrer.",
+        standardCta: "Découvrir Le Protocole — $47",
+        courseCta: "Accéder au Protocole de Libération Vocale — $47",
+        ctaSub: "Garantie 7 jours : aucune différence ressentie = remboursement intégral."
+      },
+      nerveux: {
+        title: "Blocage du Système Nerveux",
+        body: "Ta voix change sous pression non pas par manque de confiance, mais parce que ton système nerveux déclenche une réponse automatique de protection. Cette réponse encode une tension dans ton tissu vocal. Comprendre le mécanisme neurologique, c'est la première étape pour le neutraliser — pas le « gérer ».",
+        exercise: "<strong>Le ralentisseur nerveux :</strong> Avant de parler ou chanter, expire lentement pendant 6 secondes. Pas d'inspiration forcée — juste une longue expiration lente. Répète 3 fois. Remarque ce qui change dans ta gorge et tes épaules.",
+        standardOpenLoop: "Ce quiz identifie le <strong>type</strong> de blocage. Pas ton expression personnelle.<br><br>Deux personnes avec un blocage nerveux peuvent avoir des déclencheurs et des patterns corporels complètement différents.<br><br>Le <strong>Protocole de Libération Vocale</strong> combine biomécanique et régulation nerveuse pour TON pattern spécifique.",
+        courseOpenLoop: "Tu veux comprendre pourquoi ton système nerveux affecte ta voix — et comment l'adresser mécaniquement.<br><br>Le Protocole couvre exactement ça : la neurologie vocale appliquée à TON cas.",
+        standardCta: "Découvrir Le Protocole — $47",
+        courseCta: "Accéder au Protocole de Libération Vocale — $47",
+        ctaSub: "Garantie 7 jours : aucune différence ressentie = remboursement intégral."
+      },
+      identite: {
+        title: "Blocage d'Identité Vocale",
+        body: "Ta voix ne projette pas l'autorité que tu as intérieurement. Ce décalage n'est pas psychologique — il est physique. Des années de messages sur « comment tu devrais sonner » ont façonné la façon dont tu tiens ta gorge, dont tu places ta voix. Ce blocage se libère, et quand il le fait, les gens autour de toi le remarquent avant toi.",
+        exercise: "<strong>L'écoute sans jugement :</strong> Enregistre-toi en disant ou en chantant une phrase. Écoute sans critiquer — juste observer. Demande-toi : est-ce que cette voix ressemble à comment je me vis intérieurement ? Si non, c'est le gap que Le Protocole commence à mesurer et à réduire.",
+        standardOpenLoop: "Ce quiz identifie le <strong>type</strong> de blocage. Pas son expression dans ta voix spécifiquement.<br><br>Le décalage identité-voix a une origine biomécanique précise pour chaque personne — ce n'est pas le même travail pour tout le monde.<br><br>Le <strong>Protocole de Libération Vocale</strong> commence là où ce quiz s'arrête.",
+        courseOpenLoop: "Tu veux comprendre mécaniquement pourquoi ta voix ne te ressemble pas encore.<br><br>Le Protocole de Libération Vocale explique exactement quels mécanismes physiques créent ce décalage — et comment les adresser.",
+        standardCta: "Découvrir Le Protocole — $47",
+        courseCta: "Accéder au Protocole de Libération Vocale — $47",
+        ctaSub: "Garantie 7 jours : aucune différence ressentie = remboursement intégral."
+      }
+    },
+    stu: {
+      mandibulaire: {
+        title: "Blocage Mandibulaire",
+        body: "La mâchoire est le saboteur le plus sous-estimé de la voix. Quand elle est chroniquement tendue — souvent sans que tu le sentes — elle bloque la résonance, empêche les harmoniques de se déployer et rend certaines notes inaccessibles. Ce n'est pas un manque de talent. C'est un pattern biomécanique qui se libère.",
+        exercise: "<strong>L'ouverture consciente :</strong> Pose deux doigts sur ta mâchoire, juste devant tes oreilles. Ouvre doucement — 2 cm seulement. Reste 10 secondes. Remarque si un côté est plus serré que l'autre. Ferme. Répète 3 fois.",
+        standardOpenLoop: "Ce quiz identifie le <strong>type</strong> de blocage. Pas ton expression personnelle.<br><br>Deux personnes avec un blocage mandibulaire peuvent avoir des patterns complètement différents dans leur corps. C'est pourquoi les exercices génériques ne fonctionnent pas — ils ne connaissent pas <em>ta</em> voix.<br><br>Le <strong>Protocole de Libération Vocale</strong> commence par ton diagnostic spécifique. 7 jours. Garantie de résultat.",
+        courseOpenLoop: "Tu veux comprendre la mécanique. C'est exactement ce que fait Le Protocole de Libération Vocale.<br><br>7 jours de travail calibré sur TON blocage spécifique — pas sur tout le monde. La mécanique, le pourquoi, et la méthode pour le libérer durablement.",
+        standardCta: "Découvrir Le Protocole — $47",
+        courseCta: "Accéder au Protocole de Libération Vocale — $47",
+        ctaSub: "Garantie 7 jours : aucune différence ressentie = remboursement intégral."
+      },
+      souffle: {
+        title: "Blocage du Souffle",
+        body: "Ton pattern respiratoire compense quelque chose — et tu t'y es habitué·e. Le résultat : fatigue vocale rapide, notes aiguës difficiles à soutenir, voix qui perd de la couleur sur la durée. Recalibrer ce pattern change plus de choses dans ta voix que n'importe quel exercice de chant.",
+        exercise: "<strong>Le scan respiratoire :</strong> Pose une main sur la poitrine, une sur le ventre. Prends une respiration normale — sans forcer. Quelle main bouge en premier ? Si c'est celle de la poitrine, tu utilises une respiration haute compensatoire. C'est le point de départ.",
+        standardOpenLoop: "Ce quiz identifie le <strong>type</strong> de blocage. Pas ton expression personnelle.<br><br>Deux personnes avec un blocage du souffle peuvent avoir des patterns respiratoires complètement différents. C'est pourquoi les exercices génériques ne changent rien durablement.<br><br>Le <strong>Protocole de Libération Vocale</strong> identifie TON pattern spécifique en 7 jours.",
+        courseOpenLoop: "Tu veux comprendre la mécanique de ta respiration vocale. C'est précisément ce que Le Protocole enseigne.<br><br>Pas juste « respirez avec le ventre ». La biomécanique exacte de TON souffle — et comment le recalibrer.",
+        standardCta: "Découvrir Le Protocole — $47",
+        courseCta: "Accéder au Protocole de Libération Vocale — $47",
+        ctaSub: "Garantie 7 jours : aucune différence ressentie = remboursement intégral."
+      },
+      nerveux: {
+        title: "Blocage du Système Nerveux",
+        body: "Quand ta voix tremble, se ferme ou perd de la fluidité sous le regard des autres ou devant un micro, ton système nerveux est en mode protection. Ce n'est pas de la timidité. C'est physiologique. Et c'est exactement le type de blocage qui répond le mieux à une approche qui combine biomécanique et régulation nerveuse.",
+        exercise: "<strong>Le ralentisseur nerveux :</strong> Avant de parler ou chanter, expire lentement pendant 6 secondes. Pas d'inspiration forcée — juste une longue expiration lente. Répète 3 fois. Remarque ce qui change dans ta gorge et tes épaules.",
+        standardOpenLoop: "Ce quiz identifie le <strong>type</strong> de blocage. Pas ton expression personnelle.<br><br>Deux personnes avec un blocage nerveux peuvent avoir des déclencheurs et des patterns corporels complètement différents.<br><br>Le <strong>Protocole de Libération Vocale</strong> combine biomécanique et régulation nerveuse pour TON pattern spécifique.",
+        courseOpenLoop: "Tu veux comprendre pourquoi ton système nerveux affecte ta voix — et comment l'adresser mécaniquement.<br><br>Le Protocole couvre exactement ça : la neurologie vocale appliquée à TON cas.",
+        standardCta: "Découvrir Le Protocole — $47",
+        courseCta: "Accéder au Protocole de Libération Vocale — $47",
+        ctaSub: "Garantie 7 jours : aucune différence ressentie = remboursement intégral."
+      },
+      identite: {
+        title: "Blocage d'Identité Vocale",
+        body: "Ta voix ne sonne pas comme toi — et tu le sens. Il y a un écart entre qui tu es et ce que ta voix exprime. Ce n'est pas abstrait : c'est la façon dont tu places ta voix, dont tu gères ton souffle, influencée par des années d'écoute et de comparaison. Ce blocage se libère quand on identifie exactement ce qui crée le décalage.",
+        exercise: "<strong>L'écoute sans jugement :</strong> Enregistre-toi en disant ou en chantant une phrase. Écoute sans critiquer — juste observer. Demande-toi : est-ce que cette voix ressemble à comment je me vis intérieurement ? Si non, c'est le gap que Le Protocole commence à mesurer et à réduire.",
+        standardOpenLoop: "Ce quiz identifie le <strong>type</strong> de blocage. Pas son expression dans ta voix spécifiquement.<br><br>Le décalage identité-voix a une origine biomécanique précise pour chaque personne — ce n'est pas le même travail pour tout le monde.<br><br>Le <strong>Protocole de Libération Vocale</strong> commence là où ce quiz s'arrête.",
+        courseOpenLoop: "Tu veux comprendre mécaniquement pourquoi ta voix ne te ressemble pas encore.<br><br>Le Protocole de Libération Vocale explique exactement quels mécanismes physiques créent ce décalage — et comment les adresser.",
+        standardCta: "Découvrir Le Protocole — $47",
+        courseCta: "Accéder au Protocole de Libération Vocale — $47",
+        ctaSub: "Garantie 7 jours : aucune différence ressentie = remboursement intégral."
+      }
+    }
+  },
+  es: {
+    pro: {
+      mandibulaire: {
+        title: "Bloqueo Mandibular",
+        body: "Tu mandíbula acumula la tensión de cada sesión, cada presentación, cada momento cargado. Cuando se aprieta — a menudo inconscientemente — reduce tu resonancia, fuerza a la garganta a compensar y crea una fatiga que no tiene nada que ver con tu resistencia. No es fragilidad. Es un patrón biomecánico preciso, y se libera.",
+        exercise: "<strong>La apertura consciente:</strong> Pon dos dedos en la mandíbula, frente a las orejas. Abre suavemente — solo 2 cm. Quédate 10 segundos. Nota si un lado está más tenso. Cierra. Repite 3 veces.",
+        standardOpenLoop: "Este quiz identifica el <strong>tipo</strong> de bloqueo. No tu expresión personal.<br><br>Dos personas con un bloqueo mandibular pueden tener patrones completamente diferentes. Por eso los ejercicios genéricos no funcionan — no conocen <em>tu</em> voz.<br><br><strong>Tu Voz Liberada</strong> empieza con tu diagnóstico específico. 7 días. Garantía de resultado.",
+        courseOpenLoop: "Quieres entender la mecánica. Eso es exactamente lo que hace Tu Voz Liberada.<br><br>7 días de trabajo calibrado para TU bloqueo específico — no para todos. La mecánica, el porqué, y el método para liberarlo de forma duradera.",
+        standardCta: "Descubrir Tu Voz Liberada — $47",
+        courseCta: "Acceder a Tu Voz Liberada — $47",
+        ctaSub: "Garantía 7 días: sin diferencia = reembolso completo."
+      },
+      souffle: {
+        title: "Bloqueo de Respiración",
+        body: "Usas una respiración compensatoria desde hace tiempo — y tu cuerpo se adaptó. Resultado: la voz pierde potencia después de 20-30 minutos, te quedas sin aire en el momento equivocado. No es falta de resistencia. Es un patrón respiratorio que se recalibra.",
+        exercise: "<strong>El escaneo respiratorio:</strong> Una mano en el pecho, otra en el vientre. Respiración normal. ¿Qué mano se mueve primero? Si es la del pecho, usas una respiración alta compensatoria. Ese es el punto de partida.",
+        standardOpenLoop: "Este quiz identifica el <strong>tipo</strong> de bloqueo. No tu expresión personal.<br><br>Dos personas con un bloqueo de respiración pueden tener patrones completamente diferentes. Por eso los ejercicios genéricos no cambian nada de forma duradera.<br><br><strong>Tu Voz Liberada</strong> identifica TU patrón específico en 7 días.",
+        courseOpenLoop: "Quieres entender la mecánica de tu respiración vocal. Es exactamente lo que enseña el Protocolo.<br><br>No solo «respira con el vientre». La biomecánica exacta de TU respiración — y cómo recalibrarla.",
+        standardCta: "Descubrir Tu Voz Liberada — $47",
+        courseCta: "Acceder a Tu Voz Liberada — $47",
+        ctaSub: "Garantía 7 días: sin diferencia = reembolso completo."
+      },
+      nerveux: {
+        title: "Bloqueo del Sistema Nervioso",
+        body: "Tu voz cambia bajo presión no por falta de confianza, sino porque el sistema nervioso activa una respuesta automática de protección. Esta respuesta codifica tensión en el tejido vocal. Entender el mecanismo neurológico es el primer paso para neutralizarlo — no solo «manejarlo».",
+        exercise: "<strong>El desacelerador nervioso:</strong> Antes de hablar o cantar, espira lentamente durante 6 segundos. Sin inspiración forzada — solo una larga expiración lenta. 3 veces. Nota qué cambia en tu garganta y hombros.",
+        standardOpenLoop: "Este quiz identifica el <strong>tipo</strong> de bloqueo. No tu expresión personal.<br><br>Dos personas con un bloqueo nervioso pueden tener desencadenantes y patrones corporales completamente diferentes.<br><br><strong>Tu Voz Liberada</strong> combina biomecánica y regulación nerviosa para TU patrón específico.",
+        courseOpenLoop: "Quieres entender por qué tu sistema nervioso afecta tu voz — y cómo abordarlo mecánicamente.<br><br>El Protocolo cubre exactamente eso: la neurología vocal aplicada a TU caso.",
+        standardCta: "Descubrir Tu Voz Liberada — $47",
+        courseCta: "Acceder a Tu Voz Liberada — $47",
+        ctaSub: "Garantía 7 días: sin diferencia = reembolso completo."
+      },
+      identite: {
+        title: "Bloqueo de Identidad Vocal",
+        body: "Tu voz no proyecta la autoridad que tienes por dentro. Este desfase no es psicológico — es físico. Años de mensajes sobre «cómo deberías sonar» han moldeado la forma en que sostienes la garganta. Este bloqueo se libera, y cuando lo hace, los demás lo notan antes que tú.",
+        exercise: "<strong>La escucha sin juicio:</strong> Grábate diciendo o cantando una frase. Escucha sin criticar — solo observar. Pregúntate: ¿esta voz se parece a cómo me vivo por dentro? Si no, esa es la brecha que el Protocolo empieza a medir y reducir.",
+        standardOpenLoop: "Este quiz identifica el <strong>tipo</strong> de bloqueo. No su expresión en tu voz específicamente.<br><br>El desfase identidad-voz tiene un origen biomecánico preciso para cada persona — no es el mismo trabajo para todos.<br><br><strong>Tu Voz Liberada</strong> empieza donde este quiz termina.",
+        courseOpenLoop: "Quieres entender mecánicamente por qué tu voz aún no te suena como tú.<br><br>Tu Voz Liberada explica exactamente qué mecanismos físicos crean ese desfase — y cómo abordarlos.",
+        standardCta: "Descubrir Tu Voz Liberada — $47",
+        courseCta: "Acceder a Tu Voz Liberada — $47",
+        ctaSub: "Garantía 7 días: sin diferencia = reembolso completo."
+      }
+    },
+    stu: {
+      mandibulaire: {
+        title: "Bloqueo Mandibular",
+        body: "La mandíbula es el saboteador más subestimado de la voz. Cuando está crónicamente tensa — muchas veces sin sentirlo — bloquea la resonancia, impide que los armónicos se desplieguen y hace que ciertas notas sean inaccesibles. No es falta de talento. Es un patrón biomecánico que se libera.",
+        exercise: "<strong>La apertura consciente:</strong> Pon dos dedos en la mandíbula, frente a las orejas. Abre suavemente — solo 2 cm. Quédate 10 segundos. Nota si un lado está más tenso. Cierra. Repite 3 veces.",
+        standardOpenLoop: "Este quiz identifica el <strong>tipo</strong> de bloqueo. No tu expresión personal.<br><br>Dos personas con un bloqueo mandibular pueden tener patrones completamente diferentes. Por eso los ejercicios genéricos no funcionan — no conocen <em>tu</em> voz.<br><br><strong>Tu Voz Liberada</strong> empieza con tu diagnóstico específico. 7 días. Garantía de resultado.",
+        courseOpenLoop: "Quieres entender la mecánica. Eso es exactamente lo que hace Tu Voz Liberada.<br><br>7 días de trabajo calibrado para TU bloqueo específico — no para todos. La mecánica, el porqué, y el método para liberarlo de forma duradera.",
+        standardCta: "Descubrir Tu Voz Liberada — $47",
+        courseCta: "Acceder a Tu Voz Liberada — $47",
+        ctaSub: "Garantía 7 días: sin diferencia = reembolso completo."
+      },
+      souffle: {
+        title: "Bloqueo de Respiración",
+        body: "Tu patrón respiratorio compensa algo — y te has acostumbrado. El resultado: fatiga vocal rápida, notas agudas difíciles de sostener, voz que pierde color con el tiempo. Recalibrar este patrón cambia más tu voz que cualquier ejercicio de canto.",
+        exercise: "<strong>El escaneo respiratorio:</strong> Una mano en el pecho, otra en el vientre. Respiración normal. ¿Qué mano se mueve primero? Si es la del pecho, usas una respiración alta compensatoria. Ese es el punto de partida.",
+        standardOpenLoop: "Este quiz identifica el <strong>tipo</strong> de bloqueo. No tu expresión personal.<br><br>Dos personas con un bloqueo de respiración pueden tener patrones completamente diferentes. Por eso los ejercicios genéricos no cambian nada de forma duradera.<br><br><strong>Tu Voz Liberada</strong> identifica TU patrón específico en 7 días.",
+        courseOpenLoop: "Quieres entender la mecánica de tu respiración vocal. Es exactamente lo que enseña el Protocolo.<br><br>No solo «respira con el vientre». La biomecánica exacta de TU respiración — y cómo recalibrarla.",
+        standardCta: "Descubrir Tu Voz Liberada — $47",
+        courseCta: "Acceder a Tu Voz Liberada — $47",
+        ctaSub: "Garantía 7 días: sin diferencia = reembolso completo."
+      },
+      nerveux: {
+        title: "Bloqueo del Sistema Nervioso",
+        body: "Cuando tu voz tiembla, se cierra o pierde fluidez bajo la mirada de otros o frente a un micrófono, el sistema nervioso está en modo protección. No es timidez. Es fisiológico. Y es exactamente el tipo de bloqueo que mejor responde a un enfoque que combina biomecánica y regulación nerviosa.",
+        exercise: "<strong>El desacelerador nervioso:</strong> Antes de hablar o cantar, espira lentamente durante 6 segundos. Sin inspiración forzada — solo una larga expiración lenta. 3 veces. Nota qué cambia en tu garganta y hombros.",
+        standardOpenLoop: "Este quiz identifica el <strong>tipo</strong> de bloqueo. No tu expresión personal.<br><br>Dos personas con un bloqueo nervioso pueden tener desencadenantes y patrones corporales completamente diferentes.<br><br><strong>Tu Voz Liberada</strong> combina biomecánica y regulación nerviosa para TU patrón específico.",
+        courseOpenLoop: "Quieres entender por qué tu sistema nervioso afecta tu voz — y cómo abordarlo mecánicamente.<br><br>El Protocolo cubre exactamente eso: la neurología vocal aplicada a TU caso.",
+        standardCta: "Descubrir Tu Voz Liberada — $47",
+        courseCta: "Acceder a Tu Voz Liberada — $47",
+        ctaSub: "Garantía 7 días: sin diferencia = reembolso completo."
+      },
+      identite: {
+        title: "Bloqueo de Identidad Vocal",
+        body: "Tu voz no suena como tú — y lo sientes. Hay una brecha entre quién eres y lo que expresa tu voz. No es abstracto: es la forma en que colocas la voz, influenciada por años de escuchar y compararte. Este bloqueo se libera cuando se identifica exactamente qué crea el desfase.",
+        exercise: "<strong>La escucha sin juicio:</strong> Grábate diciendo o cantando una frase. Escucha sin criticar — solo observar. Pregúntate: ¿esta voz se parece a cómo me vivo por dentro? Si no, esa es la brecha que el Protocolo empieza a medir y reducir.",
+        standardOpenLoop: "Este quiz identifica el <strong>tipo</strong> de bloqueo. No su expresión en tu voz específicamente.<br><br>El desfase identidad-voz tiene un origen biomecánico preciso para cada persona — no es el mismo trabajo para todos.<br><br><strong>Tu Voz Liberada</strong> empieza donde este quiz termina.",
+        courseOpenLoop: "Quieres entender mecánicamente por qué tu voz aún no te suena como tú.<br><br>Tu Voz Liberada explica exactamente qué mecanismos físicos crean ese desfase — y cómo abordarlos.",
+        standardCta: "Descubrir Tu Voz Liberada — $47",
+        courseCta: "Acceder a Tu Voz Liberada — $47",
+        ctaSub: "Garantía 7 días: sin diferencia = reembolso completo."
+      }
+    }
+  }
+};
+
+// ================================================================
+// Q2 TRIGGER LOOKUP
+// ================================================================
+var Q2_TRIGGER = {
+  fr: [
+    "Ton déclencheur principal : les longues journées de travail vocal, là où la compensation s'accumule heure après heure.",
+    "Ton déclencheur principal : les moments à fort enjeu — quand l'enjeu monte, ton corps serre avant même que tu parles.",
+    "Ton déclencheur principal : la caméra et le micro — la présence d'un enregistrement active une réponse physique automatique.",
+    "Ton déclencheur principal : le stress émotionnel — ton système nerveux encode la tension avant même que tu commences."
+  ],
+  es: [
+    "Tu desencadenante principal: las largas jornadas de trabajo vocal, donde la compensación se acumula hora tras hora.",
+    "Tu desencadenante principal: los momentos de alta presión — cuando la apuesta sube, tu cuerpo se tensa antes de hablar.",
+    "Tu desencadenante principal: la cámara y el micrófono — la presencia de una grabación activa una respuesta física automática.",
+    "Tu desencadenante principal: el estrés emocional — tu sistema nervioso codifica la tensión antes de que empieces."
+  ]
+};
+
+// ================================================================
+// Q4 COST-OF-INACTION LOOKUP
+// ================================================================
+var Q4_COST = {
+  fr: [
+    "Sans intervention ciblée, ce pattern se renforce à chaque utilisation. Dans 6 mois, les compensations seront plus profondément ancrées — pas moins.",
+    "Le blocage non identifié est le blocage qui dure. Sans nom précis, tu ne peux pas le cibler — et il reste.",
+    "Ce décalage entre voix intérieure et voix exprimée coûte en présence, en autorité perçue, et en opportunités manquées chaque jour.",
+    "L'imprévisibilité vocale génère une méfiance envers ta propre voix — ce qui renforce le blocage nerveux et crée un cercle fermé."
+  ],
+  es: [
+    "Sin intervención específica, este patrón se refuerza con cada uso. En 6 meses, las compensaciones estarán más profundamente arraigadas — no menos.",
+    "El bloqueo no identificado es el bloqueo que dura. Sin nombre preciso, no puedes apuntarlo — y se queda.",
+    "Este desfase entre voz interior y voz expresada tiene un costo diario en presencia, autoridad percibida y oportunidades perdidas.",
+    "La imprevisibilidad vocal genera desconfianza en tu propia voz — lo que refuerza el bloqueo nervioso y crea un círculo cerrado."
+  ]
+};
+
+// ================================================================
+// VOCAL HEALTH SCORE
+// ================================================================
+function calcVocalScore(ans) {
+  var score = 50;
+  var q1 = ans[1];
+  if (Array.isArray(q1)) score -= q1.length * 8;
+  var q3 = ans[3];
+  if (Array.isArray(q3)) {
+    q3.forEach(function(idx) { if (idx !== 3) score -= 5; });
+  }
+  var q4map = [-15, -10, -5, -20];
+  var q4 = ans[4];
+  if (q4 !== null && q4 !== undefined && !Array.isArray(q4)) score += (q4map[q4] || 0);
+  if (score < 15) score = 15;
+  if (score > 75) score = 75;
+  return Math.round(score);
+}
+
+function renderScoreArc(score) {
+  var radius = 36;
+  var circumference = 2 * Math.PI * radius;
+  var filled = circumference * (score / 100);
+  var empty  = circumference - filled;
+  return '<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">'
+    + '<svg width="96" height="96" viewBox="0 0 96 96">'
+    + '<circle cx="48" cy="48" r="' + radius + '" fill="none" stroke="#EDE5D6" stroke-width="6"/>'
+    + '<circle cx="48" cy="48" r="' + radius + '" fill="none" stroke="#1B4B3A" stroke-width="6"'
+    + ' stroke-dasharray="' + filled.toFixed(1) + ' ' + empty.toFixed(1) + '"'
+    + ' stroke-linecap="round"'
+    + ' transform="rotate(-90 48 48)"/>'
+    + '<text x="48" y="44" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif"'
+    + ' font-size="22" font-weight="400" fill="#2C2825">' + score + '</text>'
+    + '<text x="48" y="58" text-anchor="middle" font-family="DM Sans, sans-serif"'
+    + ' font-size="9" font-weight="400" fill="#A89E97">/100</text>'
+    + '</svg>'
+    + '<span style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;'
+    + 'letter-spacing:0.05em;text-transform:uppercase;color:#7A706A;margin-top:4px;" '
+    + 'class="score-label-fr score-label">Santé vocale actuelle</span>'
+    + '<span style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;'
+    + 'letter-spacing:0.05em;text-transform:uppercase;color:#7A706A;margin-top:4px;display:none;" '
+    + 'class="score-label-es score-label">Salud vocal actual</span>'
+    + '</div>';
+}
+
+// ================================================================
+// APP STATE
+// ================================================================
+let lang       = 'fr';
+let currentQ   = 0;
+let answers    = [null, [], null, [], null, null]; // Q1 & Q3 are arrays
+let profile    = null;   // 'pro' | 'stu'
+let showResult = false;
+let courseOnly = false;
+
+// ================================================================
+// SCORING
+// ================================================================
+function calculateResult() {
+  const scores = [0, 0, 0, 0]; // mandibulaire, souffle, nerveux, identite
+
+  // Single-select
+  [2, 4, 5].forEach(qi => {
+    if (answers[qi] !== null) scores[SINGLE_SCORE[qi][answers[qi]]]++;
+  });
+
+  // Multi-select
+  [1, 3].forEach(qi => {
+    answers[qi].forEach(ai => scores[MULTI_SCORE[qi][ai]]++);
+  });
+
+  // Winner — tiebreak: mandibulaire > souffle > nerveux > identite (first max wins)
+  let max = -1, winner = 'mandibulaire';
+  for (let i = 0; i < 4; i++) {
+    if (scores[i] > max) { max = scores[i]; winner = RESULT_KEYS[i]; }
+  }
+  return winner;
+}
+
+// ================================================================
+// RENDER
+// ================================================================
+function render() {
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+  // Bilingual span toggles (credibility line, score label, insight labels)
+  const frClasses = ['cred-fr','score-label-fr','ins1-fr','ins2-fr','ins3-fr'];
+  const esClasses = ['cred-es','score-label-es','ins1-es','ins2-es','ins3-es'];
+  frClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'fr' ? 'inline' : 'none'));
+  esClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'es' ? 'inline' : 'none'));
+
+  document.getElementById('main-headline').innerHTML = lang === 'fr'
+    ? 'Quel est ton<br><em>blocage vocal ?</em>'
+    : '¿Cuál es tu<br><em>bloqueo vocal?</em>';
+
+  document.getElementById('subheadline').textContent = lang === 'fr'
+    ? 'Réponds à 6 questions. Découvre ton blocage principal et reçois un exercice ciblé — gratuitement.'
+    : 'Responde 6 preguntas. Descubre tu bloqueo principal y recibe un ejercicio específico — gratis.';
+
+  if (showResult) {
+    document.getElementById('quiz-screen').style.display   = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+    renderResult();
+  } else {
+    document.getElementById('quiz-screen').style.display   = 'block';
+    document.getElementById('result-screen').style.display = 'none';
+    renderQuiz();
+  }
+}
+
+function renderQuiz() {
+  const q     = QUESTIONS[currentQ];
+  const qData = q[lang];
+
+  // Progress
+  document.getElementById('progress-fill').style.width = ((currentQ + 1) / 6 * 100) + '%';
+
+  // Counter
+  document.getElementById('question-counter').textContent = lang === 'fr'
+    ? `Question ${currentQ + 1} / 6`
+    : `Pregunta ${currentQ + 1} / 6`;
+
+  // Question text
+  document.getElementById('question-text').textContent = qData.text;
+
+  // Hint
+  const hintEl = document.getElementById('question-hint');
+  if (qData.hint) {
+    hintEl.textContent    = qData.hint;
+    hintEl.style.display  = 'block';
+  } else {
+    hintEl.style.display = 'none';
+  }
+
+  // Options
+  renderOptions(q);
+
+  // Back button
+  const backBtn = document.getElementById('btn-back');
+  backBtn.style.display = currentQ > 0 ? 'block' : 'none';
+  backBtn.textContent   = lang === 'fr' ? '← Retour' : '← Atrás';
+
+  // Next button
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.disabled    = !hasCurrentAnswer();
+  nextBtn.textContent = currentQ === 5
+    ? (lang === 'fr' ? 'Voir mon résultat →' : 'Ver mi resultado →')
+    : (lang === 'fr' ? 'Continuer' : 'Continuar');
+}
+
+function hasCurrentAnswer() {
+  return QUESTIONS[currentQ].type === 'multi'
+    ? answers[currentQ].length > 0
+    : answers[currentQ] !== null;
+}
+
+const LETTERS = ['A', 'B', 'C', 'D', 'E'];
+
+function renderOptions(q) {
+  const container = document.getElementById('options-container');
+  const qData     = q[lang];
+  container.innerHTML = '';
+
+  qData.options.forEach((text, idx) => {
+    const isSelected = q.type === 'multi'
+      ? answers[q.id].includes(idx)
+      : answers[q.id] === idx;
+
+    const card  = document.createElement('div');
+    card.className = 'option-card' + (isSelected ? ' selected' : '');
+
+    const badge = document.createElement('div');
+    badge.className   = 'option-badge';
+    badge.textContent = LETTERS[idx];
+
+    const label = document.createElement('div');
+    label.className   = 'option-text';
+    label.textContent = text;
+
+    card.appendChild(badge);
+    card.appendChild(label);
+    card.addEventListener('click', () => handleOptionClick(q.id, idx, q));
+    container.appendChild(card);
+  });
+}
+
+function handleOptionClick(qId, idx, q) {
+  if (q.type === 'single') {
+    answers[qId] = idx;
+  } else {
+    const arr = answers[qId];
+    const pos = arr.indexOf(idx);
+    if (pos >= 0) {
+      arr.splice(pos, 1);
+    } else {
+      if (q.maxSelect !== null && arr.length >= q.maxSelect) return; // silent cap
+      arr.push(idx);
+    }
+  }
+  renderOptions(q);
+  document.getElementById('btn-next').disabled = !hasCurrentAnswer();
+}
+
+function handleBack() {
+  if (currentQ > 0) { currentQ--; render(); }
+}
+
+function handleNext() {
+  if (!hasCurrentAnswer()) return;
+  if (currentQ === 0) profile = (answers[0] === 0) ? 'pro' : 'stu';
+  if (currentQ === 5) {
+    courseOnly = (answers[5] === 1);
+    showResult = true;
+    render();
+    return;
+  }
+  currentQ++;
+  render();
+}
+
+function renderResult() {
+  const resultKey = calculateResult();
+  const pKey      = profile || 'stu';
+  const pathKey   = courseOnly ? 'course' : 'standard';
+  const d         = RESULTS[lang][pKey][resultKey];
+
+  // Score arc
+  const score = calcVocalScore(answers);
+  document.getElementById('score-arc-container').innerHTML = renderScoreArc(score);
+
+  // Badges
+  document.getElementById('result-badge-label').textContent =
+    lang === 'fr' ? 'Ton blocage principal' : 'Tu bloqueo principal';
+
+  const pb = document.getElementById('profile-badge');
+  if (pKey === 'pro') {
+    pb.className   = 'badge-pill badge-pro';
+    pb.textContent = lang === 'fr' ? 'Professionnel' : 'Profesional';
+  } else {
+    pb.className   = 'badge-pill badge-stu';
+    pb.textContent = lang === 'fr' ? 'Apprenant' : 'Estudiante';
+  }
+
+  // Title
+  document.getElementById('result-title').textContent = d.title;
+
+  // Three-insight result body
+  var q2text = (answers[2] !== null && answers[2] !== undefined) ? Q2_TRIGGER[lang][answers[2]] : '';
+  var q4idx  = Array.isArray(answers[4]) ? answers[4][0] : answers[4];
+  var q4text = (q4idx !== null && q4idx !== undefined) ? Q4_COST[lang][q4idx] : '';
+
+  var ins1label_fr = 'Ce qui se passe',        ins1label_es = 'Lo que ocurre';
+  var ins2label_fr = 'Quand il s\'active',      ins2label_es = 'Cuándo se activa';
+  var ins3label_fr = 'Ce qu\'il coûte sans intervention', ins3label_es = 'Lo que cuesta sin intervención';
+
+  var bodyHTML =
+    '<div style="margin-bottom:14px;">'
+    + '<div style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:#1B4B3A;margin-bottom:5px;">'
+    + '<span class="ins1-fr">' + ins1label_fr + '</span>'
+    + '<span class="ins1-es" style="display:none;">' + ins1label_es + '</span>'
+    + '</div>'
+    + '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#7A706A;line-height:1.7;">' + d.body + '</div>'
+    + '</div>';
+
+  if (q2text) {
+    bodyHTML +=
+      '<div style="margin-bottom:14px;">'
+      + '<div style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:#1B4B3A;margin-bottom:5px;">'
+      + '<span class="ins2-fr">Quand il s\'active</span>'
+      + '<span class="ins2-es" style="display:none;">Cuándo se activa</span>'
+      + '</div>'
+      + '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#7A706A;line-height:1.7;">' + q2text + '</div>'
+      + '</div>';
+  }
+
+  if (q4text) {
+    bodyHTML +=
+      '<div style="margin-bottom:18px;">'
+      + '<div style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:#C4845A;margin-bottom:5px;">'
+      + '<span class="ins3-fr">Ce qu\'il coûte sans intervention</span>'
+      + '<span class="ins3-es" style="display:none;">Lo que cuesta sin intervención</span>'
+      + '</div>'
+      + '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#7A706A;line-height:1.7;">' + q4text + '</div>'
+      + '</div>';
+  }
+
+  document.getElementById('result-body').innerHTML = bodyHTML;
+
+  document.getElementById('exercise-label').textContent   =
+    lang === 'fr' ? 'Ton exercice ciblé' : 'Tu ejercicio específico';
+  document.getElementById('exercise-box').innerHTML       = d.exercise;
+  document.getElementById('open-loop-body').innerHTML     = d[pathKey + 'OpenLoop'];
+
+  // CTA
+  const ctaBtn       = document.getElementById('btn-cta');
+  ctaBtn.textContent = d[pathKey + 'Cta'];
+  ctaBtn.className   = 'btn-cta ' + (courseOnly ? 'course' : 'standard');
+  ctaBtn.onclick     = () => {
+    const url = courseOnly ? PAYWALL_URL_COURSE_ONLY : PAYWALL_URL_STANDARD;
+    window.open(url, '_blank');
+  };
+
+  document.getElementById('guarantee-note').textContent  = d.ctaSub;
+  document.getElementById('btn-restart').textContent     =
+    lang === 'fr' ? 'Recommencer' : 'Volver a empezar';
+}
+
+function handleRestart() {
+  currentQ   = 0;
+  answers    = [null, [], null, [], null, null];
+  profile    = null;
+  showResult = false;
+  courseOnly = false;
+  render();
+}
+
+function handleLangToggle(newLang) {
+  if (lang === newLang) return;
+  lang       = newLang;
+  currentQ   = 0;
+  answers    = [null, [], null, [], null, null];
+  profile    = null;
+  showResult = false;
+  courseOnly = false;
+  render();
+}
+
+// Init
+render();
+</script>
+</body>
+</html>

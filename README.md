@@ -1,0 +1,3 @@
+# Voice Essence Academy — Vocal Block Quiz
+
+A bilingual (French / Spanish) interactive quiz built for Voice Essence Academy — Mamselle Ruiz Coach. In six questions it identifies a visitor's primary vocal block (Mandibulaire, Souffle, Système Nerveux, or Identité Vocale), routes them to a profile-specific result page with a targeted exercise, and directs them to the appropriate paywall — the course-only path for technique-focused respondents, the full membership path for everyone else. The entire experience is a single self-contained HTML file with no build step or external dependencies beyond Google Fonts.
