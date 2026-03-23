@@ -7,6 +7,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1888097325094612');
+  fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1888097325094612&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel -->
+
   <style>
     :root {
       --green-deep:  #1B4B3A;
@@ -373,6 +388,21 @@
       color: #A89E97;
       padding: 24px 0 40px;
     }
+
+    /* ── RESULT ANIMATIONS ── */
+    @keyframes resultFadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes resultScalePop {
+      0%   { opacity: 0; transform: scale(0.82); }
+      65%  { opacity: 1; transform: scale(1.04); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .result-animate {
+      opacity: 0;
+    }
+
   </style>
 </head>
 <body>
@@ -552,9 +582,10 @@ const QUESTIONS = [
     }
   },
   {
-    id: 2, type: 'single',
+    id: 2, type: 'multi', maxSelect: null,
     fr: {
       text: "Dans quel contexte ça arrive le plus souvent ?",
+      hint: "Sélectionne tout ce qui s'applique.",
       options: [
         "Lors de longues journées de travail vocal",
         "En prise de parole publique ou moment important",
@@ -564,6 +595,7 @@ const QUESTIONS = [
     },
     es: {
       text: "¿En qué contexto ocurre más?",
+      hint: "Selecciona todo lo que aplique.",
       options: [
         "En largas jornadas de trabajo vocal",
         "En presentaciones públicas o momentos importantes",
@@ -596,9 +628,10 @@ const QUESTIONS = [
     }
   },
   {
-    id: 4, type: 'single',
+    id: 4, type: 'multi', maxSelect: null,
     fr: {
       text: "Ce qui décrit le mieux ta frustration :",
+      hint: "Sélectionne tout ce qui te ressemble.",
       options: [
         "J'ai essayé des choses mais rien ne change vraiment",
         "Je ne sais pas ce qui bloque exactement",
@@ -608,6 +641,7 @@ const QUESTIONS = [
     },
     es: {
       text: "Lo que mejor describe tu frustración:",
+      hint: "Selecciona todo lo que te identifique.",
       options: [
         "He probado cosas pero nada cambia realmente",
         "No sé qué es exactamente lo que bloquea mi voz",
@@ -617,9 +651,10 @@ const QUESTIONS = [
     }
   },
   {
-    id: 5, type: 'single',
+    id: 5, type: 'multi', maxSelect: 2,
     fr: {
       text: "Ce que tu veux vraiment, c'est…",
+      hint: "Choisis jusqu'à 2 réponses.",
       options: [
         "Une voix sans fatigue qui tient toute la journée",
         "Comprendre la mécanique exacte de mon blocage et y remédier",
@@ -629,6 +664,7 @@ const QUESTIONS = [
     },
     es: {
       text: "Lo que realmente quieres es…",
+      hint: "Elige hasta 2 respuestas.",
       options: [
         "Una voz sin fatiga que aguante todo el día",
         "Entender la mecánica exacta de mi bloqueo y remediarlo",
@@ -638,9 +674,10 @@ const QUESTIONS = [
     }
   },
   {
-    id: 6, type: 'single',
+    id: 6, type: 'multi', maxSelect: null,
     fr: {
       text: "Quel est le principal obstacle qui t'empêche d'y arriver ?",
+      hint: "Sélectionne tout ce qui s'applique.",
       optionsByProfile: {
         pro: [
           "Je n'ai pas encore trouvé la bonne méthode pour mon cas spécifique",
@@ -658,6 +695,7 @@ const QUESTIONS = [
     },
     es: {
       text: "¿Cuál es el principal obstáculo que te impide llegar ahí?",
+      hint: "Selecciona todo lo que aplique.",
       optionsByProfile: {
         pro: [
           "Aún no he encontrado el método adecuado para mi caso específico",
@@ -712,14 +750,13 @@ const QUESTIONS = [
 // SCORING MAPS
 // 0=mandibulaire  1=souffle  2=nerveux  3=identite
 // ================================================================
-const SINGLE_SCORE = {
-  2: [1, 2, 3, 0],
-  4: [0, 2, 3, 1],
-  5: [1, 0, 3, 2]
-};
+const SINGLE_SCORE = {};
 const MULTI_SCORE = {
   1: [0, 1, 0, 2, 3],
-  3: [0, 0, 1, 3]
+  2: [1, 2, 3, 0],
+  3: [0, 0, 1, 3],
+  4: [0, 2, 3, 1],
+  5: [1, 0, 3, 2]
 };
 const RESULT_KEYS = ['mandibulaire', 'souffle', 'nerveux', 'identite'];
 
@@ -1005,7 +1042,7 @@ var PRICING = {
         type: "Coaching individuel",
         price: "$147",
         price_sub: "session unique",
-        desc: "60 minutes avec Mamselle. Diagnostic complet, protocole personnalisé, résultat actionnable immédiatement.",
+        desc: "55 minutes avec Mamselle. Diagnostic complet, protocole personnalisé, résultat actionnable immédiatement.",
         tag: "Places limitées",
         highlight: false,
         latam_note: false
@@ -1042,7 +1079,7 @@ var PRICING = {
         type: "Coaching individual",
         price: "$147",
         price_sub: "sesión única",
-        desc: "60 minutos con Mamselle. Diagnóstico completo, protocolo personalizado, resultado accionable de inmediato.",
+        desc: "55 minutos con Mamselle. Diagnóstico completo, protocolo personalizado, resultado accionable de inmediato.",
         tag: "Plazas limitadas",
         highlight: false,
         latam_note: true
@@ -1064,7 +1101,11 @@ function calcVocalScore(ans) {
   }
   var q4map = [-15, -10, -5, -20];
   var q4 = ans[4];
-  if (q4 !== null && q4 !== undefined && !Array.isArray(q4)) score += (q4map[q4] || 0);
+  if (Array.isArray(q4)) {
+    q4.forEach(function(idx) { if (q4map[idx] !== undefined) score += q4map[idx]; });
+  } else if (q4 !== null && q4 !== undefined) {
+    score += (q4map[q4] || 0);
+  }
   if (score < 15) score = 15;
   if (score > 75) score = 75;
   return Math.round(score);
@@ -1073,17 +1114,16 @@ function calcVocalScore(ans) {
 function renderScoreArc(score) {
   var radius = 36;
   var circumference = 2 * Math.PI * radius;
-  var filled = circumference * (score / 100);
-  var empty  = circumference - filled;
   return '<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">'
     + '<svg width="96" height="96" viewBox="0 0 96 96">'
     + '<circle cx="48" cy="48" r="' + radius + '" fill="none" stroke="#EDE5D6" stroke-width="6"/>'
-    + '<circle cx="48" cy="48" r="' + radius + '" fill="none" stroke="#1B4B3A" stroke-width="6"'
-    + ' stroke-dasharray="' + filled.toFixed(1) + ' ' + empty.toFixed(1) + '"'
+    + '<circle id="arc-progress-circle" cx="48" cy="48" r="' + radius + '" fill="none" stroke="#1B4B3A" stroke-width="6"'
+    + ' stroke-dasharray="' + circumference.toFixed(1) + '"'
+    + ' stroke-dashoffset="' + circumference.toFixed(1) + '"'
     + ' stroke-linecap="round"'
     + ' transform="rotate(-90 48 48)"/>'
     + '<text x="48" y="44" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif"'
-    + ' font-size="22" font-weight="400" fill="#2C2825">' + score + '</text>'
+    + ' font-size="22" font-weight="400" fill="#2C2825" id="arc-score-number">0</text>'
     + '<text x="48" y="58" text-anchor="middle" font-family="DM Sans, sans-serif"'
     + ' font-size="9" font-weight="400" fill="#A89E97">/100</text>'
     + '</svg>'
@@ -1101,12 +1141,13 @@ function renderScoreArc(score) {
 // ================================================================
 let lang          = 'fr';
 let currentQ      = -1;   // -1 = lead screen, 0–5 = quiz questions
-let answers       = [null, [], null, [], null, null, null, null, '']; // Q1 & Q3 are arrays
+let answers       = [null, [], [], [], [], [], [], null, '']; // Q0,Q7 single; Q1-Q6 multi; Q8 textarea
 let profile       = null;   // 'pro' | 'stu'
 let showResult    = false;
 let courseOnly    = false;
 let leadData      = { name: '', email: '', phone: '' };
 let leadSubmitted = false;
+let pixelFired    = false;
 
 // ================================================================
 // SCORING
@@ -1114,14 +1155,11 @@ let leadSubmitted = false;
 function calculateResult() {
   const scores = [0, 0, 0, 0]; // mandibulaire, souffle, nerveux, identite
 
-  // Single-select
-  [2, 4, 5].forEach(qi => {
-    if (answers[qi] !== null) scores[SINGLE_SCORE[qi][answers[qi]]]++;
-  });
-
-  // Multi-select
-  [1, 3].forEach(qi => {
-    answers[qi].forEach(ai => scores[MULTI_SCORE[qi][ai]]++);
+  // Multi-select (Q1, Q2, Q3, Q4, Q5 all vote by each selected option)
+  [1, 2, 3, 4, 5].forEach(qi => {
+    if (Array.isArray(answers[qi])) {
+      answers[qi].forEach(ai => { if (MULTI_SCORE[qi] && MULTI_SCORE[qi][ai] !== undefined) scores[MULTI_SCORE[qi][ai]]++; });
+    }
   });
 
   // Winner — tiebreak: mandibulaire > souffle > nerveux > identite (first max wins)
@@ -1150,8 +1188,8 @@ function render() {
     : '¿Cuál es tu<br><em>bloqueo vocal?</em>';
 
   document.getElementById('subheadline').textContent = lang === 'fr'
-    ? 'Réponds à 6 questions. Découvre ton blocage principal et reçois un exercice ciblé — gratuitement.'
-    : 'Responde 6 preguntas. Descubre tu bloqueo principal y recibe un ejercicio específico — gratis.';
+    ? 'Réponds à 9 questions. Découvre ton blocage principal et reçois un exercice ciblé — gratuitement.'
+    : 'Responde 9 preguntas. Descubre tu bloqueo principal y recibe un ejercicio específico — gratis.';
 
   if (showResult) {
     document.getElementById('lead-screen').style.display   = 'none';
@@ -1340,7 +1378,8 @@ function renderResult() {
   document.getElementById('result-title').textContent = d.title;
 
   // Three-insight result body
-  var q2text = (answers[2] !== null && answers[2] !== undefined) ? Q2_TRIGGER[lang][answers[2]] : '';
+  var q2idx  = Array.isArray(answers[2]) ? answers[2][0] : answers[2];
+  var q2text = (q2idx !== null && q2idx !== undefined) ? Q2_TRIGGER[lang][q2idx] : '';
   var q4idx  = Array.isArray(answers[4]) ? answers[4][0] : answers[4];
   var q4text = (q4idx !== null && q4idx !== undefined) ? Q4_COST[lang][q4idx] : '';
 
@@ -1387,8 +1426,8 @@ function renderResult() {
 
   // Obstacle acknowledgment (Q6)
   var obstacleEl = document.getElementById('obstacle-acknowledgment');
-  var q6idx = answers[6];
-  if (obstacleEl && q6idx !== null && q6idx !== undefined && typeof q6idx === 'number') {
+  var q6idx = Array.isArray(answers[6]) ? answers[6][0] : answers[6];
+  if (obstacleEl && q6idx !== null && q6idx !== undefined) {
     var obstacleArr = Q6_OBSTACLE[lang] && Q6_OBSTACLE[lang][pKey];
     var obstacleText = obstacleArr ? obstacleArr[q6idx] : null;
     if (obstacleText) {
@@ -1414,8 +1453,8 @@ function renderResult() {
   if (ctaSubEl) {
     if (isConfigB) {
       var subText = lang === 'fr'
-        ? "Tu as choisi l'accompagnement individuel. La Séance Signature est faite pour toi : 60 minutes avec Mamselle, diagnostic complet, protocole personnalisé."
-        : "Elegiste el acompañamiento individual. La Sesión Signature es para ti: 60 minutos con Mamselle, diagnóstico completo, protocolo personalizado.";
+        ? "Tu as choisi l'accompagnement individuel. La Séance Signature est faite pour toi : 55 minutes avec Mamselle, diagnostic complet, protocole personnalisé."
+        : "Elegiste el acompañamiento individual. La Sesión Signature es para ti: 55 minutos con Mamselle, diagnóstico completo, protocolo personalizado.";
       if (isWorkshop) {
         subText += '<br><span style="font-family:\'DM Sans\',sans-serif;font-size:11px;font-style:italic;color:#A89E97;">'
           + (lang === 'fr'
@@ -1431,18 +1470,65 @@ function renderResult() {
     }
   }
 
+  // Meta Pixel: result viewed — fire once per quiz completion
+  if (!pixelFired && typeof fbq !== 'undefined') {
+    pixelFired = true;
+    fbq('track', 'CompleteRegistration', {
+      content_name: resultKey,
+      content_category: pKey,
+      status: lang
+    });
+    fbq('trackCustom', 'Quiz_ResultViewed', {
+      vocal_block:  resultKey,
+      profile_type: pKey,
+      vocal_score:  score,
+      routing:      isConfigB ? 'VIP' : 'Standard',
+      language:     lang
+    });
+  }
+
   // CTA button
   const ctaBtn = document.getElementById('btn-cta');
   if (isConfigB) {
     ctaBtn.textContent = lang === 'fr' ? 'Réserver ma Séance Signature — $147' : 'Reservar mi Sesión Signature — $147';
     ctaBtn.style.background = '#7B5EA7';
     ctaBtn.className = 'btn-cta';
-    ctaBtn.onclick = function() { window.open(PAYWALL_URL_VIP, '_blank'); };
+    ctaBtn.onclick = function() {
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+          content_name: lang === 'fr' ? 'La Séance Signature' : 'La Sesión Signature',
+          content_ids:  ['seance-signature-147'],
+          value: 147, currency: 'USD', num_items: 1
+        });
+        fbq('trackCustom', 'Quiz_CTAClick', {
+          offer:       'Seance_Signature_147',
+          routing:     'VIP',
+          vocal_block: calculateResult(),
+          language:    lang
+        });
+      }
+      window.open(PAYWALL_URL_VIP, '_blank');
+    };
   } else {
     ctaBtn.textContent = lang === 'fr' ? 'Découvrir Le Protocole de Libération Vocale — $47' : 'Descubrir Tu Voz Liberada — $47';
     ctaBtn.style.background = '#1B4B3A';
     ctaBtn.className = 'btn-cta';
-    ctaBtn.onclick = function() { window.open(PAYWALL_URL_STANDARD, '_blank'); };
+    ctaBtn.onclick = function() {
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+          content_name: lang === 'fr' ? 'Le Protocole de Libération Vocale' : 'Tu Voz Liberada',
+          content_ids:  ['protocole-liberation-vocale-47'],
+          value: 47, currency: 'USD', num_items: 1
+        });
+        fbq('trackCustom', 'Quiz_CTAClick', {
+          offer:       'Protocole_47',
+          routing:     'Standard',
+          vocal_block: calculateResult(),
+          language:    lang
+        });
+      }
+      window.open(PAYWALL_URL_STANDARD, '_blank');
+    };
   }
 
   // Guarantee note
@@ -1455,15 +1541,19 @@ function renderResult() {
 
   document.getElementById('btn-restart').textContent     =
     lang === 'fr' ? 'Recommencer' : 'Volver a empezar';
+
+  // Trigger entrance animations
+  setTimeout(function() { animateResultScreen(score); }, 20);
 }
 
 function handleRestart() {
   currentQ      = 0;   // keep lead data — skip form on restart
-  answers       = [null, [], null, [], null, null, null, null, ''];
+  answers       = [null, [], [], [], [], [], [], null, ''];
   profile       = null;
   showResult    = false;
   courseOnly    = false;
   leadSubmitted = false;
+  pixelFired    = false;
   render();
 }
 
@@ -1471,12 +1561,13 @@ function handleLangToggle(newLang) {
   if (lang === newLang) return;
   lang          = newLang;
   currentQ      = -1;
-  answers       = [null, [], null, [], null, null, null, null, ''];
+  answers       = [null, [], [], [], [], [], [], null, ''];
   profile       = null;
   showResult    = false;
   courseOnly    = false;
   leadData      = { name: '', email: '', phone: '' };
   leadSubmitted = false;
+  pixelFired    = false;
   render();
 }
 
@@ -1579,6 +1670,17 @@ function handleLeadSubmit(e) {
     document.getElementById('lead-email').focus(); return;
   }
   leadData = { name: name, email: email, phone: phone };
+  // Meta Pixel: Lead captured
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead', {
+      content_name: 'Vocal Block Quiz',
+      content_category: 'Quiz Lead'
+    });
+    fbq('trackCustom', 'Quiz_LeadCapture', {
+      content_name: 'Vocal Block Quiz',
+      language:     lang
+    });
+  }
   currentQ = 0;
   render();
 }
@@ -1600,12 +1702,12 @@ function submitLead(resultKey, score) {
       routing:        courseOnly ? 'parcours-cours' : 'parcours-standard',
       q0_usage:       answers[0] !== null ? q[0][l].options[answers[0]] : '—',
       q1_symptoms:    answers[1].length ? answers[1].map(function(i){ return q[1][l].options[i]; }).join(' | ') : '—',
-      q2_context:     answers[2] !== null ? q[2][l].options[answers[2]] : '—',
+      q2_context:     answers[2].length ? answers[2].map(function(i){ return q[2][l].options[i]; }).join(' | ') : '—',
       q3_tried:       answers[3].length ? answers[3].map(function(i){ return q[3][l].options[i]; }).join(' | ') : '—',
-      q4_frustration: answers[4] !== null ? q[4][l].options[answers[4]] : '—',
-      q5_goal:        answers[5] !== null ? q[5][l].options[answers[5]] : '—',
-      q6_obstacle:    answers[6] !== null && answers[6] !== undefined
-                        ? ((q[6][l].optionsByProfile[profile || 'stu'] || [])[answers[6]] || '—')
+      q4_frustration: answers[4].length ? answers[4].map(function(i){ return q[4][l].options[i]; }).join(' | ') : '—',
+      q5_goal:        answers[5].length ? answers[5].map(function(i){ return q[5][l].options[i]; }).join(' | ') : '—',
+      q6_obstacle:    answers[6].length
+                        ? answers[6].map(function(i){ return (q[6][l].optionsByProfile[profile || 'stu'] || [])[i] || '—'; }).join(' | ')
                         : '—',
       q7_solution:    answers[7] !== null && answers[7] !== undefined ? q[7][l].options[answers[7]] : '—',
       q8_freetext:    answers[8] || '—'
@@ -1616,6 +1718,60 @@ function submitLead(resultKey, score) {
       body:    JSON.stringify(data)
     }).catch(function() {});
   } catch(err) {}
+}
+
+// ================================================================
+// RESULT ANIMATIONS
+// ================================================================
+function animateResultScreen(score) {
+  var circumference = 2 * Math.PI * 36;
+  var targetOffset  = circumference * (1 - score / 100);
+
+  // Animate score arc + counter
+  var arcEl = document.getElementById('arc-progress-circle');
+  var numEl = document.getElementById('arc-score-number');
+  if (arcEl) {
+    var duration = 1500;
+    var startTs  = null;
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+    function step(ts) {
+      if (!startTs) startTs = ts;
+      var p = Math.min((ts - startTs) / duration, 1);
+      var e = easeOut(p);
+      arcEl.style.strokeDashoffset = String(circumference - (circumference - targetOffset) * e);
+      if (numEl) numEl.textContent = Math.round(score * e);
+      if (p < 1) requestAnimationFrame(step);
+      else if (numEl) numEl.textContent = score;
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Staggered fade-up for each result section
+  var sections = [
+    { id: 'score-arc-container',       delay: 0   },
+    { sel: '.result-badges',           delay: 220 },
+    { id: 'result-title',              delay: 380 },
+    { id: 'result-body',               delay: 520 },
+    { id: 'exercise-label',            delay: 660 },
+    { id: 'exercise-box',              delay: 700 },
+    { id: 'obstacle-acknowledgment',   delay: 840 },
+    { sel: '.open-loop-box',           delay: 980 },
+    { id: 'pricing-section-container', delay: 1160 },
+    { id: 'btn-restart',               delay: 1340 }
+  ];
+
+  sections.forEach(function(s) {
+    var el = s.id ? document.getElementById(s.id) : document.querySelector(s.sel);
+    if (!el || el.style.display === 'none') return;
+    el.style.opacity   = '0';
+    el.style.transform = 'translateY(14px)';
+    el.style.transition = 'none';
+    setTimeout(function() {
+      el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+      el.style.opacity    = '1';
+      el.style.transform  = 'translateY(0)';
+    }, s.delay);
+  });
 }
 
 // Init
