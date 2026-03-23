@@ -1460,15 +1460,15 @@ function renderResult() {
   var q7ans = (answers.length > 7 && answers[7] !== null && answers[7] !== undefined) ? answers[7] : null;
 
   // Determine route key
-  // FR: 0→membership  1,2→vip
-  // ES: 0→course      1→vip      2→membership
+  // FR: 0,2→membership  1→vip
+  // ES: 0→membership   1→vip    2→course (intensive)
   var routeKey;
   if (lang === 'fr') {
-    routeKey = (q7ans === 1 || q7ans === 2) ? 'vip' : 'standard';
+    routeKey = (q7ans === 1) ? 'vip' : 'standard';
   } else {
     if (q7ans === 1)      routeKey = 'vip';
-    else if (q7ans === 2) routeKey = 'membership';
-    else                  routeKey = 'course';
+    else if (q7ans === 2) routeKey = 'course';
+    else                  routeKey = 'membership';
   }
   var isVip = (routeKey === 'vip');
 
@@ -1515,7 +1515,7 @@ function renderResult() {
       vip:        { text: 'Reservar mi Coaching Vocal Privado — $147',  bg: '#7B5EA7', name: 'Coaching Vocal Privado',        id: 'coaching-vocal-privado-147', value: 147, url: PAYWALL_URLS.es.vip }
     }
   };
-  var cfg = ctaConfig[lang][routeKey] || ctaConfig[lang][lang === 'fr' ? 'standard' : 'course'];
+  var cfg = ctaConfig[lang][routeKey] || ctaConfig[lang][lang === 'fr' ? 'standard' : 'membership'];
 
   // CTA button
   const ctaBtn = document.getElementById('btn-cta');
