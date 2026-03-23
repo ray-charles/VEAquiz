@@ -1400,15 +1400,6 @@ function renderResult() {
   document.getElementById('result-badge-label').textContent =
     lang === 'fr' ? 'Ton blocage principal' : 'Tu bloqueo principal';
 
-  const pb = document.getElementById('profile-badge');
-  if (pKey === 'pro') {
-    pb.className   = 'badge-pill badge-pro';
-    pb.textContent = lang === 'fr' ? 'Professionnel' : 'Profesional';
-  } else {
-    pb.className   = 'badge-pill badge-stu';
-    pb.textContent = lang === 'fr' ? 'Apprenant' : 'Estudiante';
-  }
-
   // Title
   document.getElementById('result-title').textContent = d.title;
 
