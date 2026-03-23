@@ -309,6 +309,63 @@
     }
     .btn-restart:hover { color: var(--dark); }
 
+    /* ── LEAD SCREEN ── */
+    .lead-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .lead-subtext {
+      font-size: 13px;
+      font-weight: 300;
+      color: #7A706A;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .field-group { margin-bottom: 14px; }
+    .field-label {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+    .optional {
+      font-size: 11px;
+      font-weight: 300;
+      text-transform: none;
+      letter-spacing: 0;
+      color: #A89E97;
+    }
+    .field-input {
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--dark);
+      background: #FAF8F4;
+      border: 0.5px solid #D8CDB5;
+      border-radius: 8px;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.15s, border-width 0.15s;
+      -webkit-appearance: none;
+    }
+    .field-input:focus        { border-color: var(--green-deep); border-width: 1.5px; }
+    .field-input::placeholder { color: #C4BAB0; }
+    .lead-privacy {
+      font-size: 11px;
+      font-style: italic;
+      color: #A89E97;
+      text-align: center;
+      margin-top: 16px;
+    }
+
     /* ── FOOTER ── */
     .footer {
       text-align: center;
@@ -351,8 +408,30 @@
       <button class="lang-btn"        id="btn-es" onclick="handleLangToggle('es')">Español</button>
     </div>
 
+    <!-- LEAD SCREEN -->
+    <div id="lead-screen">
+      <h2 class="lead-headline" id="lead-headline"></h2>
+      <p  class="lead-subtext"  id="lead-subtext"></p>
+      <form id="lead-form" onsubmit="handleLeadSubmit(event)" novalidate>
+        <div class="field-group">
+          <label class="field-label" for="lead-name"  id="label-name"></label>
+          <input class="field-input" type="text"  id="lead-name"  name="name"  autocomplete="given-name" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="lead-email" id="label-email"></label>
+          <input class="field-input" type="email" id="lead-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="lead-phone" id="label-phone"></label>
+          <input class="field-input" type="tel"   id="lead-phone" name="phone" autocomplete="tel">
+        </div>
+        <button type="submit" class="btn-next" id="btn-lead-submit" style="width:100%;margin-top:8px;padding:13px;"></button>
+      </form>
+      <p class="lead-privacy" id="lead-privacy"></p>
+    </div>
+
     <!-- QUIZ SCREEN -->
-    <div id="quiz-screen">
+    <div id="quiz-screen" style="display:none">
       <div class="progress-track">
         <div class="progress-fill" id="progress-fill"></div>
       </div>
@@ -396,6 +475,7 @@
 // ================================================================
 const PAYWALL_URL_STANDARD    = 'YOUR_STANDARD_PAYWALL_URL_HERE';
 const PAYWALL_URL_COURSE_ONLY = 'YOUR_COURSE_ONLY_PAYWALL_URL_HERE';
+const FORMSPREE_ENDPOINT      = 'YOUR_FORMSPREE_ENDPOINT_HERE';
 
 // ================================================================
 // QUESTIONS
@@ -812,12 +892,14 @@ function renderScoreArc(score) {
 // ================================================================
 // APP STATE
 // ================================================================
-let lang       = 'fr';
-let currentQ   = 0;
-let answers    = [null, [], null, [], null, null]; // Q1 & Q3 are arrays
-let profile    = null;   // 'pro' | 'stu'
-let showResult = false;
-let courseOnly = false;
+let lang          = 'fr';
+let currentQ      = -1;   // -1 = lead screen, 0–5 = quiz questions
+let answers       = [null, [], null, [], null, null]; // Q1 & Q3 are arrays
+let profile       = null;   // 'pro' | 'stu'
+let showResult    = false;
+let courseOnly    = false;
+let leadData      = { name: '', email: '', phone: '' };
+let leadSubmitted = false;
 
 // ================================================================
 // SCORING
@@ -865,10 +947,17 @@ function render() {
     : 'Responde 6 preguntas. Descubre tu bloqueo principal y recibe un ejercicio específico — gratis.';
 
   if (showResult) {
+    document.getElementById('lead-screen').style.display   = 'none';
     document.getElementById('quiz-screen').style.display   = 'none';
     document.getElementById('result-screen').style.display = 'block';
     renderResult();
+  } else if (currentQ === -1) {
+    document.getElementById('lead-screen').style.display   = 'block';
+    document.getElementById('quiz-screen').style.display   = 'none';
+    document.getElementById('result-screen').style.display = 'none';
+    renderLead();
   } else {
+    document.getElementById('lead-screen').style.display   = 'none';
     document.getElementById('quiz-screen').style.display   = 'block';
     document.getElementById('result-screen').style.display = 'none';
     renderQuiz();
@@ -904,7 +993,7 @@ function renderQuiz() {
 
   // Back button
   const backBtn = document.getElementById('btn-back');
-  backBtn.style.display = currentQ > 0 ? 'block' : 'none';
+  backBtn.style.display = 'block'; // always visible — Q0 goes back to lead screen
   backBtn.textContent   = lang === 'fr' ? '← Retour' : '← Atrás';
 
   // Next button
@@ -969,7 +1058,8 @@ function handleOptionClick(qId, idx, q) {
 }
 
 function handleBack() {
-  if (currentQ > 0) { currentQ--; render(); }
+  if (currentQ > 0)        { currentQ--; render(); }
+  else if (currentQ === 0) { currentQ = -1; render(); }
 }
 
 function handleNext() {
@@ -993,6 +1083,13 @@ function renderResult() {
 
   // Score arc
   const score = calcVocalScore(answers);
+
+  // Submit lead + full quiz data once per completion
+  if (!leadSubmitted && leadData.email) {
+    leadSubmitted = true;
+    submitLead(resultKey, score);
+  }
+
   document.getElementById('score-arc-container').innerHTML = renderScoreArc(score);
 
   // Badges
@@ -1073,23 +1170,101 @@ function renderResult() {
 }
 
 function handleRestart() {
-  currentQ   = 0;
-  answers    = [null, [], null, [], null, null];
-  profile    = null;
-  showResult = false;
-  courseOnly = false;
+  currentQ      = 0;   // keep lead data — skip form on restart
+  answers       = [null, [], null, [], null, null];
+  profile       = null;
+  showResult    = false;
+  courseOnly    = false;
+  leadSubmitted = false;
   render();
 }
 
 function handleLangToggle(newLang) {
   if (lang === newLang) return;
-  lang       = newLang;
-  currentQ   = 0;
-  answers    = [null, [], null, [], null, null];
-  profile    = null;
-  showResult = false;
-  courseOnly = false;
+  lang          = newLang;
+  currentQ      = -1;
+  answers       = [null, [], null, [], null, null];
+  profile       = null;
+  showResult    = false;
+  courseOnly    = false;
+  leadData      = { name: '', email: '', phone: '' };
+  leadSubmitted = false;
   render();
+}
+
+// ================================================================
+// LEAD SCREEN
+// ================================================================
+function renderLead() {
+  var isEs = lang === 'es';
+  document.getElementById('lead-headline').textContent = isEs
+    ? '¿Dónde recibir tu resultado?'
+    : 'Où recevoir ton résultat ?';
+  document.getElementById('lead-subtext').textContent = isEs
+    ? 'Escribe tu nombre y tu mejor correo — recibirás tu perfil vocal completo al terminar el quiz.'
+    : 'Entre ton prénom et ton meilleur email — tu reçois ton profil vocal complet après le quiz.';
+  document.getElementById('label-name').textContent   = isEs ? 'Nombre'             : 'Prénom';
+  document.getElementById('label-email').textContent  = isEs ? 'Correo electrónico' : 'Adresse e-mail';
+  document.getElementById('label-phone').innerHTML    = (isEs ? 'Teléfono' : 'Téléphone')
+    + ' <span class="optional">(' + (isEs ? 'opcional' : 'facultatif') + ')</span>';
+  document.getElementById('lead-name').placeholder    = isEs ? 'María'             : 'Marie';
+  document.getElementById('lead-email').placeholder   = isEs ? 'maria@ejemplo.com' : 'marie@exemple.com';
+  document.getElementById('lead-phone').placeholder   = isEs ? '+34 612 345 678'   : '+33 6 12 34 56 78';
+  document.getElementById('btn-lead-submit').textContent = isEs
+    ? 'Comenzar el cuestionario →'
+    : 'Commencer le quiz →';
+  document.getElementById('lead-privacy').textContent = isEs
+    ? 'Tus datos son confidenciales. Nada de spam.'
+    : 'Tes données sont confidentielles. Aucun spam.';
+  // Restore previously entered values
+  document.getElementById('lead-name').value  = leadData.name  || '';
+  document.getElementById('lead-email').value = leadData.email || '';
+  document.getElementById('lead-phone').value = leadData.phone || '';
+}
+
+function handleLeadSubmit(e) {
+  e.preventDefault();
+  var name  = document.getElementById('lead-name').value.trim();
+  var email = document.getElementById('lead-email').value.trim();
+  var phone = document.getElementById('lead-phone').value.trim();
+  // Basic HTML5 validation feedback
+  if (!name)  { document.getElementById('lead-name').focus();  return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('lead-email').focus(); return;
+  }
+  leadData = { name: name, email: email, phone: phone };
+  currentQ = 0;
+  render();
+}
+
+function submitLead(resultKey, score) {
+  if (!FORMSPREE_ENDPOINT || FORMSPREE_ENDPOINT === 'YOUR_FORMSPREE_ENDPOINT_HERE') return;
+  try {
+    var q = QUESTIONS, l = lang;
+    var data = {
+      name:           leadData.name,
+      email:          leadData.email,
+      phone:          leadData.phone || '—',
+      language:       l === 'fr' ? 'Français' : 'Español',
+      profile:        profile === 'pro'
+                        ? (l === 'fr' ? 'Professionnel' : 'Profesional')
+                        : (l === 'fr' ? 'Apprenant'     : 'Estudiante'),
+      vocal_block:    resultKey,
+      vocal_score:    score,
+      routing:        courseOnly ? 'parcours-cours' : 'parcours-standard',
+      q0_usage:       answers[0] !== null ? q[0][l].options[answers[0]] : '—',
+      q1_symptoms:    answers[1].length ? answers[1].map(function(i){ return q[1][l].options[i]; }).join(' | ') : '—',
+      q2_context:     answers[2] !== null ? q[2][l].options[answers[2]] : '—',
+      q3_tried:       answers[3].length ? answers[3].map(function(i){ return q[3][l].options[i]; }).join(' | ') : '—',
+      q4_frustration: answers[4] !== null ? q[4][l].options[answers[4]] : '—',
+      q5_goal:        answers[5] !== null ? q[5][l].options[answers[5]] : '—'
+    };
+    fetch(FORMSPREE_ENDPOINT, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body:    JSON.stringify(data)
+    }).catch(function() {});
+  } catch(err) {}
 }
 
 // Init
