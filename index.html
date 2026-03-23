@@ -542,11 +542,18 @@
 
 <script>
 // ================================================================
-// CONFIGURATION — replace these two URLs before deploying
+// CONFIGURATION — paywall URLs per language
 // ================================================================
-const PAYWALL_URL_STANDARD    = 'YOUR_STANDARD_PAYWALL_URL_HERE';
-const PAYWALL_URL_COURSE_ONLY = 'YOUR_COURSE_ONLY_PAYWALL_URL_HERE';
-const PAYWALL_URL_VIP         = 'PASTE_VIP_PAYWALL_URL_HERE';
+const PAYWALL_URLS = {
+  fr: {
+    standard: 'https://voz-essencia-academy-cbf28a.circle.so/checkout/voix-essence-academytm',
+    vip:      'https://voz-essencia-academy-cbf28a.circle.so/checkout/seance-prive-avec-mamselle'
+  },
+  es: {
+    standard: 'YOUR_ES_STANDARD_PAYWALL_URL_HERE',
+    vip:      'YOUR_ES_VIP_PAYWALL_URL_HERE'
+  }
+};
 const FORMSPREE_ENDPOINT      = 'https://formspree.io/f/xdawrzrj';
 
 // ================================================================
@@ -1501,38 +1508,38 @@ function renderResult() {
     ctaBtn.onclick = function() {
       if (typeof fbq !== 'undefined') {
         fbq('track', 'InitiateCheckout', {
-          content_name: lang === 'fr' ? 'La Séance Signature' : 'La Sesión Signature',
-          content_ids:  ['seance-signature-147'],
+          content_name: lang === 'fr' ? 'Séance Privée avec Mamselle' : 'La Sesión Signature',
+          content_ids:  ['seance-privee-mamselle-147'],
           value: 147, currency: 'USD', num_items: 1
         });
         fbq('trackCustom', 'Quiz_CTAClick', {
-          offer:       'Seance_Signature_147',
+          offer:       lang === 'fr' ? 'Seance_Privee_147' : 'Sesion_Signature_147',
           routing:     'VIP',
           vocal_block: calculateResult(),
           language:    lang
         });
       }
-      window.open(PAYWALL_URL_VIP, '_blank');
+      window.open(PAYWALL_URLS[lang].vip, '_blank');
     };
   } else {
-    ctaBtn.textContent = lang === 'fr' ? 'Découvrir Le Protocole de Libération Vocale — $47' : 'Descubrir Tu Voz Liberada — $47';
+    ctaBtn.textContent = lang === 'fr' ? 'Rejoindre Voix Essence Académie™' : 'Descubrir Tu Voz Liberada — $47';
     ctaBtn.style.background = '#1B4B3A';
     ctaBtn.className = 'btn-cta';
     ctaBtn.onclick = function() {
       if (typeof fbq !== 'undefined') {
         fbq('track', 'InitiateCheckout', {
-          content_name: lang === 'fr' ? 'Le Protocole de Libération Vocale' : 'Tu Voz Liberada',
-          content_ids:  ['protocole-liberation-vocale-47'],
-          value: 47, currency: 'USD', num_items: 1
+          content_name: lang === 'fr' ? 'Voix Essence Académie™' : 'Tu Voz Liberada',
+          content_ids:  [lang === 'fr' ? 'voix-essence-academie-membership' : 'tu-voz-liberada-47'],
+          value: 37, currency: 'USD', num_items: 1
         });
         fbq('trackCustom', 'Quiz_CTAClick', {
-          offer:       'Protocole_47',
+          offer:       lang === 'fr' ? 'VoixEssenceAcademie_Membership' : 'TuVozLiberada_47',
           routing:     'Standard',
           vocal_block: calculateResult(),
           language:    lang
         });
       }
-      window.open(PAYWALL_URL_STANDARD, '_blank');
+      window.open(PAYWALL_URLS[lang].standard, '_blank');
     };
   }
 
