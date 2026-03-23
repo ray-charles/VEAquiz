@@ -603,9 +603,10 @@ const QUESTIONS = [
     }
   },
   {
-    id: 1, type: 'single',
+    id: 1, type: 'multi', maxSelect: null,
     fr: {
       text: "Pour commencer — comment utilises-tu ta voix principalement ?",
+      hint: "Sélectionne tout ce qui s'applique.",
       options: [
         "Professionnellement : je coache, enseigne, thérapise ou prends la parole en public",
         "Je crée du contenu : podcasts, vidéos, réseaux sociaux",
@@ -615,6 +616,7 @@ const QUESTIONS = [
     },
     es: {
       text: "Para empezar — ¿cómo usas principalmente tu voz?",
+      hint: "Selecciona todo lo que aplique.",
       options: [
         "Profesionalmente: hago coaching, enseño, terapia o hablo en público",
         "Creo contenido: podcasts, videos, redes sociales",
@@ -1076,7 +1078,7 @@ var PRICING = {
   es: {
     section_label: "Los caminos disponibles",
     section_sub: "Tres formas de avanzar — según donde estés.",
-    anchor_note: "* Precios en USD. Tarifa LATAM disponible para el coaching — escríbenos antes de reservar.",
+    anchor_note: "* Precios en USD.",
     items: [
       {
         name: "Coaching Vocal Privado",
@@ -1086,7 +1088,7 @@ var PRICING = {
         desc: "55 minutos con Mamselle. Diagnóstico completo, protocolo personalizado, resultado accionable de inmediato.",
         tag: "Plazas limitadas",
         highlight: false,
-        latam_note: true,
+        latam_note: false,
         url: 'PAYWALL_ES_VIP'
       },
       {
@@ -1094,8 +1096,8 @@ var PRICING = {
         type: "Membresía mensual",
         price: "$37",
         price_sub: "por mes · sin compromiso",
-        desc: "Acceso al método completo, contenido mensual, y diagnóstico vocal personalizado incluido en el mes 1.",
-        tag: "Diagnóstico incluido en el mes 1",
+        desc: "Acceso al método completo y al contenido mensuel, con 15 días de prueba gratuita para empezar sin riesgo.",
+        tag: "15 días para probar gratis",
         highlight: true,
         latam_note: false,
         url: 'PAYWALL_ES_MEMBERSHIP'
@@ -1168,7 +1170,7 @@ function renderScoreArc(score) {
 // ================================================================
 let lang          = 'fr';
 let currentQ      = -1;   // -1 = lead screen, 0–5 = quiz questions
-let answers       = [null, null, [], [], [], [], [], [], null, '']; // Q0,Q1 single; Q2-Q7 multi; Q8 single; Q9 textarea
+let answers       = [null, [], [], [], [], [], [], [], null, '']; // Q0 single; Q1-Q7 multi; Q8 single; Q9 textarea
 let profile       = null;   // 'pro' | 'stu'
 let showResult    = false;
 let leadData      = { name: '', email: '', phone: '' };
@@ -1203,12 +1205,6 @@ function render() {
   document.documentElement.lang = lang;
   document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
   document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-
-  // Bilingual span toggles (credibility line, score label, insight labels)
-  const frClasses = ['cred-fr','score-label-fr','ins1-fr','ins2-fr','ins3-fr','social-label-fr'];
-  const esClasses = ['cred-es','score-label-es','ins1-es','ins2-es','ins3-es','social-label-es'];
-  frClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'fr' ? 'inline' : 'none'));
-  esClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'es' ? 'inline' : 'none'));
 
   // Logo placement: always outside the card, just above copyright
   document.getElementById('logo-outside-fr').style.display = (lang === 'fr') ? 'block' : 'none';
@@ -1285,6 +1281,12 @@ function render() {
     document.getElementById('result-screen').style.display = 'none';
     renderQuiz();
   }
+
+  // Bilingual span toggles — run AFTER all content is built so dynamically-created elements are caught
+  const frClasses = ['cred-fr','score-label-fr','ins1-fr','ins2-fr','ins3-fr','social-label-fr'];
+  const esClasses = ['cred-es','score-label-es','ins1-es','ins2-es','ins3-es','social-label-es'];
+  frClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'fr' ? 'inline' : 'none'));
+  esClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'es' ? 'inline' : 'none'));
 }
 
 function renderQuiz() {
@@ -1411,7 +1413,7 @@ function handleBack() {
 
 function handleNext() {
   if (!hasCurrentAnswer()) return;
-  if (currentQ === 1) profile = (answers[1] === 0) ? 'pro' : 'stu';
+  if (currentQ === 1) profile = (Array.isArray(answers[1]) && answers[1].includes(0)) ? 'pro' : 'stu';
   if (currentQ === 9) {
     var ta = document.getElementById('q8-textarea');
     if (ta) answers[9] = ta.value;
@@ -1446,15 +1448,15 @@ function renderResult() {
   var q4idx  = Array.isArray(answers[5]) ? answers[5][0] : answers[5];
   var q4text = (q4idx !== null && q4idx !== undefined) ? Q4_COST[lang][q4idx] : '';
 
-  var ins1label_fr = 'Ce qui se passe',        ins1label_es = 'Lo que ocurre';
-  var ins2label_fr = 'Quand il s\'active',      ins2label_es = 'Cuándo se activa';
-  var ins3label_fr = 'Ce qu\'il coûte sans intervention', ins3label_es = 'Lo que cuesta sin intervención';
+  // Display helpers: set correct visibility at creation time (class toggle already ran before renderResult)
+  var dFr = lang === 'es' ? ' style="display:none;"' : '';
+  var dEs = lang === 'fr' ? ' style="display:none;"' : '';
 
   var bodyHTML =
     '<div style="margin-bottom:14px;">'
     + '<div style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:#1B4B3A;margin-bottom:5px;">'
-    + '<span class="ins1-fr">' + ins1label_fr + '</span>'
-    + '<span class="ins1-es" style="display:none;">' + ins1label_es + '</span>'
+    + '<span class="ins1-fr"' + dFr + '>' + (lang === 'fr' ? 'Ce qui se passe' : 'Ce qui se passe') + '</span>'
+    + '<span class="ins1-es"' + dEs + '>Lo que ocurre</span>'
     + '</div>'
     + '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#7A706A;line-height:1.7;">' + d.body + '</div>'
     + '</div>';
@@ -1463,8 +1465,8 @@ function renderResult() {
     bodyHTML +=
       '<div style="margin-bottom:14px;">'
       + '<div style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:#1B4B3A;margin-bottom:5px;">'
-      + '<span class="ins2-fr">Quand il s\'active</span>'
-      + '<span class="ins2-es" style="display:none;">Cuándo se activa</span>'
+      + '<span class="ins2-fr"' + dFr + '>Quand il s\'active</span>'
+      + '<span class="ins2-es"' + dEs + '>Cuándo se activa</span>'
       + '</div>'
       + '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#7A706A;line-height:1.7;">' + q2text + '</div>'
       + '</div>';
@@ -1474,8 +1476,8 @@ function renderResult() {
     bodyHTML +=
       '<div style="margin-bottom:18px;">'
       + '<div style="font-family:\'DM Sans\',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#C4845A;margin-bottom:5px;text-decoration:underline;text-underline-offset:3px;">'
-      + '<span class="ins3-fr">Ce qu\'il coûte sans intervention</span>'
-      + '<span class="ins3-es" style="display:none;">Lo que cuesta sin intervención</span>'
+      + '<span class="ins3-fr"' + dFr + '>Ce qu\'il coûte sans intervention</span>'
+      + '<span class="ins3-es"' + dEs + '>Lo que cuesta sin intervención</span>'
       + '</div>'
       + '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#7A706A;line-height:1.7;">' + q4text + '</div>'
       + '</div>';
@@ -1627,7 +1629,7 @@ function renderResult() {
 
 function handleRestart() {
   currentQ      = 0;   // keep lead data — skip form on restart
-  answers       = [null, null, [], [], [], [], [], [], null, ''];
+  answers       = [null, [], [], [], [], [], [], [], null, ''];
   profile       = null;
   showResult    = false;
   leadSubmitted = false;
@@ -1639,7 +1641,7 @@ function handleLangToggle(newLang) {
   if (lang === newLang) return;
   lang          = newLang;
   currentQ      = -1;
-  answers       = [null, null, [], [], [], [], [], [], null, ''];
+  answers       = [null, [], [], [], [], [], [], [], null, ''];
   profile       = null;
   showResult    = false;
   leadData      = { name: '', email: '', phone: '' };
@@ -1877,13 +1879,13 @@ function animateResultScreen(score) {
   var p = params.get('p') || 'pro';
   if (!r || !RESULT_KEYS.includes(r)) return;
   var presets = {
-    mandibulaire: [0, 0, [0], [3], [0], [0], [1], [0], null, ''],
-    souffle:      [0, 0, [1], [0], [2], [3], [0], [0], null, ''],
-    nerveux:      [0, 0, [3], [1], [],  [1], [3], [0], null, ''],
-    identite:     [0, 0, [4], [2], [3], [2], [2], [0], null, '']
+    mandibulaire: [0, [0], [0], [3], [0], [0], [1], [0], null, ''],
+    souffle:      [0, [0], [1], [0], [2], [3], [0], [0], null, ''],
+    nerveux:      [0, [0], [3], [1], [],  [1], [3], [0], null, ''],
+    identite:     [0, [0], [4], [2], [3], [2], [2], [0], null, '']
   };
   answers    = presets[r];
-  profile = (presets[r][1] === 0) ? 'pro' : 'stu';
+  profile = (Array.isArray(presets[r][1]) && presets[r][1].includes(0)) ? 'pro' : 'stu';
   showResult = true;
 })();
 
