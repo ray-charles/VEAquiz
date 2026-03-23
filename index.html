@@ -67,10 +67,12 @@
 
     .main-headline {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(28px, 6vw, 36px);
+      font-weight: 400;
+      font-size: clamp(2.6rem, 9vw, 3.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--dark);
-      line-height: 1.2;
+      line-height: 1.15;
       margin-bottom: 14px;
     }
     .main-headline em { font-style: italic; color: var(--green-deep); }
@@ -425,7 +427,7 @@
   <!-- Elfsight Google Reviews — hidden on result page -->
   <div id="elfsight-top" style="margin-bottom:24px;min-height:100px;">
     <div class="elfsight-app-a2033325-ad8d-4b3e-a377-0415fc2e43eb" data-elfsight-app-lazy></div>
-    <p id="widget-caption" style="text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;color:#7A706A;margin-top:10px;font-style:italic;">
+    <p id="widget-caption" style="text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;color:#7A706A;margin-top:10px;">
       <span class="cred-fr">Quiz 100% Gratuit — nous permet de mieux vous servir. 🙂</span>
       <span class="cred-es" style="display:none;">Quiz 100% Gratuito — nos permite servirte mejor. 🙂</span>
     </p>
@@ -481,9 +483,6 @@
         <span class="cred-fr">Créé par Mamselle Ruiz Coach — 25 ans d'expérience · plus de 1 000 voix accompagnées · quiz construit avec les principes de biomécanique vocale</span>
         <span class="cred-es" style="display:none;">Creado por Mamselle Ruiz Coach — 25 años de experiencia · más de 1 000 voces acompañadas · quiz construido con los principios de biomecánica vocal</span>
       </p>
-      <!-- Logo on lead page — below name/email box and credibility line -->
-      <div id="logo-lead-fr" style="text-align:center;margin-top:20px;"><img src="Logo-fr.png" alt="Voix Essence™ Academy" height="48" style="height:48px;width:auto;"></div>
-      <div id="logo-lead-es" style="text-align:center;margin-top:20px;display:none;"><img src="Logo-es.png" alt="Voz Esencia™ Academy" height="48" style="height:48px;width:auto;"></div>
     </div>
 
     <!-- QUIZ SCREEN -->
@@ -508,10 +507,11 @@
         <span class="badge-pill badge-result" id="result-badge-label"></span>
       </div>
       <div class="result-title" id="result-title"></div>
-      <div id="result-thankyou" style="display:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;font-style:italic;color:#A89E97;line-height:1.6;margin-bottom:16px;text-align:center;"></div>
+      <div id="result-thankyou" style="display:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;font-style:normal;color:#7A706A;line-height:1.6;margin-bottom:20px;text-align:center;"></div>
       <div class="result-body"  id="result-body"></div>
       <div class="exercise-label" id="exercise-label"></div>
       <div class="exercise-box"   id="exercise-box"></div>
+      <div id="sales-copy-block" style="margin:20px 0;padding:16px 18px;border-radius:12px;background:linear-gradient(135deg,#F0F7F4 0%,#EDE5D6 100%);border:0.5px solid #C4E0D5;"></div>
       <div class="open-loop-box">
         <div id="cta-subtitle" style="display:none;font-family:'DM Sans',sans-serif;font-size:13px;font-style:italic;color:#7A706A;margin-bottom:10px;line-height:1.6;"></div>
         <button class="btn-cta standard" id="btn-cta"></button>
@@ -1201,13 +1201,9 @@ function render() {
   frClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'fr' ? 'inline' : 'none'));
   esClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'es' ? 'inline' : 'none'));
 
-  // Logo placement: lead-page logos vs outside-card logos
-  var isLeadPage = (!showResult && currentQ === -1);
-  var isOutsidePage = (currentQ >= 0 || showResult);
-  document.getElementById('logo-lead-fr').style.display   = (isLeadPage && lang === 'fr') ? 'block' : 'none';
-  document.getElementById('logo-lead-es').style.display   = (isLeadPage && lang === 'es') ? 'block' : 'none';
-  document.getElementById('logo-outside-fr').style.display = (isOutsidePage && lang === 'fr') ? 'block' : 'none';
-  document.getElementById('logo-outside-es').style.display = (isOutsidePage && lang === 'es') ? 'block' : 'none';
+  // Logo placement: always outside the card, just above copyright
+  document.getElementById('logo-outside-fr').style.display = (lang === 'fr') ? 'block' : 'none';
+  document.getElementById('logo-outside-es').style.display = (lang === 'es') ? 'block' : 'none';
 
   document.getElementById('main-headline').innerHTML = showResult
     ? (lang === 'fr'
@@ -1231,7 +1227,7 @@ document.getElementById('main-headline').style.display = (currentQ >= 0 && !show
 
   // Elfsight top widget — shown on lead page only
   document.getElementById('elfsight-top').style.display = (!showResult && currentQ === -1) ? 'block' : 'none';
-  document.getElementById('subheadline').style.display   = showResult ? 'none' : 'block';
+  document.getElementById('subheadline').style.display   = (currentQ === -1 && !showResult) ? 'block' : 'none';
 
   // 92% social proof — shown during quiz only
   var proofEl = document.getElementById('quiz-social-proof');
@@ -1462,7 +1458,7 @@ function renderResult() {
   if (q4text) {
     bodyHTML +=
       '<div style="margin-bottom:18px;">'
-      + '<div style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:#C4845A;margin-bottom:5px;">'
+      + '<div style="font-family:\'DM Sans\',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#C4845A;margin-bottom:5px;text-decoration:underline;text-underline-offset:3px;">'
       + '<span class="ins3-fr">Ce qu\'il coûte sans intervention</span>'
       + '<span class="ins3-es" style="display:none;">Lo que cuesta sin intervención</span>'
       + '</div>'
@@ -1475,6 +1471,16 @@ function renderResult() {
   document.getElementById('exercise-label').textContent =
     lang === 'fr' ? 'Ton exercice ciblé' : 'Tu ejercicio específico';
   document.getElementById('exercise-box').innerHTML = d.exercise;
+
+  // Sales copy bridge — after exercise, before CTA
+  var salesCopyEl = document.getElementById('sales-copy-block');
+  if (salesCopyEl) {
+    var salesFr = 'Cet exercice t\'offre un premier aperçu de ce qui est possible — mais le blocage a des racines plus profondes qu\'un seul exercice ne peut atteindre. Ce que tu viens de vivre n\'est qu\'un avant-goût du travail précis qu\'il est possible de faire sur ton mécanisme vocal spécifique. Le Protocole de Libération Vocale va là où ce quiz s\'arrête : diagnostic complet, plan structuré, résultat mesurable.';
+    var salesEs = 'Este ejercicio te da un primer vistazo de lo que es posible — pero el bloqueo tiene raíces más profundas de lo que un solo ejercicio puede alcanzar. Lo que acabas de experimentar es solo el comienzo del trabajo preciso que se puede hacer sobre tu mecanismo vocal específico. Tu Voz Auténtica en 7 Días va donde este quiz termina: diagnóstico completo, plan estructurado, resultado medible.';
+    salesCopyEl.innerHTML = '<p style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:400;color:#2C2825;line-height:1.75;margin:0;">'
+      + (lang === 'fr' ? salesFr : salesEs)
+      + '</p>';
+  }
 
   // Q7-based CTA routing
   var q7ans = (answers.length > 8 && answers[8] !== null && answers[8] !== undefined) ? answers[8] : null;
