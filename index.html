@@ -418,13 +418,6 @@
 
   <!-- TOP SECTION -->
   <div class="top-section">
-    <!-- Bilingual logo — switches with language toggle -->
-    <div id="logo-fr" style="margin-bottom:16px;">
-      <img src="Logo-fr.png" alt="Voix Essence™ Academy" width="auto" height="48" style="height:48px;width:auto;">
-    </div>
-    <div id="logo-es" style="margin-bottom:16px;display:none;">
-      <img src="Logo-es.png" alt="Voz Esencia™ Academy" width="auto" height="48" style="height:48px;width:auto;">
-    </div>
     <h1 class="main-headline" id="main-headline"></h1>
     <p class="subheadline" id="subheadline"></p>
   </div>
@@ -432,6 +425,16 @@
   <!-- Elfsight Google Reviews — hidden on result page -->
   <div id="elfsight-top" style="margin-bottom:24px;min-height:100px;">
     <div class="elfsight-app-a2033325-ad8d-4b3e-a377-0415fc2e43eb" data-elfsight-app-lazy></div>
+    <p id="widget-caption" style="text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;color:#7A706A;margin-top:10px;font-style:italic;">
+      <span class="cred-fr">Quiz 100% Gratuit — nous permet de mieux vous servir. 🙂</span>
+      <span class="cred-es" style="display:none;">Quiz 100% Gratuito — nos permite servirte mejor. 🙂</span>
+    </p>
+  </div>
+
+  <!-- 92% social proof — shown during quiz only -->
+  <div id="quiz-social-proof" style="display:none;text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;font-style:italic;color:#7A706A;margin-bottom:12px;line-height:1.6;">
+    <span id="proof-fr">92% des personnes qui ont commencé ce quiz l'ont terminé et l'ont trouvé très précieux.</span>
+    <span id="proof-es" style="display:none;">92% de las personas que comenzaron este quiz lo terminaron y lo encontraron muy valioso.</span>
   </div>
 
   <!-- QUIZ CARD -->
@@ -475,9 +478,12 @@
         border-top: 0.5px solid #EDE5D6;
         padding-top: 14px;
       ">
-        <span class="cred-fr">Créé par Mamselle Ruiz Coach — 25 ans d'expérience · plus de 1 000 voix accompagnées · méthode biomécanique personnalisée</span>
-        <span class="cred-es" style="display:none;">Creado por Mamselle Ruiz Coach — 25 años de experiencia · más de 1 000 voces acompañadas · método biomecánico personalizado</span>
+        <span class="cred-fr">Créé par Mamselle Ruiz Coach — 25 ans d'expérience · plus de 1 000 voix accompagnées · quiz construit avec les principes de biomécanique vocale</span>
+        <span class="cred-es" style="display:none;">Creado por Mamselle Ruiz Coach — 25 años de experiencia · más de 1 000 voces acompañadas · quiz construido con los principios de biomecánica vocal</span>
       </p>
+      <!-- Logo on lead page — below name/email box and credibility line -->
+      <div id="logo-lead-fr" style="text-align:center;margin-top:20px;"><img src="Logo-fr.png" alt="Voix Essence™ Academy" height="48" style="height:48px;width:auto;"></div>
+      <div id="logo-lead-es" style="text-align:center;margin-top:20px;display:none;"><img src="Logo-es.png" alt="Voz Esencia™ Academy" height="48" style="height:48px;width:auto;"></div>
     </div>
 
     <!-- QUIZ SCREEN -->
@@ -502,6 +508,7 @@
         <span class="badge-pill badge-result" id="result-badge-label"></span>
       </div>
       <div class="result-title" id="result-title"></div>
+      <div id="result-thankyou" style="display:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;font-style:italic;color:#A89E97;line-height:1.6;margin-bottom:16px;text-align:center;"></div>
       <div class="result-body"  id="result-body"></div>
       <div class="exercise-label" id="exercise-label"></div>
       <div class="exercise-box"   id="exercise-box"></div>
@@ -541,6 +548,10 @@
 
   </div><!-- /quiz-card -->
 
+  <!-- Logo outside quiz card — shown during quiz questions and on result page (below social footer) -->
+  <div id="logo-outside-fr" style="text-align:center;margin-top:20px;display:none;"><img src="Logo-fr.png" alt="Voix Essence™ Academy" height="48" style="height:48px;width:auto;"></div>
+  <div id="logo-outside-es" style="text-align:center;margin-top:20px;display:none;"><img src="Logo-es.png" alt="Voz Esencia™ Academy" height="48" style="height:48px;width:auto;"></div>
+
   <div class="footer" id="site-footer"></div>
 </div><!-- /page-wrapper -->
 
@@ -568,6 +579,23 @@ const QUESTIONS = [
   {
     id: 0, type: 'single',
     fr: {
+      text: "Si nous trouvons la solution exacte à ton problème actuel, voudrais-tu l'obtenir ?",
+      options: [
+        "Oui, absolument",
+        "Non, pas pour l'instant"
+      ]
+    },
+    es: {
+      text: "Si encontramos la solución exacta a tu problema actual, ¿te gustaría obtenerla?",
+      options: [
+        "Sí, absolutamente",
+        "No, por ahora no"
+      ]
+    }
+  },
+  {
+    id: 1, type: 'single',
+    fr: {
       text: "Pour commencer — comment utilises-tu ta voix principalement ?",
       options: [
         "Professionnellement : je coache, enseigne, thérapise ou prends la parole en public",
@@ -587,7 +615,7 @@ const QUESTIONS = [
     }
   },
   {
-    id: 1, type: 'multi', maxSelect: null,
+    id: 2, type: 'multi', maxSelect: null,
     fr: {
       text: "Comment ta voix te limite-t-elle concrètement ?",
       hint: "Sélectionne tout ce qui s'applique.",
@@ -612,7 +640,7 @@ const QUESTIONS = [
     }
   },
   {
-    id: 2, type: 'multi', maxSelect: null,
+    id: 3, type: 'multi', maxSelect: null,
     fr: {
       text: "Dans quel contexte ça arrive le plus souvent ?",
       hint: "Sélectionne tout ce qui s'applique.",
@@ -635,7 +663,7 @@ const QUESTIONS = [
     }
   },
   {
-    id: 3, type: 'multi', maxSelect: null,
+    id: 4, type: 'multi', maxSelect: null,
     fr: {
       text: "Qu'as-tu déjà essayé pour améliorer ta voix ?",
       hint: "Sélectionne tout ce qui s'applique.",
@@ -658,7 +686,7 @@ const QUESTIONS = [
     }
   },
   {
-    id: 4, type: 'multi', maxSelect: null,
+    id: 5, type: 'multi', maxSelect: null,
     fr: {
       text: "Ce qui décrit le mieux ta frustration :",
       hint: "Sélectionne tout ce qui te ressemble.",
@@ -681,7 +709,7 @@ const QUESTIONS = [
     }
   },
   {
-    id: 5, type: 'multi', maxSelect: 2,
+    id: 6, type: 'multi', maxSelect: 2,
     fr: {
       text: "Ce que tu veux vraiment, c'est…",
       hint: "Choisis jusqu'à 2 réponses.",
@@ -704,7 +732,7 @@ const QUESTIONS = [
     }
   },
   {
-    id: 6, type: 'multi', maxSelect: null,
+    id: 7, type: 'multi', maxSelect: null,
     fr: {
       text: "Quel est le principal obstacle qui t'empêche d'y arriver ?",
       hint: "Sélectionne tout ce qui s'applique.",
@@ -743,7 +771,7 @@ const QUESTIONS = [
     }
   },
   {
-    id: 7, type: 'single',
+    id: 8, type: 'single',
     fr: {
       text: "Si tu pouvais choisir, quel type d'accompagnement te conviendrait le mieux ?",
       options: [
@@ -764,7 +792,7 @@ const QUESTIONS = [
     }
   },
   {
-    id: 8, type: 'textarea',
+    id: 9, type: 'textarea',
     fr: {
       text: "Y a-t-il autre chose que tu aimerais que nous sachions avant de te donner ton résultat ?",
       placeholder: "Tu peux partager ce que tu veux — une situation particulière, une question, un contexte que tu trouves important. Rien ici n'est obligatoire."
@@ -781,11 +809,11 @@ const QUESTIONS = [
 // 0=mandibulaire  1=souffle  2=nerveux  3=identite
 // ================================================================
 const MULTI_SCORE = {
-  1: [0, 1, 0, 2, 3],
-  2: [1, 2, 3, 0],
-  3: [0, 0, 1, 3],
-  4: [0, 2, 3, 1],
-  5: [1, 0, 3, 2]
+  2: [0, 1, 0, 2, 3],   // Q2 symptoms
+  3: [1, 2, 3, 0],       // Q3 context
+  4: [2, 3, 1, 0],       // Q4 what you tried — FIXED (was [0,0,1,3])
+  5: [0, 2, 3, 1],       // Q5 frustration
+  6: [1, 0, 3, 2]        // Q6 goals
 };
 const RESULT_KEYS = ['mandibulaire', 'souffle', 'nerveux', 'identite'];
 
@@ -1010,13 +1038,13 @@ var PRICING = {
   fr: {
     section_label: "Les parcours disponibles",
     section_sub: "Deux façons d'avancer — selon là où tu en es.",
-    anchor_note: "* Prix en USD. Réservation de la séance confirmée sous 24h.",
+    anchor_note: "* Prix en CAD. Essai gratuit de 15 jours — annulable à tout moment.",
     items: [
       {
         name: "La Séance Privée avec Mamselle",
         type: "Coaching individuel",
-        price: "$147",
-        price_sub: "session unique",
+        price: "200 $",
+        price_sub: "CAD par séance",
         desc: "55 minutes. Diagnostic complet, protocole personnalisé, résultat actionnable immédiatement.",
         tag: "Places limitées",
         highlight: false,
@@ -1026,10 +1054,10 @@ var PRICING = {
       {
         name: "Voix Essence Académie™",
         type: "Membership mensuel",
-        price: "$37",
-        price_sub: "par mois · sans engagement",
-        desc: "Accès à la méthode complète, contenu mensuel, et diagnostic vocal personnalisé inclus au mois 1.",
-        tag: "Diagnostic inclus au mois 1",
+        price: "49 $",
+        price_sub: "CAD / mois · sans engagement",
+        desc: "Accès à la méthode complète, contenu mensuel, et essai gratuit de 15 jours pour commencer sans risque.",
+        tag: "Essai gratuit de 15 jours",
         highlight: true,
         latam_note: false,
         url: 'PAYWALL_FR_STANDARD'
@@ -1131,7 +1159,7 @@ function renderScoreArc(score) {
 // ================================================================
 let lang          = 'fr';
 let currentQ      = -1;   // -1 = lead screen, 0–5 = quiz questions
-let answers       = [null, [], [], [], [], [], [], null, '']; // Q0,Q7 single; Q1-Q6 multi; Q8 textarea
+let answers       = [null, null, [], [], [], [], [], [], null, '']; // Q0,Q1 single; Q2-Q7 multi; Q8 single; Q9 textarea
 let profile       = null;   // 'pro' | 'stu'
 let showResult    = false;
 let leadData      = { name: '', email: '', phone: '' };
@@ -1145,7 +1173,7 @@ function calculateResult() {
   const scores = [0, 0, 0, 0]; // mandibulaire, souffle, nerveux, identite
 
   // Multi-select (Q1, Q2, Q3, Q4, Q5 all vote by each selected option)
-  [1, 2, 3, 4, 5].forEach(qi => {
+  [2, 3, 4, 5, 6].forEach(qi => {
     if (Array.isArray(answers[qi])) {
       answers[qi].forEach(ai => { if (MULTI_SCORE[qi] && MULTI_SCORE[qi][ai] !== undefined) scores[MULTI_SCORE[qi][ai]]++; });
     }
@@ -1173,27 +1201,47 @@ function render() {
   frClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'fr' ? 'inline' : 'none'));
   esClasses.forEach(cls => document.querySelectorAll('.' + cls).forEach(el => el.style.display = lang === 'es' ? 'inline' : 'none'));
 
-  // Bilingual logos
-  document.getElementById('logo-fr').style.display = lang === 'fr' ? 'block' : 'none';
-  document.getElementById('logo-es').style.display = lang === 'es' ? 'block' : 'none';
+  // Logo placement: lead-page logos vs outside-card logos
+  var isLeadPage = (!showResult && currentQ === -1);
+  var isOutsidePage = (currentQ >= 0 || showResult);
+  document.getElementById('logo-lead-fr').style.display   = (isLeadPage && lang === 'fr') ? 'block' : 'none';
+  document.getElementById('logo-lead-es').style.display   = (isLeadPage && lang === 'es') ? 'block' : 'none';
+  document.getElementById('logo-outside-fr').style.display = (isOutsidePage && lang === 'fr') ? 'block' : 'none';
+  document.getElementById('logo-outside-es').style.display = (isOutsidePage && lang === 'es') ? 'block' : 'none';
 
-  document.getElementById('main-headline').innerHTML = lang === 'fr'
-    ? 'Quel est ton<br><em>blocage vocal ?</em>'
-    : '¿Cuál es tu<br><em>bloqueo vocal?</em>';
+  document.getElementById('main-headline').innerHTML = showResult
+    ? (lang === 'fr'
+        ? 'Quel est ton<br><em>blocage vocal ?</em>'
+        : '¿Cuál es tu<br><em>bloqueo vocal?</em>')
+    : (lang === 'fr'
+        ? 'Frustré de perdre<br><em>contrôle de ta voix ?</em>'
+        : '¿Frustrado/a de perder<br><em>el control de tu voz?</em>');
+
+// Hide headline during quiz questions (shown on lead and result only)
+document.getElementById('main-headline').style.display = (currentQ >= 0 && !showResult) ? 'none' : 'block';
 
   document.getElementById('subheadline').textContent = lang === 'fr'
-    ? 'Réponds à 9 questions. Découvre ton blocage principal et reçois un exercice ciblé — gratuitement.'
-    : 'Responde 9 preguntas. Descubre tu bloqueo principal y recibe un ejercicio específico — gratis.';
+    ? 'Découvre ton blocage principal et reçois un exercice ciblé en répondant aux 9 prochaines questions.'
+    : 'Descubre tu bloqueo principal y recibe un ejercicio específico respondiendo las 9 siguientes preguntas.';
 
   var footerEl = document.getElementById('site-footer');
   if (footerEl) footerEl.textContent = lang === 'fr'
     ? '© 2026 Voix Essence Academy · Mamselle Ruiz Coach'
     : '© 2026 Voz Esencia Academy · Mamselle Ruiz Coach';
 
-  // Elfsight top widget — hidden on result page
-  var onResult = showResult;
-  document.getElementById('elfsight-top').style.display  = onResult ? 'none' : 'block';
-  document.getElementById('subheadline').style.display   = onResult ? 'none' : 'block';
+  // Elfsight top widget — shown on lead page only
+  document.getElementById('elfsight-top').style.display = (!showResult && currentQ === -1) ? 'block' : 'none';
+  document.getElementById('subheadline').style.display   = showResult ? 'none' : 'block';
+
+  // 92% social proof — shown during quiz only
+  var proofEl = document.getElementById('quiz-social-proof');
+  if (proofEl) {
+    proofEl.style.display = (!showResult && currentQ >= 0) ? 'block' : 'none';
+    var pfr = document.getElementById('proof-fr');
+    var pes = document.getElementById('proof-es');
+    if (pfr) pfr.style.display = lang === 'fr' ? 'inline' : 'none';
+    if (pes) pes.style.display = lang === 'es' ? 'inline' : 'none';
+  }
 
   // Elfsight bottom result widgets — toggle by language
   var rFr = document.getElementById('elfsight-result-fr');
@@ -1224,12 +1272,12 @@ function renderQuiz() {
   const qData = q[lang];
 
   // Progress
-  document.getElementById('progress-fill').style.width = ((currentQ + 1) / 9 * 100) + '%';
+  document.getElementById('progress-fill').style.width = ((currentQ + 1) / 10 * 100) + '%';
 
   // Counter
   document.getElementById('question-counter').textContent = lang === 'fr'
-    ? `Question ${currentQ + 1} / 9`
-    : `Pregunta ${currentQ + 1} / 9`;
+    ? `Question ${currentQ + 1} / 10`
+    : `Pregunta ${currentQ + 1} / 10`;
 
   // Question text
   document.getElementById('question-text').textContent = qData.text;
@@ -1254,7 +1302,7 @@ function renderQuiz() {
   // Next button
   const nextBtn = document.getElementById('btn-next');
   nextBtn.disabled    = !hasCurrentAnswer();
-  nextBtn.textContent = currentQ === 8
+  nextBtn.textContent = currentQ === 9
     ? (lang === 'fr' ? 'Voir mon résultat →' : 'Ver mi resultado →')
     : (lang === 'fr' ? 'Continuer' : 'Continuar');
 }
@@ -1343,10 +1391,10 @@ function handleBack() {
 
 function handleNext() {
   if (!hasCurrentAnswer()) return;
-  if (currentQ === 0) profile = (answers[0] === 0) ? 'pro' : 'stu';
-  if (currentQ === 8) {
+  if (currentQ === 1) profile = (answers[1] === 0) ? 'pro' : 'stu';
+  if (currentQ === 9) {
     var ta = document.getElementById('q8-textarea');
-    if (ta) answers[8] = ta.value;
+    if (ta) answers[9] = ta.value;
     showResult = true;
     render();
     return;
@@ -1372,10 +1420,19 @@ function renderResult() {
   // Title
   document.getElementById('result-title').textContent = d.title;
 
+  // Thank you text below result title
+  var thankEl = document.getElementById('result-thankyou');
+  if (thankEl) {
+    thankEl.textContent = lang === 'fr'
+      ? 'Merci d\'avoir pris le temps de faire ce quiz. Il nous permet jour après jour d\'offrir un meilleur service à tous nos clients.'
+      : 'Gracias por tomarte el tiempo de hacer este quiz. Nos permite día a día ofrecer un mejor servicio a todos nuestros clientes.';
+    thankEl.style.display = 'block';
+  }
+
   // Three-insight result body
-  var q2idx  = Array.isArray(answers[2]) ? answers[2][0] : answers[2];
+  var q2idx  = Array.isArray(answers[3]) ? answers[3][0] : answers[3];
   var q2text = (q2idx !== null && q2idx !== undefined) ? Q2_TRIGGER[lang][q2idx] : '';
-  var q4idx  = Array.isArray(answers[4]) ? answers[4][0] : answers[4];
+  var q4idx  = Array.isArray(answers[5]) ? answers[5][0] : answers[5];
   var q4text = (q4idx !== null && q4idx !== undefined) ? Q4_COST[lang][q4idx] : '';
 
   var ins1label_fr = 'Ce qui se passe',        ins1label_es = 'Lo que ocurre';
@@ -1420,7 +1477,7 @@ function renderResult() {
   document.getElementById('exercise-box').innerHTML = d.exercise;
 
   // Q7-based CTA routing
-  var q7ans = (answers.length > 7 && answers[7] !== null && answers[7] !== undefined) ? answers[7] : null;
+  var q7ans = (answers.length > 8 && answers[8] !== null && answers[8] !== undefined) ? answers[8] : null;
 
   // Determine route key
   // FR: 0,2→membership  1→vip
@@ -1532,7 +1589,7 @@ function renderResult() {
 
 function handleRestart() {
   currentQ      = 0;   // keep lead data — skip form on restart
-  answers       = [null, [], [], [], [], [], [], null, ''];
+  answers       = [null, null, [], [], [], [], [], [], null, ''];
   profile       = null;
   showResult    = false;
   leadSubmitted = false;
@@ -1544,7 +1601,7 @@ function handleLangToggle(newLang) {
   if (lang === newLang) return;
   lang          = newLang;
   currentQ      = -1;
-  answers       = [null, [], [], [], [], [], [], null, ''];
+  answers       = [null, null, [], [], [], [], [], [], null, ''];
   profile       = null;
   showResult    = false;
   leadData      = { name: '', email: '', phone: '' };
@@ -1697,17 +1754,18 @@ function submitLead(resultKey, score, routeKey) {
       vocal_block:    resultKey,
       vocal_score:    score,
       routing:        routeKey || 'standard',
-      q0_usage:       answers[0] !== null ? q[0][l].options[answers[0]] : '—',
-      q1_symptoms:    answers[1].length ? answers[1].map(function(i){ return q[1][l].options[i]; }).join(' | ') : '—',
-      q2_context:     answers[2].length ? answers[2].map(function(i){ return q[2][l].options[i]; }).join(' | ') : '—',
-      q3_tried:       answers[3].length ? answers[3].map(function(i){ return q[3][l].options[i]; }).join(' | ') : '—',
-      q4_frustration: answers[4].length ? answers[4].map(function(i){ return q[4][l].options[i]; }).join(' | ') : '—',
-      q5_goal:        answers[5].length ? answers[5].map(function(i){ return q[5][l].options[i]; }).join(' | ') : '—',
-      q6_obstacle:    answers[6].length
-                        ? answers[6].map(function(i){ return (q[6][l].optionsByProfile[profile || 'stu'] || [])[i] || '—'; }).join(' | ')
+      q0_qualified:   answers[0] === 0 ? 'Oui' : (answers[0] === 1 ? 'Non' : '—'),
+      q0_usage:       answers[1] !== null ? q[1][l].options[answers[1]] : '—',
+      q1_symptoms:    answers[2].length ? answers[2].map(function(i){ return q[2][l].options[i]; }).join(' | ') : '—',
+      q2_context:     answers[3].length ? answers[3].map(function(i){ return q[3][l].options[i]; }).join(' | ') : '—',
+      q3_tried:       answers[4].length ? answers[4].map(function(i){ return q[4][l].options[i]; }).join(' | ') : '—',
+      q4_frustration: answers[5].length ? answers[5].map(function(i){ return q[5][l].options[i]; }).join(' | ') : '—',
+      q5_goal:        answers[6].length ? answers[6].map(function(i){ return q[6][l].options[i]; }).join(' | ') : '—',
+      q6_obstacle:    answers[7].length
+                        ? answers[7].map(function(i){ return (q[7][l].optionsByProfile[profile || 'stu'] || [])[i] || '—'; }).join(' | ')
                         : '—',
-      q7_solution:    answers[7] !== null && answers[7] !== undefined ? q[7][l].options[answers[7]] : '—',
-      q8_freetext:    answers[8] || '—'
+      q7_solution:    answers[8] !== null && answers[8] !== undefined ? q[8][l].options[answers[8]] : '—',
+      q8_freetext:    answers[9] || '—'
     };
     fetch(FORMSPREE_ENDPOINT, {
       method:  'POST',
@@ -1780,14 +1838,14 @@ function animateResultScreen(score) {
   var r = params.get('r');
   var p = params.get('p') || 'pro';
   if (!r || !RESULT_KEYS.includes(r)) return;
-  profile = p;
   var presets = {
-    mandibulaire: [0, [0], [3], [0], [0], [1], [0], null, ''],
-    souffle:      [0, [1], [0], [2], [3], [0], [0], null, ''],
-    nerveux:      [0, [3], [1], [],  [1], [3], [0], null, ''],
-    identite:     [0, [4], [2], [3], [2], [2], [0], null, '']
+    mandibulaire: [0, 0, [0], [3], [0], [0], [1], [0], null, ''],
+    souffle:      [0, 0, [1], [0], [2], [3], [0], [0], null, ''],
+    nerveux:      [0, 0, [3], [1], [],  [1], [3], [0], null, ''],
+    identite:     [0, 0, [4], [2], [3], [2], [2], [0], null, '']
   };
   answers    = presets[r];
+  profile = (presets[r][1] === 0) ? 'pro' : 'stu';
   showResult = true;
 })();
 
