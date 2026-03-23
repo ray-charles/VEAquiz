@@ -531,9 +531,10 @@
           </a>
         </div>
       </div>
-      <!-- Elfsight Google Reviews — bottom of result page -->
+      <!-- Elfsight Google Reviews — bottom of result page (bilingual) -->
       <div id="elfsight-result" style="margin-top:28px;padding-top:24px;border-top:0.5px solid #D8CDB5;">
-        <div class="elfsight-app-445dc5e6-2c0e-4727-bb45-c0ea727e6cc4" data-elfsight-app-lazy></div>
+        <div id="elfsight-result-fr" class="elfsight-app-51c462bb-16a9-435c-81c1-7138813af62e" data-elfsight-app-lazy></div>
+        <div id="elfsight-result-es" class="elfsight-app-445dc5e6-2c0e-4727-bb45-c0ea727e6cc4" data-elfsight-app-lazy style="display:none;"></div>
       </div>
     </div>
 
@@ -1218,6 +1219,12 @@ function render() {
   // Elfsight top widget — hidden on result page
   var onResult = showResult;
   document.getElementById('elfsight-top').style.display = onResult ? 'none' : 'block';
+
+  // Elfsight bottom result widgets — toggle by language
+  var rFr = document.getElementById('elfsight-result-fr');
+  var rEs = document.getElementById('elfsight-result-es');
+  if (rFr) rFr.style.display = lang === 'fr' ? 'block' : 'none';
+  if (rEs) rEs.style.display = lang === 'es' ? 'block' : 'none';
 
   if (showResult) {
     document.getElementById('lead-screen').style.display   = 'none';
