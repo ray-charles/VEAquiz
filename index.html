@@ -1156,9 +1156,13 @@ function render() {
     }
   }
 
-  document.getElementById('subheadline').textContent = lang === 'fr'
-    ? 'Découvre ton blocage principal et reçois un exercice ciblé en répondant aux 9 prochaines questions.'
-    : 'Descubre tu bloqueo principal y recibe un ejercicio específico respondiendo las 9 siguientes preguntas.';
+  document.getElementById('subheadline').innerHTML = lang === 'fr'
+    ? '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Découvre ton blocage principal et maîtrise ta voix</span>'
+      + '<span style="display:block;margin-top:6px;">+ reçois un exercice ciblé</span>'
+      + '<span style="display:block;">en répondant aux 9 prochaines questions</span>'
+    : '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Descubre tu bloqueo principal y domina tu voz</span>'
+      + '<span style="display:block;margin-top:6px;">+ recibe un ejercicio específico</span>'
+      + '<span style="display:block;">respondiendo las 9 siguientes preguntas</span>';
 
   var footerEl = document.getElementById('site-footer');
   if (footerEl) footerEl.textContent = lang === 'fr'
