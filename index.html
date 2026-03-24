@@ -817,7 +817,7 @@ const QUESTIONS = [
 
 // ================================================================
 // SCORING MAPS
-// 0=mandibulaire  1=souffle  2=nerveux  3=identite
+// 0=mandibulaire  1=respiration  2=nerveux  3=identite
 // ================================================================
 const MULTI_SCORE = {
   2: [0, 1, 0, 2, 3],   // Q2 symptoms
@@ -826,7 +826,7 @@ const MULTI_SCORE = {
   5: [0, 2, 3, 1],       // Q5 frustration
   6: [1, 0, 3, 2]        // Q6 goals
 };
-const RESULT_KEYS = ['mandibulaire', 'souffle', 'nerveux', 'identite'];
+const RESULT_KEYS = ['mandibulaire', 'respiration', 'nerveux', 'identite'];
 
 // ================================================================
 // RESULTS DATA
@@ -839,8 +839,8 @@ const RESULTS = {
         body: "Ta mâchoire accumule la tension de chaque session, chaque présentation, chaque moment chargé. Quand elle se serre — souvent inconsciemment — elle réduit ta résonance, force ta gorge à compenser, et crée une fatigue qui n'a rien à voir avec ton endurance. Ce n'est pas une fragilité. C'est un pattern biomécanique précis, et il se libère.",
         exercise: "<strong>L'ouverture consciente :</strong> Pose deux doigts sur ta mâchoire, juste devant tes oreilles. Ouvre doucement — 2 cm seulement. Reste 10 secondes. Remarque si un côté est plus serré que l'autre. Ferme. Répète 3 fois."
       },
-      souffle: {
-        title: "Blocage du Souffle",
+      respiration: {
+        title: "Blocage Respiratoire",
         body: "Tu utilises une respiration compensatoire depuis longtemps — et ton corps s'y est adapté. Résultat : ta voix perd en puissance après 20-30 minutes, tu manques d'air au mauvais moment, et tu forces là où tu devrais avoir du flux. Ce n'est pas un manque d'endurance. C'est un pattern respiratoire qui se recalibre.",
         exercise: "<strong>Le scan respiratoire :</strong> Pose une main sur la poitrine, une sur le ventre. Prends une respiration normale — sans forcer. Quelle main bouge en premier ? Si c'est celle de la poitrine, tu utilises une respiration haute compensatoire. C'est le point de départ."
       },
@@ -861,8 +861,8 @@ const RESULTS = {
         body: "La mâchoire est le saboteur le plus sous-estimé de la voix. Quand elle est chroniquement tendue — souvent sans que tu le sentes — elle bloque la résonance, empêche les harmoniques de se déployer et rend certaines notes inaccessibles. Ce n'est pas un manque de talent. C'est un pattern biomécanique qui se libère.",
         exercise: "<strong>L'ouverture consciente :</strong> Pose deux doigts sur ta mâchoire, juste devant tes oreilles. Ouvre doucement — 2 cm seulement. Reste 10 secondes. Remarque si un côté est plus serré que l'autre. Ferme. Répète 3 fois."
       },
-      souffle: {
-        title: "Blocage du Souffle",
+      respiration: {
+        title: "Blocage Respiratoire",
         body: "Ton pattern respiratoire compense quelque chose — et tu t'y es habitué·e. Le résultat : fatigue vocale rapide, notes aiguës difficiles à soutenir, voix qui perd de la couleur sur la durée. Recalibrer ce pattern change plus de choses dans ta voix que n'importe quel exercice de chant.",
         exercise: "<strong>Le scan respiratoire :</strong> Pose une main sur la poitrine, une sur le ventre. Prends une respiration normale — sans forcer. Quelle main bouge en premier ? Si c'est celle de la poitrine, tu utilises une respiration haute compensatoire. C'est le point de départ."
       },
@@ -885,7 +885,7 @@ const RESULTS = {
         body: "Tu mandíbula acumula la tensión de cada sesión, cada presentación, cada momento cargado. Cuando se aprieta — a menudo inconscientemente — reduce tu resonancia, fuerza a la garganta a compensar y crea una fatiga que no tiene nada que ver con tu resistencia. No es fragilidad. Es un patrón biomecánico preciso, y se libera.",
         exercise: "<strong>La apertura consciente:</strong> Pon dos dedos en la mandíbula, frente a las orejas. Abre suavemente — solo 2 cm. Quédate 10 segundos. Nota si un lado está más tenso. Cierra. Repite 3 veces."
       },
-      souffle: {
+      respiration: {
         title: "Bloqueo de Respiración",
         body: "Usas una respiración compensatoria desde hace tiempo — y tu cuerpo se adaptó. Resultado: la voz pierde potencia después de 20-30 minutos, te quedas sin aire en el momento equivocado. No es falta de resistencia. Es un patrón respiratorio que se recalibra.",
         exercise: "<strong>El escaneo respiratorio:</strong> Una mano en el pecho, otra en el vientre. Respiración normal. ¿Qué mano se mueve primero? Si es la del pecho, usas una respiración alta compensatoria. Ese es el punto de partida."
@@ -907,7 +907,7 @@ const RESULTS = {
         body: "La mandíbula es el saboteador más subestimado de la voz. Cuando está crónicamente tensa — muchas veces sin sentirlo — bloquea la resonancia, impide que los armónicos se desplieguen y hace que ciertas notas sean inaccesibles. No es falta de talento. Es un patrón biomecánico que se libera.",
         exercise: "<strong>La apertura consciente:</strong> Pon dos dedos en la mandíbula, frente a las orejas. Abre suavemente — solo 2 cm. Quédate 10 segundos. Nota si un lado está más tenso. Cierra. Repite 3 veces."
       },
-      souffle: {
+      respiration: {
         title: "Bloqueo de Respiración",
         body: "Tu patrón respiratorio compensa algo — y te has acostumbrado. El resultado: fatiga vocal rápida, notas agudas difíciles de sostener, voz que pierde color con el tiempo. Recalibrar este patrón cambia más tu voz que cualquier ejercicio de canto.",
         exercise: "<strong>El escaneo respiratorio:</strong> Una mano en el pecho, otra en el vientre. Respiración normal. ¿Qué mano se mueve primero? Si es la del pecho, usas una respiración alta compensatoria. Ese es el punto de partida."
@@ -1101,7 +1101,7 @@ let pixelFired    = false;
 // SCORING
 // ================================================================
 function calculateResult() {
-  const scores = [0, 0, 0, 0]; // mandibulaire, souffle, nerveux, identite
+  const scores = [0, 0, 0, 0]; // mandibulaire, respiration, nerveux, identite
 
   // Multi-select (Q1, Q2, Q3, Q4, Q5 all vote by each selected option)
   [2, 3, 4, 5, 6].forEach(qi => {
@@ -1110,7 +1110,7 @@ function calculateResult() {
     }
   });
 
-  // Winner — tiebreak: mandibulaire > souffle > nerveux > identite (first max wins)
+  // Winner — tiebreak: mandibulaire > respiration > nerveux > identite (first max wins)
   let max = -1, winner = 'mandibulaire';
   for (let i = 0; i < 4; i++) {
     if (scores[i] > max) { max = scores[i]; winner = RESULT_KEYS[i]; }
@@ -1794,7 +1794,7 @@ function animateResultScreen(score) {
 }
 
 // ================================================================
-// PREVIEW MODE — ?r=mandibulaire|souffle|nerveux|identite&p=pro|stu
+// PREVIEW MODE — ?r=mandibulaire|respiration|nerveux|identite&p=pro|stu
 // ================================================================
 (function() {
   var hash = window.location.hash.replace('#','');
@@ -1804,7 +1804,7 @@ function animateResultScreen(score) {
   if (!r || !RESULT_KEYS.includes(r)) return;
   var presets = {
     mandibulaire: [0, [0], [0], [3], [0], [0], [1], [0], null, ''],
-    souffle:      [0, [0], [1], [0], [2], [3], [0], [0], null, ''],
+    respiration:  [0, [0], [1], [0], [2], [3], [0], [0], null, ''],
     nerveux:      [0, [0], [3], [1], [],  [1], [3], [0], null, ''],
     identite:     [0, [0], [4], [2], [3], [2], [2], [0], null, '']
   };
