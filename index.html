@@ -116,6 +116,7 @@
       font-size: 12px;
       font-weight: 500;
       padding: 6px 14px;
+      min-height: 36px;
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.15s;
@@ -288,6 +289,8 @@
       color: var(--dark);
       line-height: 1.6;
       margin-bottom: 20px;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
     .open-loop-box {
       border: 0.5px solid var(--green-deep);
@@ -446,8 +449,8 @@
 
   <!-- 92% social proof — shown during quiz only -->
   <div id="quiz-social-proof" style="display:none;text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;font-style:italic;color:#7A706A;margin-bottom:12px;line-height:1.6;">
-    <span id="proof-fr">92% des personnes qui ont commencé ce quiz l'ont terminé et l'ont trouvé très précieux.</span>
-    <span id="proof-es" style="display:none;">92% de las personas que comenzaron este quiz lo terminaron y lo encontraron muy valioso.</span>
+    <span id="proof-fr">92% des personnes qui ont commencé ce quiz l'ont terminé et ont trouvé de la valeur dans les exercices.</span>
+    <span id="proof-es" style="display:none;">92% de las personas que comenzaron este quiz lo terminaron y encontraron valor en los ejercicios.</span>
   </div>
 
   <!-- QUIZ CARD -->
@@ -466,7 +469,7 @@
       <form id="lead-form" onsubmit="handleLeadSubmit(event)" novalidate>
         <div class="field-group">
           <label class="field-label" for="lead-name"  id="label-name"></label>
-          <input class="field-input" type="text"  id="lead-name"  name="name"  autocomplete="given-name" required>
+          <input class="field-input" type="text"  id="lead-name"  name="name"  autocomplete="name" required>
         </div>
         <div class="field-group">
           <label class="field-label" for="lead-email" id="label-email"></label>
@@ -590,15 +593,15 @@ const QUESTIONS = [
     fr: {
       text: "Si nous trouvons la solution exacte à ton problème actuel, voudrais-tu l'obtenir ?",
       options: [
-        "Oui, absolument",
-        "Non, pas pour l'instant"
+        "Oui",
+        "Non"
       ]
     },
     es: {
       text: "Si encontramos la solución exacta a tu problema actual, ¿te gustaría obtenerla?",
       options: [
-        "Sí, absolutamente",
-        "No, por ahora no"
+        "Sí",
+        "No"
       ]
     }
   },
@@ -837,44 +840,44 @@ const RESULTS = {
       mandibulaire: {
         title: "Blocage Mandibulaire",
         body: "Ta mâchoire accumule la tension de chaque session, chaque présentation, chaque moment chargé. Quand elle se serre — souvent inconsciemment — elle réduit ta résonance, force ta gorge à compenser, et crée une fatigue qui n'a rien à voir avec ton endurance. Ce n'est pas une fragilité. C'est un pattern biomécanique précis, et il se libère.",
-        exercise: "<strong>L'ouverture consciente :</strong> Pose deux doigts sur ta mâchoire, juste devant tes oreilles. Ouvre doucement — 2 cm seulement. Reste 10 secondes. Remarque si un côté est plus serré que l'autre. Ferme. Répète 3 fois."
+        exercise: "<strong>Découvre ton blocage — L'Ouverture Consciente</strong><br><br>Pose deux doigts sur ta mâchoire, juste devant tes oreilles. Ouvre doucement — 2 cm seulement. Reste 10 secondes. Observe si un côté est plus serré que l'autre. Ferme. Répète 3 fois.<br><br><strong>Maîtrise ta voix — Étirement et Massage de la Mâchoire</strong><br><br>Ouvre la mâchoire le plus largement possible (avec précaution) pour étirer les muscles faciaux en profondeur. Puis élève le menton vers le haut et pousse les lèvres vers le ciel (bec au ciel) pour étirer les muscles situés entre la mâchoire et la clavicule. Répète 10 fois. Termine par un massage global des muscles faciaux et de l'interstice de l'articulation mandibulaire."
       },
       respiration: {
         title: "Blocage Respiratoire",
         body: "Tu utilises une respiration compensatoire depuis longtemps — et ton corps s'y est adapté. Résultat : ta voix perd en puissance après 20-30 minutes, tu manques d'air au mauvais moment, et tu forces là où tu devrais avoir du flux. Ce n'est pas un manque d'endurance. C'est un pattern respiratoire qui se recalibre.",
-        exercise: "<strong>Le scan respiratoire :</strong> Pose une main sur la poitrine, une sur le ventre. Prends une respiration normale — sans forcer. Quelle main bouge en premier ? Si c'est celle de la poitrine, tu utilises une respiration haute compensatoire. C'est le point de départ."
+        exercise: "<strong>Découvre ton blocage — Le Scan Respiratoire</strong><br><br>Pose une main sur ta poitrine, l'autre sur ton ventre. Respire normalement, sans forcer. Quelle main bouge en premier ? Si c'est celle de la poitrine, tu utilises une respiration haute compensatoire. C'est ton point de départ.<br><br><strong>Maîtrise ta voix — La Respiration Complète en 3 Dimensions :</strong><br><br>Référence Vidéo Bibliothèque:<br><em>3-Respiration Complète</em><br><br>Inspire par le nez (ou nez + bouche selon besoin). Laisse l'air descendre sans lever les épaules. Observe trois expansions simultanées :<br><br>1. Ventre → s'avance<br>2. Côtes → s'ouvrent latéralement<br>3. Dos (lombaires) → s'élargit vers l'arrière<br><br>Image : un parapluie qui s'ouvre à 360°. Objectif : engager le diaphragme et sortir de la respiration claviculaire."
       },
       nerveux: {
         title: "Blocage du Système Nerveux",
         body: "Ta voix change sous pression non pas par manque de confiance, mais parce que ton système nerveux déclenche une réponse automatique de protection. Cette réponse encode une tension dans ton tissu vocal. Comprendre le mécanisme neurologique, c'est la première étape pour le neutraliser — pas le « gérer ».",
-        exercise: "<strong>Le ralentisseur nerveux :</strong> Avant de parler ou chanter, expire lentement pendant 6 secondes. Pas d'inspiration forcée — juste une longue expiration lente. Répète 3 fois. Remarque ce qui change dans ta gorge et tes épaules."
+        exercise: "<strong>Découvre ton blocage — Le Ralentisseur Nerveux</strong><br><br>Avant de parler ou de chanter, expire lentement pendant 6 secondes. Pas d'inspiration forcée — juste une longue expiration lente. Répète 3 fois. Observe ce qui change dans ta gorge et tes épaules.<br><br><strong>Maîtrise ta voix — Relâchement Cervical et Nerveux</strong><br><br>Assis-toi droit, colonne vertébrale vers le ciel, pieds plaqués au sol, mains sur les genoux. Laisse tomber la tête vers le bas, menton proche de la poitrine. Détache littéralement la tête du corps — elle devient lourde. Inspire et détends les muscles du cou, des épaules et des trapèzes. Reste là une minute avec des respirations profondes. Remonte la tête à son axe. Relax.<br><br>Cet écart que tu viens de découvrir, ce n'est pas un manque de talent ni une fatalité. C'est le résultat de compensations mécaniques qui se sont installées au fil du temps — et ça se corrige. Dans les Masterclass du membership, on déconstruit ensemble ces schémas et on installe les bases d'une mécanique vocale alignée avec qui tu es vraiment. C'est là que la transformation commence."
       },
       identite: {
         title: "Blocage d'Identité Vocale",
         body: "Ta voix ne projette pas l'autorité que tu as intérieurement. Ce décalage n'est pas psychologique — il est physique. Des années de messages sur « comment tu devrais sonner » ont façonné la façon dont tu tiens ta gorge, dont tu places ta voix. Ce blocage se libère, et quand il le fait, les gens autour de toi le remarquent avant toi.",
-        exercise: "<strong>L'écoute sans jugement :</strong> Enregistre-toi en disant ou en chantant une phrase. Écoute sans critiquer — juste observer. Demande-toi : est-ce que cette voix ressemble à comment je me vis intérieurement ? Si non, c'est le gap que Le Protocole commence à mesurer et à réduire."
+        exercise: "<strong>Découvre ton blocage — L'Écoute Sans Jugement</strong><br><br>Enregistre-toi en disant ou en chantant un paragraphe. Écoute sans critiquer — juste observer. Demande-toi : est-ce que cette voix ressemble à comment je me vis intérieurement ? Si non, c'est l'écart entre ta voix perçue et ta voix authentique.<br><br><strong>Maîtrise ta voix — Ta voix n'est pas le problème, ta mécanique oui.</strong>"
       }
     },
     stu: {
       mandibulaire: {
         title: "Blocage Mandibulaire",
         body: "La mâchoire est le saboteur le plus sous-estimé de la voix. Quand elle est chroniquement tendue — souvent sans que tu le sentes — elle bloque la résonance, empêche les harmoniques de se déployer et rend certaines notes inaccessibles. Ce n'est pas un manque de talent. C'est un pattern biomécanique qui se libère.",
-        exercise: "<strong>L'ouverture consciente :</strong> Pose deux doigts sur ta mâchoire, juste devant tes oreilles. Ouvre doucement — 2 cm seulement. Reste 10 secondes. Remarque si un côté est plus serré que l'autre. Ferme. Répète 3 fois."
+        exercise: "<strong>Découvre ton blocage — L'Ouverture Consciente</strong><br><br>Pose deux doigts sur ta mâchoire, juste devant tes oreilles. Ouvre doucement — 2 cm seulement. Reste 10 secondes. Observe si un côté est plus serré que l'autre. Ferme. Répète 3 fois.<br><br><strong>Maîtrise ta voix — Étirement et Massage de la Mâchoire</strong><br><br>Ouvre la mâchoire le plus largement possible (avec précaution) pour étirer les muscles faciaux en profondeur. Puis élève le menton vers le haut et pousse les lèvres vers le ciel (bec au ciel) pour étirer les muscles situés entre la mâchoire et la clavicule. Répète 10 fois. Termine par un massage global des muscles faciaux et de l'interstice de l'articulation mandibulaire."
       },
       respiration: {
         title: "Blocage Respiratoire",
         body: "Ton pattern respiratoire compense quelque chose — et tu t'y es habitué·e. Le résultat : fatigue vocale rapide, notes aiguës difficiles à soutenir, voix qui perd de la couleur sur la durée. Recalibrer ce pattern change plus de choses dans ta voix que n'importe quel exercice de chant.",
-        exercise: "<strong>Le scan respiratoire :</strong> Pose une main sur la poitrine, une sur le ventre. Prends une respiration normale — sans forcer. Quelle main bouge en premier ? Si c'est celle de la poitrine, tu utilises une respiration haute compensatoire. C'est le point de départ."
+        exercise: "<strong>Découvre ton blocage — Le Scan Respiratoire</strong><br><br>Pose une main sur ta poitrine, l'autre sur ton ventre. Respire normalement, sans forcer. Quelle main bouge en premier ? Si c'est celle de la poitrine, tu utilises une respiration haute compensatoire. C'est ton point de départ.<br><br><strong>Maîtrise ta voix — La Respiration Complète en 3 Dimensions :</strong><br><br>Référence Vidéo Bibliothèque:<br><em>3-Respiration Complète</em><br><br>Inspire par le nez (ou nez + bouche selon besoin). Laisse l'air descendre sans lever les épaules. Observe trois expansions simultanées :<br><br>1. Ventre → s'avance<br>2. Côtes → s'ouvrent latéralement<br>3. Dos (lombaires) → s'élargit vers l'arrière<br><br>Image : un parapluie qui s'ouvre à 360°. Objectif : engager le diaphragme et sortir de la respiration claviculaire."
       },
       nerveux: {
         title: "Blocage du Système Nerveux",
         body: "Quand ta voix tremble, se ferme ou perd de la fluidité sous le regard des autres ou devant un micro, ton système nerveux est en mode protection. Ce n'est pas de la timidité. C'est physiologique. Et c'est exactement le type de blocage qui répond le mieux à une approche qui combine biomécanique et régulation nerveuse.",
-        exercise: "<strong>Le ralentisseur nerveux :</strong> Avant de parler ou chanter, expire lentement pendant 6 secondes. Pas d'inspiration forcée — juste une longue expiration lente. Répète 3 fois. Remarque ce qui change dans ta gorge et tes épaules."
+        exercise: "<strong>Découvre ton blocage — Le Ralentisseur Nerveux</strong><br><br>Avant de parler ou de chanter, expire lentement pendant 6 secondes. Pas d'inspiration forcée — juste une longue expiration lente. Répète 3 fois. Observe ce qui change dans ta gorge et tes épaules.<br><br><strong>Maîtrise ta voix — Relâchement Cervical et Nerveux</strong><br><br>Assis-toi droit, colonne vertébrale vers le ciel, pieds plaqués au sol, mains sur les genoux. Laisse tomber la tête vers le bas, menton proche de la poitrine. Détache littéralement la tête du corps — elle devient lourde. Inspire et détends les muscles du cou, des épaules et des trapèzes. Reste là une minute avec des respirations profondes. Remonte la tête à son axe. Relax.<br><br>Cet écart que tu viens de découvrir, ce n'est pas un manque de talent ni une fatalité. C'est le résultat de compensations mécaniques qui se sont installées au fil du temps — et ça se corrige. Dans les Masterclass du membership, on déconstruit ensemble ces schémas et on installe les bases d'une mécanique vocale alignée avec qui tu es vraiment. C'est là que la transformation commence."
       },
       identite: {
         title: "Blocage d'Identité Vocale",
         body: "Ta voix ne sonne pas comme toi — et tu le sens. Il y a un écart entre qui tu es et ce que ta voix exprime. Ce n'est pas abstrait : c'est la façon dont tu places ta voix, dont tu gères ton souffle, influencée par des années d'écoute et de comparaison. Ce blocage se libère quand on identifie exactement ce qui crée le décalage.",
-        exercise: "<strong>L'écoute sans jugement :</strong> Enregistre-toi en disant ou en chantant une phrase. Écoute sans critiquer — juste observer. Demande-toi : est-ce que cette voix ressemble à comment je me vis intérieurement ? Si non, c'est le gap que Le Protocole commence à mesurer et à réduire."
+        exercise: "<strong>Découvre ton blocage — L'Écoute Sans Jugement</strong><br><br>Enregistre-toi en disant ou en chantant un paragraphe. Écoute sans critiquer — juste observer. Demande-toi : est-ce que cette voix ressemble à comment je me vis intérieurement ? Si non, c'est l'écart entre ta voix perçue et ta voix authentique.<br><br><strong>Maîtrise ta voix — Ta voix n'est pas le problème, ta mécanique oui.</strong>"
       }
     }
   },
@@ -883,44 +886,44 @@ const RESULTS = {
       mandibulaire: {
         title: "Bloqueo Mandibular",
         body: "Tu mandíbula acumula la tensión de cada sesión, cada presentación, cada momento cargado. Cuando se aprieta — a menudo inconscientemente — reduce tu resonancia, fuerza a la garganta a compensar y crea una fatiga que no tiene nada que ver con tu resistencia. No es fragilidad. Es un patrón biomecánico preciso, y se libera.",
-        exercise: "<strong>La apertura consciente:</strong> Pon dos dedos en la mandíbula, frente a las orejas. Abre suavemente — solo 2 cm. Quédate 10 segundos. Nota si un lado está más tenso. Cierra. Repite 3 veces."
+        exercise: "<strong>Descubre tu bloqueo — La Apertura Consciente</strong><br><br>Pon dos dedos en la mandíbula, justo frente a las orejas. Abre suavemente — solo 2 cm. Quédate 10 segundos. Observa si un lado está más tenso que el otro. Cierra. Repite 3 veces.<br><br><strong>Domina tu voz — Estiramiento y Masaje de la Mandíbula</strong><br><br>Abre la mandíbula lo más posible (con precaución) para estirar los músculos faciales en profundidad. Luego eleva el mentón hacia arriba y empuja los labios hacia el cielo (pico al cielo) para estirar los músculos situados entre la mandíbula y la clavícula. Repite 10 veces. Termina con un masaje global de los músculos faciales y del intersticio de la articulación mandibular."
       },
       respiration: {
         title: "Bloqueo de Respiración",
         body: "Usas una respiración compensatoria desde hace tiempo — y tu cuerpo se adaptó. Resultado: la voz pierde potencia después de 20-30 minutos, te quedas sin aire en el momento equivocado. No es falta de resistencia. Es un patrón respiratorio que se recalibra.",
-        exercise: "<strong>El escaneo respiratorio:</strong> Una mano en el pecho, otra en el vientre. Respiración normal. ¿Qué mano se mueve primero? Si es la del pecho, usas una respiración alta compensatoria. Ese es el punto de partida."
+        exercise: "<strong>Descubre tu bloqueo — El Escaneo Respiratorio</strong><br><br>Pon una mano en el pecho, la otra en el vientre. Respira normalmente, sin forzar. ¿Qué mano se mueve primero? Si es la del pecho, usas una respiración alta compensatoria. Ese es tu punto de partida.<br><br><strong>Domina tu voz — La Respiración Completa en 3 Dimensiones:</strong><br><br>Referencia Video Biblioteca:<br><em>3-Respiración Completa</em><br><br>Inspira por la nariz (o nariz + boca según necesidad). Deja que el aire baje sin levantar los hombros. Observa tres expansiones simultáneas:<br><br>1. Vientre → avanza<br>2. Costillas → se abren lateralmente<br>3. Espalda (lumbares) → se ensancha hacia atrás<br><br>Imagen: un paraguas que se abre a 360°. Objetivo: activar el diafragma y salir de la respiración clavicular."
       },
       nerveux: {
         title: "Bloqueo del Sistema Nervioso",
         body: "Tu voz cambia bajo presión no por falta de confianza, sino porque el sistema nervioso activa una respuesta automática de protección. Esta respuesta codifica tensión en el tejido vocal. Entender el mecanismo neurológico es el primer paso para neutralizarlo — no solo «manejarlo».",
-        exercise: "<strong>El desacelerador nervioso:</strong> Antes de hablar o cantar, espira lentamente durante 6 segundos. Sin inspiración forzada — solo una larga expiración lenta. 3 veces. Nota qué cambia en tu garganta y hombros."
+        exercise: "<strong>Descubre tu bloqueo — El Desacelerador Nervioso</strong><br><br>Antes de hablar o cantar, espira lentamente durante 6 segundos. Sin inspiración forzada — solo una larga expiración lenta. Repite 3 veces. Observa qué cambia en tu garganta y tus hombros.<br><br><strong>Domina tu voz — Relajación Cervical y Nerviosa</strong><br><br>Siéntate derecho, columna vertebral hacia el cielo, pies apoyados en el suelo, manos sobre las rodillas. Deja caer la cabeza hacia abajo, mentón cerca del pecho. Desconecta literalmente la cabeza del cuerpo — se vuelve pesada. Inspira y relaja los músculos del cuello, los hombros y los trapecios. Quédate ahí un minuto con respiraciones profundas. Sube la cabeza a su eje. Relax.<br><br>Esta brecha que acabas de descubrir no es una falta de talento ni una fatalidad. Es el resultado de compensaciones mecánicas que se han instalado con el tiempo — y eso se puede corregir. En las Masterclass del membership, deconstruimos juntos estos esquemas e instalamos las bases de una mecánica vocal alineada con quien realmente eres. Ahí es donde comienza la transformación."
       },
       identite: {
         title: "Bloqueo de Identidad Vocal",
         body: "Tu voz no proyecta la autoridad que tienes por dentro. Este desfase no es psicológico — es físico. Años de mensajes sobre «cómo deberías sonar» han moldeado la forma en que sostienes la garganta. Este bloqueo se libera, y cuando lo hace, los demás lo notan antes que tú.",
-        exercise: "<strong>La escucha sin juicio:</strong> Grábate diciendo o cantando una frase. Escucha sin criticar — solo observar. Pregúntate: ¿esta voz se parece a cómo me vivo por dentro? Si no, esa es la brecha que el Protocolo empieza a medir y reducir."
+        exercise: "<strong>Descubre tu bloqueo — La Escucha Sin Juicio</strong><br><br>Grábate diciendo o cantando un párrafo. Escucha sin criticar — solo observar. Pregúntate: ¿esta voz se parece a cómo me vivo por dentro? Si no, esa es la brecha entre tu voz percibida y tu voz auténtica.<br><br><strong>Domina tu voz — Tu voz no es el problema, tu mecánica sí.</strong>"
       }
     },
     stu: {
       mandibulaire: {
         title: "Bloqueo Mandibular",
         body: "La mandíbula es el saboteador más subestimado de la voz. Cuando está crónicamente tensa — muchas veces sin sentirlo — bloquea la resonancia, impide que los armónicos se desplieguen y hace que ciertas notas sean inaccesibles. No es falta de talento. Es un patrón biomecánico que se libera.",
-        exercise: "<strong>La apertura consciente:</strong> Pon dos dedos en la mandíbula, frente a las orejas. Abre suavemente — solo 2 cm. Quédate 10 segundos. Nota si un lado está más tenso. Cierra. Repite 3 veces."
+        exercise: "<strong>Descubre tu bloqueo — La Apertura Consciente</strong><br><br>Pon dos dedos en la mandíbula, justo frente a las orejas. Abre suavemente — solo 2 cm. Quédate 10 segundos. Observa si un lado está más tenso que el otro. Cierra. Repite 3 veces.<br><br><strong>Domina tu voz — Estiramiento y Masaje de la Mandíbula</strong><br><br>Abre la mandíbula lo más posible (con precaución) para estirar los músculos faciales en profundidad. Luego eleva el mentón hacia arriba y empuja los labios hacia el cielo (pico al cielo) para estirar los músculos situados entre la mandíbula y la clavícula. Repite 10 veces. Termina con un masaje global de los músculos faciales y del intersticio de la articulación mandibular."
       },
       respiration: {
         title: "Bloqueo de Respiración",
         body: "Tu patrón respiratorio compensa algo — y te has acostumbrado. El resultado: fatiga vocal rápida, notas agudas difíciles de sostener, voz que pierde color con el tiempo. Recalibrar este patrón cambia más tu voz que cualquier ejercicio de canto.",
-        exercise: "<strong>El escaneo respiratorio:</strong> Una mano en el pecho, otra en el vientre. Respiración normal. ¿Qué mano se mueve primero? Si es la del pecho, usas una respiración alta compensatoria. Ese es el punto de partida."
+        exercise: "<strong>Descubre tu bloqueo — El Escaneo Respiratorio</strong><br><br>Pon una mano en el pecho, la otra en el vientre. Respira normalmente, sin forzar. ¿Qué mano se mueve primero? Si es la del pecho, usas una respiración alta compensatoria. Ese es tu punto de partida.<br><br><strong>Domina tu voz — La Respiración Completa en 3 Dimensiones:</strong><br><br>Referencia Video Biblioteca:<br><em>3-Respiración Completa</em><br><br>Inspira por la nariz (o nariz + boca según necesidad). Deja que el aire baje sin levantar los hombros. Observa tres expansiones simultáneas:<br><br>1. Vientre → avanza<br>2. Costillas → se abren lateralmente<br>3. Espalda (lumbares) → se ensancha hacia atrás<br><br>Imagen: un paraguas que se abre a 360°. Objetivo: activar el diafragma y salir de la respiración clavicular."
       },
       nerveux: {
         title: "Bloqueo del Sistema Nervioso",
         body: "Cuando tu voz tiembla, se cierra o pierde fluidez bajo la mirada de otros o frente a un micrófono, el sistema nervioso está en modo protección. No es timidez. Es fisiológico. Y es exactamente el tipo de bloqueo que mejor responde a un enfoque que combina biomecánica y regulación nerviosa.",
-        exercise: "<strong>El desacelerador nervioso:</strong> Antes de hablar o cantar, espira lentamente durante 6 segundos. Sin inspiración forzada — solo una larga expiración lenta. 3 veces. Nota qué cambia en tu garganta y hombros."
+        exercise: "<strong>Descubre tu bloqueo — El Desacelerador Nervioso</strong><br><br>Antes de hablar o cantar, espira lentamente durante 6 segundos. Sin inspiración forzada — solo una larga expiración lenta. Repite 3 veces. Observa qué cambia en tu garganta y tus hombros.<br><br><strong>Domina tu voz — Relajación Cervical y Nerviosa</strong><br><br>Siéntate derecho, columna vertebral hacia el cielo, pies apoyados en el suelo, manos sobre las rodillas. Deja caer la cabeza hacia abajo, mentón cerca del pecho. Desconecta literalmente la cabeza del cuerpo — se vuelve pesada. Inspira y relaja los músculos del cuello, los hombros y los trapecios. Quédate ahí un minuto con respiraciones profundas. Sube la cabeza a su eje. Relax.<br><br>Esta brecha que acabas de descubrir no es una falta de talento ni una fatalidad. Es el resultado de compensaciones mecánicas que se han instalado con el tiempo — y eso se puede corregir. En las Masterclass del membership, deconstruimos juntos estos esquemas e instalamos las bases de una mecánica vocal alineada con quien realmente eres. Ahí es donde comienza la transformación."
       },
       identite: {
         title: "Bloqueo de Identidad Vocal",
         body: "Tu voz no suena como tú — y lo sientes. Hay una brecha entre quién eres y lo que expresa tu voz. No es abstracto: es la forma en que colocas la voz, influenciada por años de escuchar y compararte. Este bloqueo se libera cuando se identifica exactamente qué crea el desfase.",
-        exercise: "<strong>La escucha sin juicio:</strong> Grábate diciendo o cantando una frase. Escucha sin criticar — solo observar. Pregúntate: ¿esta voz se parece a cómo me vivo por dentro? Si no, esa es la brecha que el Protocolo empieza a medir y reducir."
+        exercise: "<strong>Descubre tu bloqueo — La Escucha Sin Juicio</strong><br><br>Grábate diciendo o cantando un párrafo. Escucha sin criticar — solo observar. Pregúntate: ¿esta voz se parece a cómo me vivo por dentro? Si no, esa es la brecha entre tu voz percibida y tu voz auténtica.<br><br><strong>Domina tu voz — Tu voz no es el problema, tu mecánica sí.</strong>"
       }
     }
   }
@@ -1342,6 +1345,7 @@ function handleNext() {
     var ta = document.getElementById('q8-textarea');
     if (ta) answers[9] = ta.value;
     showResult = true;
+    sessionStorage.setItem('veaQuizState', JSON.stringify({ lang: lang, answers: answers, profile: profile, leadData: leadData }));
     render();
     return;
   }
@@ -1558,19 +1562,13 @@ function handleRestart() {
   showResult    = false;
   leadSubmitted = false;
   pixelFired    = false;
+  sessionStorage.removeItem('veaQuizState');
   render();
 }
 
 function handleLangToggle(newLang) {
   if (lang === newLang) return;
-  lang          = newLang;
-  currentQ      = -1;
-  answers       = [null, [], [], [], [], [], [], [], null, ''];
-  profile       = null;
-  showResult    = false;
-  leadData      = { name: '', email: '', phone: '' };
-  leadSubmitted = false;
-  pixelFired    = false;
+  lang = newLang;
   render();
 }
 
@@ -1811,6 +1809,22 @@ function animateResultScreen(score) {
   answers    = presets[r];
   profile = (Array.isArray(presets[r][1]) && presets[r][1].includes(0)) ? 'pro' : 'stu';
   showResult = true;
+})();
+
+// Restore result page on reload
+(function() {
+  var saved = sessionStorage.getItem('veaQuizState');
+  if (saved && !showResult) {
+    try {
+      var s = JSON.parse(saved);
+      lang          = s.lang          || lang;
+      answers       = s.answers       || answers;
+      profile       = s.profile       || profile;
+      leadData      = s.leadData      || leadData;
+      leadSubmitted = true;
+      showResult    = true;
+    } catch(e) {}
+  }
 })();
 
 // Init
