@@ -511,10 +511,6 @@
       65%  { opacity: 1; transform: scale(1.04); }
       100% { opacity: 1; transform: scale(1); }
     }
-    .result-animate {
-      opacity: 0;
-    }
-
   </style>
 </head>
 <body>
@@ -1047,116 +1043,6 @@ const RESULTS = {
   }
 };
 
-// ================================================================
-// Q2 TRIGGER LOOKUP
-// ================================================================
-var Q2_TRIGGER = {
-  fr: [
-    "Ton déclencheur principal : les longues journées de travail vocal, là où la compensation s'accumule heure après heure.",
-    "Ton déclencheur principal : les moments à fort enjeu — quand l'enjeu monte, ton corps serre avant même que tu parles.",
-    "Ton déclencheur principal : la caméra et le micro — la présence d'un enregistrement active une réponse physique automatique.",
-    "Ton déclencheur principal : le stress émotionnel — ton système nerveux encode la tension avant même que tu commences."
-  ],
-  es: [
-    "Tu desencadenante principal: las largas jornadas de trabajo vocal, donde la compensación se acumula hora tras hora.",
-    "Tu desencadenante principal: los momentos de alta presión — cuando la apuesta sube, tu cuerpo se tensa antes de hablar.",
-    "Tu desencadenante principal: la cámara y el micrófono — la presencia de una grabación activa una respuesta física automática.",
-    "Tu desencadenante principal: el estrés emocional — tu sistema nervioso codifica la tensión antes de que empieces."
-  ]
-};
-
-// ================================================================
-// Q4 COST-OF-INACTION LOOKUP
-// ================================================================
-var Q4_COST = {
-  fr: [
-    "Sans intervention ciblée, ce pattern se renforce à chaque utilisation. Dans 6 mois, les compensations seront plus profondément ancrées — pas moins.",
-    "Le blocage non identifié est le blocage qui dure. Sans nom précis, tu ne peux pas le cibler — et il reste.",
-    "Ce décalage entre voix intérieure et voix exprimée coûte en présence, en autorité perçue, et en opportunités manquées chaque jour.",
-    "L'imprévisibilité vocale génère une méfiance envers ta propre voix — ce qui renforce le blocage nerveux et crée un cercle fermé."
-  ],
-  es: [
-    "Sin intervención específica, este patrón se refuerza con cada uso. En 6 meses, las compensaciones estarán más profundamente arraigadas — no menos.",
-    "El bloqueo no identificado es el bloqueo que dura. Sin nombre preciso, no puedes apuntarlo — y se queda.",
-    "Este desfase entre voz interior y voz expresada tiene un costo diario en presencia, autoridad percibida y oportunidades perdidas.",
-    "La imprevisibilidad vocal genera desconfianza en tu propia voz — lo que refuerza el bloqueo nervioso y crea un círculo cerrado."
-  ]
-};
-
-// ================================================================
-// PRICING DATA
-// ================================================================
-var PRICING = {
-  fr: {
-    section_label: "Les parcours disponibles",
-    section_sub: "Deux façons d'avancer — selon là où tu en es.",
-    anchor_note: "* Prix en CAD. Essai gratuit de 15 jours — annulable à tout moment.",
-    items: [
-      {
-        name: "La Séance Privée avec Mamselle",
-        type: "Coaching individuel",
-        price: "200 $",
-        price_sub: "CAD par séance",
-        desc: "55 minutes. Diagnostic complet, protocole personnalisé, résultat actionnable immédiatement.",
-        tag: "Places limitées",
-        highlight: false,
-        latam_note: false,
-        url: 'PAYWALL_FR_VIP'
-      },
-      {
-        name: "Voix Essence Academy™",
-        type: "Membership mensuel",
-        price: "49 $",
-        price_sub: "CAD / mois · sans engagement",
-        desc: "Accès à la méthode complète, contenu mensuel, et essai gratuit de 15 jours pour commencer sans risque.",
-        tag: "Essai gratuit de 15 jours",
-        highlight: true,
-        latam_note: false,
-        url: 'PAYWALL_FR_STANDARD'
-      }
-    ]
-  },
-  es: {
-    section_label: "Los caminos disponibles",
-    section_sub: "Tres formas de avanzar — según donde estés.",
-    anchor_note: "* Precios en USD.",
-    items: [
-      {
-        name: "Coaching Vocal Privado",
-        type: "Coaching individual",
-        price: "$147",
-        price_sub: "sesión única",
-        desc: "55 minutos con Mamselle. Diagnóstico completo, protocolo personalizado, resultado accionable de inmediato.",
-        tag: "Plazas limitadas",
-        highlight: false,
-        latam_note: false,
-        url: 'PAYWALL_ES_VIP'
-      },
-      {
-        name: "Voz Esencia Academy™",
-        type: "Membresía mensual",
-        price: "$37",
-        price_sub: "por mes · sin compromiso",
-        desc: "Acceso al método completo y al contenido mensuel, con 15 días de prueba gratuita para empezar sin riesgo.",
-        tag: "15 días para probar gratis",
-        highlight: true,
-        latam_note: false,
-        url: 'PAYWALL_ES_MEMBERSHIP'
-      },
-      {
-        name: "Tu Voz Auténtica en 7 Días",
-        type: "Curso intensivo",
-        price: "$47",
-        price_sub: "pago único",
-        desc: "Un programa intensivo de 7 días calibrado para tu bloqueo específico. Acceso inmediato.",
-        tag: null,
-        highlight: false,
-        latam_note: false,
-        url: 'PAYWALL_ES_COURSE'
-      }
-    ]
-  }
-};
 
 // ================================================================
 // VOCAL HEALTH SCORE
@@ -1212,7 +1098,6 @@ function renderScoreArc(score) {
 let lang          = 'fr';
 let currentQ      = -1;   // -1 = lead screen, 0–9 = quiz questions
 let answers       = [null, [], [], [], [], [], [], [], null, '']; // Q0 single; Q1-Q7 multi; Q8 single; Q9 textarea
-let selectedTags  = [];     // avatar segment tags from Q6
 let profile       = null;   // 'pro' | 'stu'
 let showResult    = false;
 let leadData      = { name: '', email: '', phone: '' };
@@ -1481,12 +1366,6 @@ function handleOptionClick(qId, idx, q) {
       if (q.maxSelect !== null && arr.length >= q.maxSelect) arr.shift(); // auto-deselect first
       arr.push(idx);
     }
-    // Update selectedTags for Q6
-    if (qId === 6) {
-      const qData = QUESTIONS[qId][lang];
-      const tags = qData.optionTags || [];
-      selectedTags = arr.flatMap(i => tags[i] || []);
-    }
   }
   renderOptions(q);
   document.getElementById('btn-next').disabled = !hasCurrentAnswer();
@@ -1504,7 +1383,7 @@ function handleNext() {
     var ta = document.getElementById('q8-textarea');
     if (ta) answers[9] = ta.value;
     showResult = true;
-    sessionStorage.setItem('veaQuizState', JSON.stringify({ lang: lang, answers: answers, profile: profile, leadData: leadData, selectedTags: selectedTags }));
+    sessionStorage.setItem('veaQuizState', JSON.stringify({ lang: lang, answers: answers, profile: profile, leadData: leadData }));
     render();
     return;
   }
@@ -1553,7 +1432,7 @@ function renderResult() {
 
   // Cost-of-inaction block (standalone section between body and exercise)
   var costEl = document.getElementById('cost-block');
-  var costText = COST_DATA[lang] && COST_DATA[lang][resultKey] ? COST_DATA[lang][resultKey] : '';
+  var costText = (COST_DATA[lang] && COST_DATA[lang][resultKey]) ? COST_DATA[lang][resultKey] : '';
   var costTitle = lang === 'fr' ? "CE QU'IL COÛTE SANS INTERVENTION" : "LO QUE CUESTA SIN INTERVENCIÓN";
   if (costText) {
     costEl.innerHTML = '<div class="cost-title">' + costTitle + '</div><div class="cost-body">' + costText + '</div>';
@@ -1567,7 +1446,7 @@ function renderResult() {
   document.getElementById('exercise-box').innerHTML = d.exercise;
 
   // Q7-based CTA routing
-  var q7ans = (answers.length > 8 && answers[8] !== null && answers[8] !== undefined) ? answers[8] : null;
+  var q8ans = (answers.length > 8 && answers[8] !== null && answers[8] !== undefined) ? answers[8] : null;
 
   // Determine route key
   // FR: 0,2→standard(membership)  1→vip
@@ -1576,10 +1455,10 @@ function renderResult() {
   if (window._previewRoute) {
     routeKey = window._previewRoute;
   } else if (lang === 'fr') {
-    routeKey = (q7ans === 1) ? 'vip' : 'standard';
+    routeKey = (q8ans === 1) ? 'vip' : 'standard';
   } else {
-    if (q7ans === 1)      routeKey = 'vip';
-    else if (q7ans === 2) routeKey = 'course';
+    if (q8ans === 1)      routeKey = 'vip';
+    else if (q8ans === 2) routeKey = 'course';
     else                  routeKey = 'membership';
   }
   var isVip = (routeKey === 'vip');
@@ -1616,11 +1495,11 @@ function renderResult() {
       membership: [
         'Acabas de entender por qué nada ha funcionado hasta ahora.<br>No es falta de talento. No es falta de resistencia.<br>Es un patrón compensatorio que nadie había identificado jamás.',
         'Ahora tienes dos opciones.',
-        'Cierras esta página. Vuelves a los ejercicios de YouTube.<br>En 6 meses estás exactamente en el mismo lugar —<br>misma fatiga, misma frustración, misma voz que no te representa.',
+        'Cierras esta página. Vuelves a los ejercicios de YouTube.<br>En 6 meses estás exactamente en el mismo lugar misma fatiga, misma frustración, misma voz que no te representa.',
         'O pruebas 15 días. Gratuitamente.',
-        '<span style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:1.05rem;color:#C4845A;display:block;margin-bottom:16px;">Valor total de 880$ — hoy : <strong style="font-weight:bold;color:#1B4B3A;">0$ durante 15 días.</strong></span>',
         '<strong style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#1B4B3A;display:block;margin-top:6px;">LO QUE DESBLOQUEAS DESDE HOY</strong>',
         '• Biblioteca de ejercicios completa (675$)<br>• Masterclasses de grupo mensuales (150$/mes)<br>• Seguimiento y soporte 24/7 (15$/mes)<br>• Actualidades para estar al día en la ciencia de la voz y el bienestar (25$/mes)<br>• Coaches disponibles en todo momento para preguntas técnicas (15$/mes)',
+        '<span style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:1.05rem;color:#C4845A;display:block;margin-bottom:16px;">Valor total de 880$ — hoy : <strong style="font-weight:bold;color:#1B4B3A;">0$ durante 15 días.</strong></span>',
         '<strong style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#1B4B3A;display:block;margin-top:6px;">15 DÍAS GRATIS. ACCESO COMPLETO AL 100%</strong>',
         'Cancelación en un clic. Sin condición. Sin juicio.',
         'No deberías tomar ninguna decisión sin tener acceso a toda la información. Por eso la única manera de saber si la Academia realmente te ayuda, es probarla.'
@@ -1897,7 +1776,7 @@ function submitLead(resultKey, score, routeKey) {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body:    JSON.stringify(data)
-    }).catch(function(err) { console.warn('Formspree submission failed:', err); });
+    }).catch(function() {});
   } catch(err) {}
 }
 
@@ -1965,6 +1844,7 @@ function animateResultScreen(score) {
   var r = params.get('r');
   var l = params.get('lang');
   var cta = params.get('cta');
+  var p   = params.get('p');
   if (!r || !RESULT_KEYS.includes(r)) return;
   if (l === 'es' || l === 'fr') lang = l;
   if (cta) window._previewRoute = cta;
@@ -1976,6 +1856,7 @@ function animateResultScreen(score) {
   };
   answers    = presets[r];
   profile = (Array.isArray(presets[r][1]) && presets[r][1].includes(0)) ? 'pro' : 'stu';
+  if (p === 'pro' || p === 'stu') profile = p;
   showResult = true;
 })();
 
@@ -1991,7 +1872,9 @@ function animateResultScreen(score) {
       leadData      = s.leadData      || leadData;
       leadSubmitted = true;
       showResult    = true;
-    } catch(e) {}
+    } catch(e) {
+      sessionStorage.removeItem('veaQuizState');
+    }
   }
 })();
 
