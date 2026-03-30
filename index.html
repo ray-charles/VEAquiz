@@ -1660,6 +1660,77 @@ function resolvePricingUrl(token) {
 }
 
 function renderPricingSection(l) {
+  var PRICING = {
+    fr: {
+      section_label: "Les parcours disponibles",
+      section_sub: "Deux façons d'avancer — selon là où tu en es.",
+      anchor_note: "* Prix en CAD. Essai gratuit de 15 jours — annulable à tout moment.",
+      items: [
+        {
+          name: "La Séance Privée avec Mamselle",
+          type: "Coaching individuel",
+          price: "200 $",
+          price_sub: "CAD par séance",
+          desc: "55 minutes. Diagnostic complet, protocole personnalisé, résultat actionnable immédiatement.",
+          tag: "Places limitées",
+          highlight: false,
+          latam_note: false,
+          url: 'PAYWALL_FR_VIP'
+        },
+        {
+          name: "Voix Essence Academy™",
+          type: "Membership mensuel",
+          price: "49 $",
+          price_sub: "CAD / mois · sans engagement",
+          desc: "Accès à la méthode complète, contenu mensuel, et essai gratuit de 15 jours pour commencer sans risque.",
+          tag: "Essai gratuit de 15 jours",
+          highlight: true,
+          latam_note: false,
+          url: 'PAYWALL_FR_STANDARD'
+        }
+      ]
+    },
+    es: {
+      section_label: "Los caminos disponibles",
+      section_sub: "Tres formas de avanzar — según donde estés.",
+      anchor_note: "* Precios en USD.",
+      items: [
+        {
+          name: "Coaching Vocal Privado",
+          type: "Coaching individual",
+          price: "$147",
+          price_sub: "sesión única",
+          desc: "55 minutos con Mamselle. Diagnóstico completo, protocolo personalizado, resultado accionable de inmediato.",
+          tag: "Plazas limitadas",
+          highlight: false,
+          latam_note: false,
+          url: 'PAYWALL_ES_VIP'
+        },
+        {
+          name: "Voz Esencia Academy™",
+          type: "Membresía mensual",
+          price: "$37",
+          price_sub: "por mes · sin compromiso",
+          desc: "Acceso al método completo y al contenido mensuel, con 15 días de prueba gratuita para empezar sin riesgo.",
+          tag: "15 días para probar gratis",
+          highlight: true,
+          latam_note: false,
+          url: 'PAYWALL_ES_MEMBERSHIP'
+        },
+        {
+          name: "Tu Voz Auténtica en 7 Días",
+          type: "Curso intensivo",
+          price: "$47",
+          price_sub: "pago único",
+          desc: "Un programa intensivo de 7 días calibrado para tu bloqueo específico. Acceso inmediato.",
+          tag: null,
+          highlight: false,
+          latam_note: false,
+          url: 'PAYWALL_ES_COURSE'
+        }
+      ]
+    }
+  };
   var p = PRICING[l];
   var cardsHTML = '';
 
