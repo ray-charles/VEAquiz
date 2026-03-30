@@ -1410,9 +1410,37 @@ function renderResult() {
 
   // Three-insight result body
   var q2idx  = Array.isArray(answers[3]) ? answers[3][0] : answers[3];
-  var q2text = (q2idx !== null && q2idx !== undefined) ? Q2_TRIGGER[lang][q2idx] : '';
+  var Q2_TRIGGER_DATA = {
+    fr: [
+      "Ton déclencheur principal : les longues journées de travail vocal, là où la compensation s'accumule heure après heure.",
+      "Ton déclencheur principal : les moments à fort enjeu — quand l'enjeu monte, ton corps serre avant même que tu parles.",
+      "Ton déclencheur principal : la caméra et le micro — la présence d'un enregistrement active une réponse physique automatique.",
+      "Ton déclencheur principal : le stress émotionnel — ton système nerveux encode la tension avant même que tu commences."
+    ],
+    es: [
+      "Tu desencadenante principal: las largas jornadas de trabajo vocal, donde la compensación se acumula hora tras hora.",
+      "Tu desencadenante principal: los momentos de alta presión — cuando la apuesta sube, tu cuerpo se tensa antes de hablar.",
+      "Tu desencadenante principal: la cámara y el micrófono — la presencia de una grabación activa una respuesta física automática.",
+      "Tu desencadenante principal: el estrés emocional — tu sistema nervioso codifica la tensión antes de que empieces."
+    ]
+  };
+  var Q4_COST_DATA = {
+    fr: [
+      "Sans intervention ciblée, ce pattern se renforce à chaque utilisation. Dans 6 mois, les compensations seront plus profondément ancrées — pas moins.",
+      "Le blocage non identifié est le blocage qui dure. Sans nom précis, tu ne peux pas le cibler — et il reste.",
+      "Ce décalage entre voix intérieure et voix exprimée coûte en présence, en autorité perçue, et en opportunités manquées chaque jour.",
+      "L'imprévisibilité vocale génère une méfiance envers ta propre voix — ce qui renforce le blocage nerveux et crée un cercle fermé."
+    ],
+    es: [
+      "Sin intervención específica, este patrón se refuerza con cada uso. En 6 meses, las compensaciones estarán más profundamente arraigadas — no menos.",
+      "El bloqueo no identificado es el bloqueo que dura. Sin nombre preciso, no puedes apuntarlo — y se queda.",
+      "Este desfase entre voz interior y voz expresada tiene un costo diario en presencia, autoridad percibida y oportunidades perdidas.",
+      "La imprevisibilidad vocal genera desconfianza en tu propia voz — lo que refuerza el bloqueo nervioso y crea un círculo cerrado."
+    ]
+  };
+  var q2text = (q2idx !== null && q2idx !== undefined) ? Q2_TRIGGER_DATA[lang][q2idx] : '';
   var q4idx  = Array.isArray(answers[5]) ? answers[5][0] : answers[5];
-  var q4text = (q4idx !== null && q4idx !== undefined) ? Q4_COST[lang][q4idx] : '';
+  var q4text = (q4idx !== null && q4idx !== undefined) ? Q4_COST_DATA[lang][q4idx] : '';
 
   // Display helpers: set correct visibility at creation time (class toggle already ran before renderResult)
   var dFr = lang === 'es' ? ' style="display:none;"' : '';
