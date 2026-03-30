@@ -1619,11 +1619,7 @@ function renderResult() {
     lang === 'fr' ? 'Recommencer' : 'Volver a empezar';
 
   // Trigger entrance animations
-  requestAnimationFrame(function() {
-    requestAnimationFrame(function() {
-      animateResultScreen(score);
-    });
-  });
+  setTimeout(function() { animateResultScreen(score); }, 20);
 
   // Re-init Elfsight widgets that were hidden on page load
   setTimeout(function() {
