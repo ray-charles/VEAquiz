@@ -1099,6 +1099,11 @@ function renderScoreArc(score) {
 // APP STATE
 // ================================================================
 let lang          = 'fr';
+(function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var urlLang = urlParams.get('lang');
+  if (urlLang === 'es' || urlLang === 'fr') lang = urlLang;
+})();
 let currentQ      = -1;   // -1 = lead screen, 0–9 = quiz questions
 let answers       = [null, [], [], [], [], [], [], [], null, '']; // Q0 single; Q1-Q7 multi; Q8 single; Q9 textarea
 let profile       = null;   // 'pro' | 'stu'
