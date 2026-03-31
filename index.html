@@ -1973,7 +1973,7 @@ function animateResultScreen(score) {
   if (saved && !showResult) {
     try {
       var s = JSON.parse(saved);
-      lang          = s.lang          || lang;
+      if (!new URLSearchParams(window.location.search).get('lang')) lang = s.lang || lang;
       answers       = s.answers       || answers;
       profile       = s.profile       || profile;
       leadData      = s.leadData      || leadData;
