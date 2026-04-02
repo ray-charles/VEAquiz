@@ -1104,6 +1104,45 @@ let lang          = 'fr';
   var urlLang = urlParams.get('lang');
   if (urlLang === 'es' || urlLang === 'fr') lang = urlLang;
 })();
+
+var quizVariant = (function() {
+  var p = new URLSearchParams(window.location.search).get('v');
+  return (p === 'v2' || p === 'v3' || p === 'v4') ? p : 'v1';
+})();
+
+var VARIANTS = {
+  fr: {
+    v1: { headline: null, sub: null },
+    v2: {
+      headline: 'Ta voix ne te représente pas encore\u00a0?<br><em>Découvre ce qui la bloque.</em>',
+      sub: 'Découvre ton blocage vocal en 10 questions. Moins d\'1 minute. Exercice personnalisé inclus — gratuit.'
+    },
+    v3: {
+      headline: 'Pas un manque de talent.<br><em>Un blocage.</em>',
+      sub: 'Découvre ton blocage vocal en 10 questions. Moins d\'1 minute. Exercice personnalisé inclus — gratuit.'
+    },
+    v4: {
+      headline: '1\u202f000+ voix libérées.<br><em>Qu\'est-ce qui bloque la tienne\u00a0?</em>',
+      sub: 'Découvre ton blocage vocal en 10 questions. Moins d\'1 minute. Exercice personnalisé inclus — gratuit.'
+    }
+  },
+  es: {
+    v1: { headline: null, sub: null },
+    v2: {
+      headline: '¿Tu voz no te representa todavía?<br><em>Descubre lo que la bloquea.</em>',
+      sub: 'Descubre tu bloqueo vocal en 10 preguntas. Menos de 1 minuto. Ejercicio personalizado incluido — gratis.'
+    },
+    v3: {
+      headline: 'No es falta de talento.<br><em>Es un bloqueo.</em>',
+      sub: 'Descubre tu bloqueo vocal en 10 preguntas. Menos de 1 minuto. Ejercicio personalizado incluido — gratis.'
+    },
+    v4: {
+      headline: '1,000+ voces liberadas.<br><em>¿Qué bloquea la tuya?</em>',
+      sub: 'Descubre tu bloqueo vocal en 10 preguntas. Menos de 1 minuto. Ejercicio personalizado incluido — gratis.'
+    }
+  }
+};
+
 let currentQ      = -1;   // -1 = lead screen, 0–9 = quiz questions
 let answers       = [null, [], [], [], [], [], [], [], null, '']; // Q0 single; Q1-Q7 multi; Q8 single; Q9 textarea
 let profile       = null;   // 'pro' | 'stu'
@@ -1146,13 +1185,16 @@ function render() {
   document.getElementById('logo-outside-es').style.display = (lang === 'es') ? 'block' : 'none';
 
   var hlEl = document.getElementById('main-headline');
+  var vData = VARIANTS[lang] && VARIANTS[lang][quizVariant];
   hlEl.innerHTML = showResult
     ? (lang === 'fr'
         ? 'Quel est ton<br><em>blocage vocal ?</em>'
         : '¿Cuál es tu<br><em>bloqueo vocal?</em>')
-    : (lang === 'fr'
-        ? 'Frustré de perdre<br><em>contrôle de ta voix ?</em>'
-        : '¿Frustrado/a de perder<br><em>el control de tu voz?</em>');
+    : (vData && vData.headline
+        ? vData.headline
+        : (lang === 'fr'
+            ? 'Frustré de perdre<br><em>contrôle de ta voix ?</em>'
+            : '¿Frustrado/a de perder<br><em>el control de tu voz?</em>'));
   // Results page: revert to original headline size; landing page: large uppercase
   if (showResult) { hlEl.classList.add('result-mode'); } else { hlEl.classList.remove('result-mode'); }
   // Hide headline during quiz questions (shown on lead and result only)
@@ -1171,15 +1213,20 @@ function render() {
     }
   }
 
-  document.getElementById('subheadline').innerHTML = lang === 'fr'
-    ? '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Il est temps que ta voix ressemble à qui tu es.</span>'
-      + '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Découvre ton blocage et reprends contrôle.</span>'
-      + '<span style="display:block;margin-top:6px;">+ reçois un exercice ciblé</span>'
-      + '<span style="display:block;">en répondant aux 10 prochaines questions</span>'
-    : '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Es hora de que tu voz se parezca a quien eres.</span>'
-      + '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Descubre tu bloqueo y retoma el control.</span>'
-      + '<span style="display:block;margin-top:6px;">+ recibe un ejercicio específico</span>'
-      + '<span style="display:block;">respondiendo las 10 siguientes preguntas</span>';
+  var subEl = document.getElementById('subheadline');
+  if (vData && vData.sub && !showResult && currentQ === -1) {
+    subEl.innerHTML = '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">' + vData.sub + '</span>';
+  } else {
+    subEl.innerHTML = lang === 'fr'
+      ? '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Il est temps que ta voix ressemble à qui tu es.</span>'
+        + '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Découvre ton blocage et reprends contrôle.</span>'
+        + '<span style="display:block;margin-top:6px;">+ reçois un exercice ciblé</span>'
+        + '<span style="display:block;">en répondant aux 10 prochaines questions</span>'
+      : '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Es hora de que tu voz se parezca a quien eres.</span>'
+        + '<span style="display:block;font-size:17px;font-weight:700;text-decoration:underline;color:var(--terra);">Descubre tu bloqueo y retoma el control.</span>'
+        + '<span style="display:block;margin-top:6px;">+ recibe un ejercicio específico</span>'
+        + '<span style="display:block;">respondiendo las 10 siguientes preguntas</span>';
+  }
 
   var footerEl = document.getElementById('site-footer');
   if (footerEl) footerEl.textContent = lang === 'fr'
@@ -1860,6 +1907,7 @@ function submitLead(resultKey, score, routeKey) {
       email:          leadData.email,
       phone:          leadData.phone || '—',
       language:       l === 'fr' ? 'Français' : 'Español',
+      variant:        quizVariant,
       profile:        profile === 'pro'
                         ? (l === 'fr' ? 'Professionnel' : 'Profesional')
                         : (l === 'fr' ? 'Apprenant'     : 'Estudiante'),
