@@ -589,6 +589,14 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
   .card.hoverable:hover, .review:hover, .tl-card:hover { transform: none; }
   html { scroll-behavior: auto; }
 }
+/* ===== PERFORMANCE MARQUEE ===== */
+.marquee{overflow:hidden;position:relative;margin-top:28px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);}
+.marquee-track{display:flex;gap:16px;width:max-content;animation:vea-marquee 80s linear infinite;}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+.marquee img{height:300px;width:auto;border-radius:16px;object-fit:cover;box-shadow:0 14px 34px rgba(20,97,131,0.2);flex-shrink:0;}
+@keyframes vea-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (max-width:600px){.marquee img{height:210px}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none;overflow-x:auto}.marquee{mask-image:none;-webkit-mask-image:none}}
 </style>
 </head>
 <body>
@@ -654,6 +662,19 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
         <p class="body">Y lo primero que quiero que sepas es esto, mi querida: yo no estoy aquí para juzgarte. Cuando escucho tu voz, hago una lectura precisa de cómo suena hoy — porque la voz se mueve, ¿verdad?, con el biorritmo, con las emociones, con el estado de ánimo.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PERFORMANCE MARQUEE — "sabe cantar y arrancar ovaciones"
+     ============================================================ -->
+<section class="section light" style="overflow:hidden;">
+  <div class="wrap center reveal" style="max-width:840px;margin:0 auto 4px;">
+    <p class="eyebrow">En el escenario</p>
+    <h2 class="h2">Una coach vocal que sabe cantar &mdash; <em>y arrancar ovaciones de pie.</em></h2>
+  </div>
+  <div class="marquee reveal" aria-label="Mamselle Ruiz en concierto">
+    <div class="marquee-track"><img src="slide-01.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-02.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-03.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-04.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-05.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-06.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-07.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-08.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-09.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-10.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-11.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-12.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-13.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-14.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-15.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-16.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-17.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-18.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-19.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-20.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-21.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-22.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-23.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-24.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-01.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-02.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-03.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-04.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-05.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-06.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-07.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-08.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-09.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-10.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-11.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-12.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-13.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-14.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-15.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-16.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-17.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-18.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-19.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-20.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-21.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-22.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-23.jpg" alt="Mamselle Ruiz en escena" loading="lazy"><img src="slide-24.jpg" alt="Mamselle Ruiz en escena" loading="lazy"></div>
   </div>
 </section>
 
