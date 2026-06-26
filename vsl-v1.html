@@ -339,6 +339,18 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
   box-shadow: 0 0 0 8px rgba(212,175,55,0.2);
 }
 
+/* ===== HERO PHOTO (Mamselle) ===== */
+.hero-photo-wrap { display:flex; justify-content:center; }
+.hero-photo {
+  width:100%; max-width:430px; aspect-ratio:1/1;
+  border-radius:22px; object-fit:cover; object-position:center top;
+  box-shadow:0 24px 54px rgba(0,0,0,0.42);
+  border:3px solid rgba(212,175,55,0.55);
+}
+@media (max-width:880px){ .hero-photo{ max-width:340px; } }
+/* Filled device screenshot (full-bleed, visible over the placeholder) */
+.shot-slot img.shot-filled { opacity:1 !important; }
+
 /* ===== STAT / COUNT-UP STRIP ===== */
 .stat-strip {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
@@ -560,36 +572,9 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
         </div>
       </div>
 
-      <!-- DEVICE MOCKUPS — phone + laptop with swappable img slots -->
-      <div class="devices reveal">
-        <!-- PHONE -->
-        <div class="phone" aria-label="Vista del curso en teléfono">
-          <div class="phone-screen">
-            <div class="shot-slot">
-              <!-- Swap src + remove style to reveal -->
-              <img id="shot-phone" src="" alt="Captura del curso Voz Esencia en el teléfono — reemplazar">
-              <div class="shot-play" aria-hidden="true">
-                <svg width="20" height="24" viewBox="0 0 26 30" fill="none"><path d="M2 2L24 15L2 28V2Z" fill="#146183"/></svg>
-              </div>
-              <div class="shot-badge">App móvil</div>
-              <div class="shot-note">Reemplazar: captura del curso</div>
-            </div>
-          </div>
-        </div>
-        <!-- LAPTOP -->
-        <div class="laptop" aria-label="Vista del curso en computadora">
-          <div class="laptop-screen">
-            <div class="shot-slot">
-              <img id="shot-laptop" src="" alt="Captura del curso Voz Esencia en la computadora — reemplazar">
-              <div class="shot-play" aria-hidden="true">
-                <svg width="22" height="26" viewBox="0 0 26 30" fill="none"><path d="M2 2L24 15L2 28V2Z" fill="#146183"/></svg>
-              </div>
-              <div class="shot-badge">Plataforma del curso</div>
-              <div class="shot-note">Reemplazar: captura del curso</div>
-            </div>
-          </div>
-          <div class="laptop-base"></div>
-        </div>
+      <!-- HERO PHOTO — Mamselle (authority / face above the fold) -->
+      <div class="hero-photo-wrap reveal">
+        <img class="hero-photo" src="mamselle.jpg" alt="Mamselle Ruiz — cantante profesional y coach vocal, 25 años de experiencia">
       </div>
     </div>
   </div>
@@ -657,6 +642,42 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
     </div>
 
     <p class="body reveal center" style="margin-top:26px;font-style:italic;">La idea no es mejorar tu voz: es encontrarla. Porque <strong>tu voz es tu huella digital en el mundo.</strong></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     LLÉVALO CONTIGO — device mockups (phone real, laptop pending)
+     ============================================================ -->
+<section class="section light">
+  <div class="wrap">
+    <div class="reveal center" style="max-width:720px;margin:0 auto 8px;">
+      <p class="eyebrow">Donde quieras, cuando quieras</p>
+      <h2 class="h2">Llévalo contigo — <em>en tu teléfono y en tu computadora.</em></h2>
+      <p class="body">Acceso inmediato desde cualquier dispositivo. Tu programa de 7 días y tu Kit Vocal Esencial, siempre a la mano.</p>
+    </div>
+    <div class="devices reveal" style="margin-top:28px;">
+      <!-- PHONE (real screenshot) -->
+      <div class="phone" aria-label="El curso en el teléfono">
+        <div class="phone-screen">
+          <div class="shot-slot"><img class="shot-filled" src="course-phone.png" alt="El curso Voz Esencia en el teléfono"></div>
+        </div>
+      </div>
+      <!-- LAPTOP (placeholder until the web screenshot) -->
+      <div class="laptop" aria-label="El curso en la computadora">
+        <div class="laptop-screen">
+          <div class="shot-slot">
+            <img id="shot-laptop" src="" alt="El curso Voz Esencia en la computadora">
+            <div class="shot-play" aria-hidden="true">
+              <svg width="22" height="26" viewBox="0 0 26 30" fill="none"><path d="M2 2L24 15L2 28V2Z" fill="#146183"/></svg>
+            </div>
+            <div class="shot-badge">Plataforma del curso</div>
+            <div class="shot-note">Captura web — próximamente</div>
+          </div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
+    </div>
+    <p class="social-line reveal" style="margin-top:18px;">Acceso inmediato · desde tu teléfono · para siempre</p>
   </div>
 </section>
 
