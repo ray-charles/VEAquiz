@@ -140,7 +140,7 @@ img { max-width: 100%; display: block; }
 
 h1.hero-h1 {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(2.1rem, 5.4vw, 3.6rem);
   line-height: 1.12; letter-spacing: -0.015em;
   color: #FFFFFF; margin-bottom: 18px;
@@ -149,7 +149,7 @@ h1.hero-h1 em { font-style: normal; font-weight: 600; color: var(--gold); }
 
 h2.h2 {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(1.7rem, 3.8vw, 2.6rem);
   line-height: 1.16; letter-spacing: -0.01em;
   color: var(--teal-deep);
@@ -177,7 +177,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 
 .lead-line {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(1.25rem, 3.2vw, 1.7rem);
   line-height: 1.3; color: var(--teal-deep);
   margin-bottom: 16px; letter-spacing: -0.01em;
@@ -282,7 +282,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
   text-align: center; padding: 18px;
 }
 .hero-vsl-cap {
-  font-family: 'Montserrat', sans-serif; font-weight: 300;
+  font-family: 'Montserrat', sans-serif; font-weight: 400;
   font-size: clamp(0.95rem, 2.3vw, 1.2rem); color: #FFFFFF;
   max-width: 82%; margin-top: 14px; line-height: 1.4;
 }
@@ -429,6 +429,34 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 .section.dark .mech-bad { background: rgba(255,255,255,0.06); color: var(--white-78); }
 .section.dark .mech-good { background: rgba(255,255,255,0.1); color: #FFFFFF; }
 
+/* ===== ANTES / DESPUÉS (data-driven transformation) ===== */
+.ba-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:center; margin-top:32px; }
+@media (max-width:820px){ .ba-grid{ grid-template-columns:1fr; gap:14px; } }
+.ba-card { border-radius:22px; padding:30px 26px; position:relative; overflow:hidden; height:100%; }
+.ba-before { background:linear-gradient(165deg,#3a1a20,#23111a); border:1px solid rgba(224,122,122,0.28); filter:saturate(.92); }
+.ba-after { background:linear-gradient(165deg,#0f6173,#12805e); border:1px solid rgba(212,175,55,0.45); box-shadow:0 22px 54px rgba(18,94,74,0.42); }
+.ba-label { font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; font-size:13px; display:flex; align-items:center; gap:9px; margin-bottom:12px; }
+.ba-before .ba-label { color:#ed9090; }
+.ba-after .ba-label { color:var(--gold-soft); }
+.ba-label .b { width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px; }
+.ba-before .ba-label .b { background:rgba(224,122,122,0.18); color:#ed9090; }
+.ba-after .ba-label .b { background:rgba(212,175,55,0.24); color:var(--gold-soft); }
+.ba-h { font-family:'Montserrat',sans-serif; font-weight:400; font-size:clamp(1.2rem,2.4vw,1.55rem); line-height:1.2; margin-bottom:18px; }
+.ba-before .ba-h { color:#f0d6d6; }
+.ba-after .ba-h { color:#fff; }
+.ba-list { list-style:none; display:flex; flex-direction:column; gap:13px; }
+.ba-item { display:flex; gap:11px; align-items:flex-start; font-family:'DM Sans',sans-serif; font-size:14.5px; line-height:1.5; }
+.ba-before .ba-item { color:#e3c6c6; }
+.ba-after .ba-item { color:#e8f6f0; }
+.ba-ic { flex-shrink:0; width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px; }
+.ba-before .ba-ic { background:rgba(224,122,122,0.16); color:#ed9090; }
+.ba-after .ba-ic { background:rgba(212,175,55,0.2); color:var(--gold-soft); }
+.ba-item .pct { font-family:'Montserrat',sans-serif; font-weight:700; font-size:11px; color:#ed9090; margin-left:4px; white-space:nowrap; }
+.ba-mid { display:flex; align-items:center; justify-content:center; padding:4px; }
+.ba-arrow { width:82px;height:82px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;line-height:1;text-align:center;box-shadow:0 12px 34px rgba(212,175,55,0.55),0 0 0 8px rgba(255,255,255,0.65); }
+.ba-arrow .n { font-size:30px;font-weight:700; }
+.ba-arrow .u { font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-top:3px;font-weight:700; }
+
 /* ===== THREE DIMENSIONS ===== */
 .dim-icon {
   width: 48px; height: 48px; border-radius: 14px;
@@ -571,7 +599,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 <header class="topbar">
   <div class="topbar-inner">
     <img class="topbar-logo" src="Logo-es.png" alt="Voz Esencia™ Academy">
-    <a class="topbar-cta js-cta" data-cta="topbar" href="https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial">Empezar — $822 MXN</a>
+    <a class="topbar-cta js-cta" data-cta="topbar" href="https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial">Empezar</a>
   </div>
 </header>
 
@@ -582,9 +610,9 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 <section class="section hero">
   <div class="wrap">
     <div class="hero-single reveal" style="max-width:860px;margin:0 auto;text-align:center;">
-      <p class="eyebrow">Método Voz Esencia™ · Mamselle Ruiz</p>
-      <h1 class="hero-h1">Cómo recuperar tu voz auténtica en <em>7 días</em> sin perder un segundo</h1>
-      <p class="hero-sub" style="margin-left:auto;margin-right:auto;">Sin solfeo, sin teoría musical, sin técnica complicada. Solo el botón mecánico exacto que suelta tu laringe — para que tu voz deje de pelear por salir y salga sola. Conmigo del otro lado, los 7 días.</p>
+      <p class="eyebrow">Método Voz Esencia™</p>
+      <h1 class="hero-h1">Recupera tu voz auténtica en <em>7 días</em> sin perder un segundo</h1>
+      <p class="hero-sub" style="margin-left:auto;margin-right:auto;">Aprende el proceso exacto, paso a paso, basado en el Método Voz Esencia™, creado por Mamselle Ruiz, cantante y coach vocal. Un método respaldado por miles de estudiantes en todo el mundo.</p>
 
       <!-- VSL VIDEO — swap this block for the real player (iframe / video) -->
       <div class="hero-vsl">
@@ -653,6 +681,53 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 </section>
 
 <!-- ============================================================
+     ANTES / DESPUÉS — data-driven transformation (n=450)
+     ============================================================ -->
+<section class="section white">
+  <div class="wrap">
+    <div class="reveal center" style="max-width:760px;margin:0 auto;">
+      <p class="eyebrow">El cambio</p>
+      <h2 class="h2">De donde estás hoy… <em>a donde tu voz puede llegar.</em></h2>
+      <p class="body">Esto es lo que nos dijeron <strong>más de 450 personas</strong> que hicieron su evaluación — y lo que cambia cuando la laringe por fin se suelta.</p>
+    </div>
+
+    <div class="ba-grid reveal">
+      <div class="ba-card ba-before">
+        <div class="ba-label"><span class="b">&#10005;</span> Antes</div>
+        <div class="ba-h">Tu voz peleando por salir.</div>
+        <ul class="ba-list">
+          <li class="ba-item"><span class="ba-ic">&#10005;</span><span>Una tensión en la garganta y la mandíbula que no se suelta.<span class="pct">58%</span></span></li>
+          <li class="ba-item"><span class="ba-ic">&#10005;</span><span>Te quedas sin aire: la voz se apaga antes de terminar.<span class="pct">27%</span></span></li>
+          <li class="ba-item"><span class="ba-ic">&#10005;</span><span>Los nervios toman el control — la voz se corta, tiembla, se cierra.<span class="pct">20%</span></span></li>
+          <li class="ba-item"><span class="ba-ic">&#10005;</span><span>Probaste videos, respiración… o no supiste ni por dónde empezar. Y nada cambió.<span class="pct">48%</span></span></li>
+          <li class="ba-item"><span class="ba-ic">&#10005;</span><span>Te escuchas grabada y piensas: «esa no soy yo».</span></li>
+        </ul>
+      </div>
+
+      <div class="ba-mid"><div class="ba-arrow"><span class="n">7</span><span class="u">días</span></div></div>
+
+      <div class="ba-card ba-after">
+        <div class="ba-label"><span class="b">&#10003;</span> Después</div>
+        <div class="ba-h">Tu voz saliendo sola.</div>
+        <ul class="ba-list">
+          <li class="ba-item"><span class="ba-ic">&#10003;</span><span>Una voz libre que fluye sin esfuerzo — sin miedo a quebrarse.</span></li>
+          <li class="ba-item"><span class="ba-ic">&#10003;</span><span>Te presentas con presencia, como la persona que ya eres.</span></li>
+          <li class="ba-item"><span class="ba-ic">&#10003;</span><span>Te atreves más: subes al escenario, enciendes la cámara.</span></li>
+          <li class="ba-item"><span class="ba-ic">&#10003;</span><span>Una voz segura y poderosa, que te toman en serio.</span></li>
+          <li class="ba-item"><span class="ba-ic">&#10003;</span><span>Una voz que dura todo el día, sin dolor.</span></li>
+          <li class="ba-item"><span class="ba-ic">&#10003;</span><span>Una voz que te representa: «eso sí soy yo».</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="reveal center" style="margin-top:30px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink-soft);">El <strong style="color:var(--teal-deep);">65%</strong> de quienes llegan hasta aquí ya lo decidieron: <em>«Sí — ya es momento.»</em></p>
+    <div class="reveal center" style="margin-top:18px;">
+      <a class="cta-gold js-cta" data-cta="before-after" href="https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial" style="width:auto;max-width:none;padding-left:42px;padding-right:42px;">Quiero mi después &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      THREE DIMENSIONS — qué estás comprando (light)
      ============================================================ -->
 <section class="section white">
@@ -705,14 +780,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
       <!-- LAPTOP (placeholder until the web screenshot) -->
       <div class="laptop" aria-label="El curso en la computadora">
         <div class="laptop-screen">
-          <div class="shot-slot">
-            <img id="shot-laptop" src="" alt="El curso Voz Esencia en la computadora">
-            <div class="shot-play" aria-hidden="true">
-              <svg width="22" height="26" viewBox="0 0 26 30" fill="none"><path d="M2 2L24 15L2 28V2Z" fill="#146183"/></svg>
-            </div>
-            <div class="shot-badge">Plataforma del curso</div>
-            <div class="shot-note">Captura web — próximamente</div>
-          </div>
+          <div class="shot-slot"><img class="shot-filled" src="course-laptop.png" alt="El curso Voz Esencia en la computadora"></div>
         </div>
         <div class="laptop-base"></div>
       </div>
@@ -844,7 +912,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
       <!-- REAL review (verbatim, from repo) -->
       <div class="review">
         <div class="review-top">
-          <div class="avatar" style="background:#146183;">J</div>
+          <img class="avatar" src="rev-justine.jpg" alt="Justine Lafortune" style="object-fit:cover;">
           <div>
             <div class="review-name">Justine Lafortune</div>
             <div class="review-meta">Canadá</div>
@@ -857,7 +925,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
       <!-- REAL review (verbatim, from repo) -->
       <div class="review">
         <div class="review-top">
-          <div class="avatar" style="background:#258ba1;">L</div>
+          <img class="avatar" src="rev-lea.jpg" alt="Léa Plourde-Archer" style="object-fit:cover;">
           <div>
             <div class="review-name">Léa Plourde-Archer</div>
             <div class="review-meta">Canadá</div>
@@ -869,17 +937,17 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 
       <!-- REAL Google reviews (verbatim) -->
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#d4af37;color:#2f1525;">J</div><div><div class="review-name">Julia Lazzarotto</div><div class="review-meta">6 opiniones · Google</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-julia.jpg" alt="Julia Lazzarotto" style="object-fit:cover;"><div><div class="review-name">Julia Lazzarotto</div><div class="review-meta">6 opiniones · Google</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« ¡Un regalo para ti y para los demás! Una maravillosa oportunidad para explorar tu voz con autenticidad en el entorno seguro y de apoyo que ofrece Mamselle Ruiz. Desde el primer taller, experimenté los beneficios: ¡una dosis maravillosa de vitalidad y alegría! »</p>
       </div>
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#146183;">J</div><div><div class="review-name">Joëlle Maguire</div><div class="review-meta">Google · hace 2 años</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-joelle.jpg" alt="Joëlle Maguire" style="object-fit:cover;"><div><div class="review-name">Joëlle Maguire</div><div class="review-meta">Google · hace 2 años</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« Mamselle sabe cómo llegar a nosotros y transportarnos a un espacio y tiempo de reconectarnos con nosotros mismos. Las enseñanzas nos guían a elevarnos con una atmósfera impregnada de amor, confianza y una magnífica creatividad. Su voz poderosa y cautivadora abre un camino de libertad donde podemos (re)descubrir la nuestra, aquella que (re)conecta con nuestra alma. Gracias, Mamselle. »</p>
       </div>
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#258ba1;">G</div><div><div class="review-name">Genevieve Lavoie</div><div class="review-meta">13 opiniones · Google</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-genevieve.jpg" alt="Genevieve Lavoie" style="object-fit:cover;"><div><div class="review-name">Genevieve Lavoie</div><div class="review-meta">13 opiniones · Google</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« Mamselle Ruiz posee un talento único para que el canto suene natural. Sus métodos suaves e intuitivos nos guían a encontrar nuestra propia voz y armonizar con el ritmo del grupo. ¡Es una inspiración artística inigualable! »</p>
       </div>
@@ -889,37 +957,37 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
         <p class="review-quote">« Soy ingeniero jubilado. Decidí por primera vez en mi vida recibir clases para cantar. Con su experiencia y los métodos que desarrolló durante años, Mamselle me guió a aprender a respirar, a cantar afinado, a frasear y a desarrollar fluidez — todo en buen humor y con cariño. »</p>
       </div>
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#0d4a66;">N</div><div><div class="review-name">Nikita Thilavanh</div><div class="review-meta">Local Guide · 18 opiniones</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-nikita.jpg" alt="Nikita Thilavanh" style="object-fit:cover;"><div><div class="review-name">Nikita Thilavanh</div><div class="review-meta">Local Guide · 18 opiniones</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« Mamselle tiene un don para crear un ambiente mágico y acogedor. Posee un talento increíble y es maravillosamente amable. Sus clases son experiencias verdaderamente alegres y enriquecedoras. Te guía con mucha paciencia y cariño. ¡La recomiendo muchísimo! »</p>
       </div>
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#d4af37;color:#2f1525;">M</div><div><div class="review-name">Micha Evans</div><div class="review-meta">Google · hace 2 años</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-micha.jpg" alt="Micha Evans" style="object-fit:cover;"><div><div class="review-name">Micha Evans</div><div class="review-meta">Google · hace 2 años</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« Una enseñanza personalizada y auténtica, basada en sólidos conocimientos, que nos ayuda a conectar con nuestra verdadera esencia. Mamselle Ruiz siente un profundo respeto por sus alumnos de todas las edades. Es un privilegio aprender de ella. »</p>
       </div>
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#146183;">M</div><div><div class="review-name">Maryse Filion</div><div class="review-meta">2 opiniones · Google</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-maryse.jpg" alt="Maryse Filion" style="object-fit:cover;"><div><div class="review-name">Maryse Filion</div><div class="review-meta">2 opiniones · Google</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« ¡Mamselle es excelente e increíblemente generosa! Ya sea que prefieras clases grupales o individuales, ella escucha tus necesidades y te transportará a su mundo. Es una inversión que nutre el alma y te permite conectar con tu instrumento cotidiano pero importantísimo: ¡tu voz! »</p>
       </div>
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#258ba1;">F</div><div><div class="review-name">flore lacau</div><div class="review-meta">5 opiniones · hace 7 meses</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-flore.jpg" alt="flore lacau" style="object-fit:cover;"><div><div class="review-name">flore lacau</div><div class="review-meta">5 opiniones · hace 7 meses</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« Gracias Mamselle: por tu magnífica voz, tu talento, tu capacidad para crear un espacio mágico y seguro para crear, para liberarse, para divertirse, para compartir. »</p>
       </div>
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#7A6070;">C</div><div><div class="review-name">Caroline Tardif</div><div class="review-meta">4 opiniones · hace un año</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-caroline.jpg" alt="Caroline Tardif" style="object-fit:cover;"><div><div class="review-name">Caroline Tardif</div><div class="review-meta">4 opiniones · hace un año</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« Los círculos de canto de Mamselle Ruiz son momentos de puro placer, relajación y compañerismo. Mamselle es una profesora experimentada: amable, divertida y muy cercana. Desde la primera sesión, nos sentimos bienvenidos, sin importar nuestra experiencia. »</p>
       </div>
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#0d4a66;">K</div><div><div class="review-name">Karimé Issa</div><div class="review-meta">10 opiniones · hace 7 meses</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-karime.jpg" alt="Karimé Issa" style="object-fit:cover;"><div><div class="review-name">Karimé Issa</div><div class="review-meta">10 opiniones · hace 7 meses</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« Comprendí que no se trataba sólo de clases de canto, sino de trabajar a partir de la transformación interior. Poco a poco me abrí y comencé a alcanzar notas que no sabía que podía cantar; descubrí mi voz. Aprender a descubrir mi voz es un ejercicio profundo de sanar aquello que mantenía escondido. »</p>
       </div>
       <div class="review">
-        <div class="review-top"><div class="avatar" style="background:#d4af37;color:#2f1525;">A</div><div><div class="review-name">amélie nappert</div><div class="review-meta">6 opiniones · hace 7 meses</div></div></div>
+        <div class="review-top"><img class="avatar" src="rev-amelie.jpg" alt="amélie nappert" style="object-fit:cover;"><div><div class="review-name">amélie nappert</div><div class="review-meta">6 opiniones · hace 7 meses</div></div></div>
         <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-quote">« Aprender con Mamselle es liberador e inspirador. Tanto en clases particulares como en grupo, te hace sentir cómodo. Crea momentos mágicos a la vez que proporciona la técnica justa. Las canciones que elige son preciosas. Gracias por todo. »</p>
       </div>
