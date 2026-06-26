@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- ===== VERBATIM <head> ESSENTIALS (from vea2.html / vsl.html) ===== -->
+<meta charset="UTF-8">
+
+<!-- Resource hints -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recupera tu voz auténtica en 7 días · Kit Vocal Esencial — Voz Esencia™ Academy</title>
+<meta name="description" content="Cómo recuperar tu voz auténtica en 7 días sin perder un segundo — el método Voz Esencia de Mamselle Ruiz. Un solo pago de $822 MXN, acceso de por vida.">
+
+<!-- ===== FONTS — Montserrat (headlines 700/800) + DM Sans (body). NO Cormorant Garamond. ===== -->
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=DM+Sans:wght@300;400;500;700&display=swap"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+</noscript>
+
+<!-- ===== META / FACEBOOK PIXEL (VERBATIM — pixel id 1888097325094612) ===== -->
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1888097325094612');
+fbq('track','PageView');
+fbq('trackCustom','VSLv1_PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+  src="https://www.facebook.com/tr?id=1888097325094612&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
+
+<style>
+/* ===== ROOT TOKENS — teal dominant + gold accent (matches the quiz vea2.html) ===== */
+:root {
+  --teal-deep:   #146183;   /* dominant brand teal (quiz token) */
+  --teal-mid:    #258ba1;
+  --teal-pale:   #53c1c2;
+  --teal-darker: #0d4a66;   /* darker teal for the dark "what's inside" block */
+  --gold:        #d4af37;   /* brand gold — the hero CTA accent (quiz token) */
+  --gold-deep:   #c9a22e;
+  --gold-soft:   #fee1b6;
+  --ink:         #2f1525;   /* dark text on light surfaces (quiz token) */
+  --ink-soft:    #7A6070;
+  --page-light:  #eef5f7;   /* pale page bg (quiz light token) */
+  --card:        #FFFFFF;
+  --card-border: rgba(212,175,55,0.25);   /* gold hairline (quiz token) */
+  --white-78:    rgba(255,255,255,0.82);
+  --white-55:    rgba(255,255,255,0.58);
+  --maxw:        1080px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--page-light);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  color: var(--ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.65;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ===== STICKY TOP BAR (logo + single CTA) ===== */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: saturate(140%) blur(8px);
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 0.5px solid var(--card-border);
+}
+.topbar-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.topbar-logo { height: 34px; width: auto; }
+.topbar-cta {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.01em;
+  background: var(--gold); color: var(--ink);
+  padding: 11px 20px; border-radius: 999px;
+  text-decoration: none; white-space: nowrap;
+  transition: background .18s ease, transform .08s ease;
+  box-shadow: 0 2px 10px rgba(212,175,55,0.35);
+}
+.topbar-cta:hover { background: var(--gold-deep); }
+.topbar-cta:active { transform: scale(.98); }
+@media (max-width: 480px) {
+  .topbar-inner { padding: 9px 16px; }
+  .topbar-logo { height: 28px; }
+  .topbar-cta { font-size: 11px; padding: 9px 14px; }
+}
+
+/* ===== LAYOUT — full-width responsive, content capped at --maxw ===== */
+.section { padding: 64px 24px; }
+.section.tight { padding: 44px 24px; }
+.section.light { background: var(--page-light); }
+.section.white { background: #FFFFFF; }
+.section.dark {
+  background: linear-gradient(160deg, var(--teal-deep) 0%, var(--teal-darker) 100%);
+  color: #FFFFFF;
+}
+.wrap { max-width: var(--maxw); margin: 0 auto; }
+.wrap-narrow { max-width: 760px; margin: 0 auto; }
+@media (max-width: 600px) {
+  .section { padding: 48px 18px; }
+  .section.tight { padding: 34px 18px; }
+}
+
+/* ===== TYPOGRAPHY ===== */
+.eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 800; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 16px;
+}
+.section.dark .eyebrow { color: var(--gold-soft); }
+.section.white .eyebrow, .section.light .eyebrow { color: var(--teal-deep); }
+
+h1.hero-h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.1rem, 5.4vw, 3.6rem);
+  line-height: 1.08; letter-spacing: -0.02em;
+  color: #FFFFFF; margin-bottom: 18px;
+}
+h1.hero-h1 em { font-style: normal; color: var(--gold); }
+
+h2.h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.7rem, 3.8vw, 2.6rem);
+  line-height: 1.14; letter-spacing: -0.015em;
+  color: var(--teal-deep);
+  margin-bottom: 16px;
+}
+.section.dark h2.h2 { color: #FFFFFF; }
+h2.h2 em { font-style: normal; color: var(--gold); }
+.section.dark h2.h2 em { color: var(--gold-soft); }
+
+h3.h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.2; color: var(--teal-deep);
+  margin-bottom: 10px;
+}
+.section.dark h3.h3 { color: #FFFFFF; }
+
+p.body { font-size: clamp(15px,1.6vw,17px); font-weight: 400; color: var(--ink); line-height: 1.72; margin-bottom: 14px; }
+p.body:last-child { margin-bottom: 0; }
+.section.dark p.body { color: var(--white-78); }
+p.body strong { font-weight: 700; color: var(--teal-deep); }
+.section.dark p.body strong { color: #FFFFFF; }
+p.body.big { font-size: clamp(17px,2vw,20px); }
+
+.lead-line {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3.2vw, 1.7rem);
+  line-height: 1.3; color: var(--teal-deep);
+  margin-bottom: 16px; letter-spacing: -0.01em;
+}
+.section.dark .lead-line { color: #FFFFFF; }
+
+.center { text-align: center; }
+
+/* ===== PRIMARY (GOLD) CTA — the money button ===== */
+.cta-gold {
+  display: inline-block; max-width: 520px; width: 100%;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(15px,1.8vw,18px); font-weight: 800;
+  text-align: center;
+  padding: 19px 26px;
+  border-radius: 12px;
+  text-decoration: none;
+  letter-spacing: 0.005em;
+  line-height: 1.3;
+  box-shadow: 0 8px 26px rgba(212,175,55,0.4);
+  transition: background 0.18s ease, transform 0.08s ease, box-shadow .18s ease;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+.cta-gold:hover { background: var(--gold-deep); box-shadow: 0 10px 30px rgba(212,175,55,0.5); }
+.cta-gold:active { transform: scale(0.99); }
+
+/* Secondary (teal) CTA — section level */
+.cta-teal {
+  display: inline-block; max-width: 520px; width: 100%;
+  background: var(--teal-deep); color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(15px,1.8vw,17px); font-weight: 700;
+  text-align: center; padding: 18px 24px; border-radius: 12px;
+  text-decoration: none; line-height: 1.3;
+  box-shadow: 0 6px 20px rgba(20,97,131,0.28);
+  transition: background 0.18s ease, transform 0.08s ease;
+  touch-action: manipulation; cursor: pointer;
+}
+.cta-teal:hover { background: var(--teal-mid); }
+.cta-teal:active { transform: scale(0.99); }
+.section.dark .cta-teal { background: var(--gold); color: var(--ink); box-shadow: 0 8px 26px rgba(212,175,55,0.4); }
+.section.dark .cta-teal:hover { background: var(--gold-deep); }
+
+.cta-reassure {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 400; font-style: italic;
+  color: var(--ink-soft);
+  text-align: center; margin: 14px 0 0;
+}
+.section.dark .cta-reassure { color: var(--white-78); }
+
+.social-line {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--teal-deep);
+  text-align: center; margin: 18px 0 0;
+}
+.section.dark .social-line { color: var(--gold-soft); }
+
+/* ===== HERO ===== */
+.hero {
+  background:
+    radial-gradient(circle at 78% 18%, rgba(83,193,194,0.28) 0%, rgba(83,193,194,0) 45%),
+    linear-gradient(155deg, var(--teal-deep) 0%, var(--teal-darker) 100%);
+  color: #FFFFFF;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px; align-items: center;
+}
+@media (max-width: 880px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 34px; }
+}
+.hero-sub {
+  font-size: clamp(15px,1.9vw,19px); font-weight: 400;
+  color: var(--white-78); line-height: 1.62; margin-bottom: 26px; max-width: 560px;
+}
+.hero-ctawrap { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+@media (max-width: 880px) { .hero-ctawrap { align-items: stretch; } }
+.hero-trust {
+  display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 26px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--white-78);
+}
+.hero-trust span { display: inline-flex; align-items: center; gap: 7px; }
+.hero-trust .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+/* ===== DEVICE MOCKUPS ===== */
+.devices {
+  display: flex; align-items: flex-end; justify-content: center; gap: 28px; flex-wrap: wrap;
+}
+@media (max-width: 880px) { .devices { gap: 24px; } }
+
+/* Phone */
+.phone {
+  width: 210px; flex-shrink: 0;
+  border-radius: 34px;
+  background: #0c1820;
+  padding: 12px;
+  box-shadow: 0 22px 50px rgba(0,0,0,0.4);
+  position: relative;
+}
+.phone::before {
+  content: ""; position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  width: 64px; height: 6px; border-radius: 6px; background: rgba(255,255,255,0.18); z-index: 3;
+}
+.phone-screen {
+  border-radius: 24px; overflow: hidden; aspect-ratio: 9 / 19;
+  background: linear-gradient(160deg, #258ba1 0%, #146183 60%, #0d3346 100%);
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+@media (max-width: 480px) { .phone { width: 170px; } }
+
+/* Laptop */
+.laptop { width: 380px; max-width: 64vw; flex-shrink: 1; }
+.laptop-screen {
+  border: 10px solid #0c1820; border-bottom: none;
+  border-radius: 14px 14px 0 0; overflow: hidden;
+  background: linear-gradient(160deg, #258ba1 0%, #146183 62%, #0d3346 100%);
+  aspect-ratio: 16 / 10; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.34);
+}
+.laptop-base {
+  height: 14px; background: linear-gradient(#1a2a34,#0c1820);
+  border-radius: 0 0 12px 12px; margin: 0 -14px;
+  position: relative;
+}
+.laptop-base::after {
+  content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 26%; height: 5px; border-radius: 0 0 6px 6px; background: rgba(0,0,0,0.45);
+}
+@media (max-width: 480px) { .laptop { width: 100%; max-width: 320px; } }
+
+/* Placeholder slot inside mockups */
+.shot-slot {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 16px;
+}
+.shot-slot img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0;
+}
+.shot-badge {
+  font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800;
+  letter-spacing: 0.04em; color: #FFFFFF; margin-bottom: 8px;
+}
+.shot-note {
+  font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+  color: rgba(255,255,255,0.7); letter-spacing: 0.02em; line-height: 1.4;
+  background: rgba(0,0,0,0.22); padding: 5px 9px; border-radius: 999px;
+}
+.shot-play {
+  width: 54px; height: 54px; border-radius: 50%; background: var(--gold);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
+  box-shadow: 0 0 0 8px rgba(212,175,55,0.2);
+}
+
+/* ===== STAT / COUNT-UP STRIP ===== */
+.stat-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+}
+@media (max-width: 640px) { .stat-strip { grid-template-columns: 1fr; gap: 14px; } }
+.stat {
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.16);
+  border-radius: 16px; padding: 26px 20px; text-align: center;
+}
+.stat-num {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: clamp(2rem, 5vw, 2.8rem); color: var(--gold-soft); line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--white-78);
+  margin-top: 10px; line-height: 1.4;
+}
+
+/* ===== CARDS GRID (generic) ===== */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+@media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--card);
+  border-radius: 18px;
+  border: 0.5px solid var(--card-border);
+  padding: 28px 24px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card.hoverable:hover { transform: translateY(-5px); box-shadow: 0 16px 38px rgba(20,97,131,0.14); }
+.section.dark .card {
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.16);
+}
+
+/* ===== MECHANISM DIAGRAM ===== */
+.mech { margin: 22px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 720px) { .mech { grid-template-columns: 1fr; } }
+.mech-row {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500;
+  padding: 18px 20px; border-radius: 14px; line-height: 1.4;
+}
+.mech-row .arrow { color: var(--gold); font-weight: 900; }
+.mech-bad  { background: #FFFFFF; color: var(--ink); border-left: 5px solid #b07b4a; border-radius: 0 14px 14px 0; }
+.mech-good { background: #FFFFFF; color: var(--teal-deep); font-weight: 700; border-left: 5px solid var(--gold); border-radius: 0 14px 14px 0; }
+.section.dark .mech-bad { background: rgba(255,255,255,0.06); color: var(--white-78); }
+.section.dark .mech-good { background: rgba(255,255,255,0.1); color: #FFFFFF; }
+
+/* ===== THREE DIMENSIONS ===== */
+.dim-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: rgba(212,175,55,0.16); color: var(--teal-deep);
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+}
+.section.dark .dim-icon { background: rgba(212,175,55,0.22); color: var(--gold-soft); }
+
+/* ===== 7-DAY CURRICULUM TIMELINE ===== */
+.timeline { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+@media (max-width: 760px) { .timeline { grid-template-columns: 1fr; } }
+.tl-card {
+  background: rgba(255,255,255,0.07);
+  border: 0.5px solid rgba(255,255,255,0.16);
+  border-radius: 16px; padding: 22px 22px 22px 22px;
+  position: relative; overflow: hidden;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.tl-card:hover { transform: translateY(-4px); border-color: rgba(212,175,55,0.55); }
+.tl-card.tl-final { background: rgba(212,175,55,0.14); border-color: rgba(212,175,55,0.5); }
+.tl-day {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold-soft); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 12px;
+}
+.tl-num {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--gold); color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; font-weight: 800; flex-shrink: 0;
+}
+.tl-title { font-family:'Montserrat',sans-serif; font-weight:700; font-size:17px; color:#FFFFFF; margin-bottom: 6px; line-height:1.25; }
+.tl-text { font-family:'DM Sans',sans-serif; font-size:14px; color: var(--white-78); line-height:1.55; }
+
+/* ===== REVIEW MOSAIC ===== */
+.google-badge {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: #FFFFFF; border: 0.5px solid var(--card-border);
+  border-radius: 999px; padding: 10px 20px;
+  box-shadow: 0 6px 18px rgba(20,97,131,0.1);
+}
+.google-badge .g-logo { font-family:'Montserrat',sans-serif; font-weight:800; font-size:18px; letter-spacing:-0.02em; }
+.google-badge .g-logo .b{color:#4285F4}.google-badge .g-logo .r{color:#EA4335}.google-badge .g-logo .y{color:#FBBC05}.google-badge .g-logo .g{color:#34A853}
+.google-badge .g-score { font-family:'Montserrat',sans-serif; font-weight:800; font-size:20px; color: var(--ink); }
+.google-badge .g-stars { color: var(--gold); font-size: 15px; letter-spacing: 1px; }
+.google-badge .g-meta { font-family:'DM Sans',sans-serif; font-size:12px; color: var(--ink-soft); }
+
+.mosaic { columns: 3 280px; column-gap: 20px; margin-top: 34px; }
+@media (max-width: 720px) { .mosaic { columns: 1; } }
+.review {
+  break-inside: avoid; margin: 0 0 20px;
+  background: #FFFFFF; border: 0.5px solid var(--card-border);
+  border-radius: 16px; padding: 22px 22px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.review:hover { transform: translateY(-4px); box-shadow: 0 16px 38px rgba(20,97,131,0.14); }
+.review.placeholder { border-style: dashed; border-color: rgba(20,97,131,0.3); background: rgba(20,97,131,0.03); }
+.review-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.avatar {
+  width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family:'Montserrat',sans-serif; font-weight:800; font-size:18px; color:#FFFFFF;
+}
+.review-name { font-family:'Montserrat',sans-serif; font-weight:700; font-size:14px; color: var(--ink); line-height: 1.2; }
+.review-meta { font-family:'DM Sans',sans-serif; font-size:12px; color: var(--ink-soft); margin-top:2px; }
+.review-stars { color: var(--gold); font-size: 13px; letter-spacing: 1.5px; margin-bottom: 8px; }
+.review-quote { font-family:'DM Sans',sans-serif; font-size:15px; color: var(--ink); line-height: 1.6; }
+.review-quote.ph { color: var(--ink-soft); font-style: italic; }
+
+/* ===== OFFER STACK ===== */
+.offer-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: start; }
+@media (max-width: 860px) { .offer-grid { grid-template-columns: 1fr; gap: 24px; } }
+.stack { list-style: none; margin: 6px 0 0; }
+.stack li {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 16px 0; border-bottom: 0.5px solid rgba(212,175,55,0.22);
+  font-family: 'DM Sans', sans-serif;
+}
+.stack-item { font-size: 15px; font-weight: 400; color: var(--ink); line-height: 1.55; flex: 1; }
+.stack-item b { font-weight: 700; color: var(--teal-deep); }
+.stack-value { font-size: 14px; font-weight: 700; color: var(--gold-deep); white-space: nowrap; text-align: right; flex-shrink: 0; }
+.stack-total {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 16px 0 4px; margin-top: 4px; font-family: 'DM Sans', sans-serif;
+}
+.stack-total .label { font-size: 15px; font-weight: 700; color: var(--ink); }
+.stack-total .val   { font-size: 16px; font-weight: 700; color: var(--ink-soft); text-decoration: line-through; }
+.price-box {
+  position: sticky; top: 80px;
+  text-align: center; background: #FFFFFF;
+  border: 1px solid var(--card-border); border-radius: 20px;
+  padding: 30px 24px; box-shadow: 0 18px 44px rgba(20,97,131,0.12);
+}
+.price-label { font-family:'Montserrat',sans-serif; font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color: var(--teal-deep); margin-bottom: 8px; }
+.price-amount { font-family:'Montserrat',sans-serif; font-weight:800; font-size: 58px; color: var(--teal-deep); line-height: 1; letter-spacing: -0.03em; }
+.price-amount .cur { font-size: 22px; vertical-align: super; color: var(--ink-soft); margin-left: 4px; font-weight: 700; }
+.price-sub { font-family:'DM Sans',sans-serif; font-size:13px; font-weight:400; color: var(--ink-soft); margin: 10px 0 0; }
+.price-old { font-family:'DM Sans',sans-serif; font-size:14px; color: var(--ink-soft); margin-bottom: 6px; }
+.price-old s { color: var(--ink-soft); }
+
+/* ===== GUARANTEE ===== */
+.guarantee {
+  background: rgba(212,175,55,0.1);
+  border-left: 5px solid var(--gold);
+  border-radius: 0 16px 16px 0; padding: 24px 24px;
+}
+
+/* ===== FAQ ===== */
+.faq-item { border-bottom: 0.5px solid var(--card-border); padding: 18px 0; }
+.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+.faq-q { font-family:'Montserrat',sans-serif; font-size:16px; font-weight:700; color: var(--teal-deep); margin-bottom: 7px; }
+.faq-a { font-family:'DM Sans',sans-serif; font-size:15px; font-weight:400; color: var(--ink); line-height: 1.6; }
+
+/* ===== SIGNATURE / CLOSE ===== */
+.signature { font-family:'Montserrat',sans-serif; font-weight:700; font-size:24px; color: var(--teal-deep); margin-top: 6px; }
+.ps-line { font-family:'DM Sans',sans-serif; font-size:14px; font-weight:400; font-style:italic; color: var(--ink-soft); line-height:1.6; margin-top: 18px; border-top: 0.5px solid var(--card-border); padding-top: 16px; }
+
+/* ===== FOOTER ===== */
+.logo-wrap { text-align: center; margin-top: 8px; }
+.logo-wrap img { height: 48px; width: auto; margin: 0 auto; }
+.footer { text-align: center; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:400; color: var(--ink-soft); padding: 26px 18px 28px; }
+
+/* ===== SCROLL-REVEAL ANIMATION (verbatim pattern from vsl.html) ===== */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .card.hoverable:hover, .review:hover, .tl-card:hover { transform: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     STICKY TOP BAR — logo + single CTA (no nav links)
+     ============================================================ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <img class="topbar-logo" src="Logo-es.png" alt="Voz Esencia™ Academy">
+    <a class="topbar-cta js-cta" data-cta="topbar" href="https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial">Empezar — $822 MXN</a>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO — H1 = Spanish of "How to get your authentic voice back
+     in 7 days without wasting a second"
+     ============================================================ -->
+<section class="section hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal">
+        <p class="eyebrow">Método Voz Esencia™ · Mamselle Ruiz</p>
+        <h1 class="hero-h1">Cómo recuperar tu voz auténtica en <em>7 días</em> sin perder un segundo</h1>
+        <p class="hero-sub">Sin solfeo, sin teoría musical, sin técnica complicada. Solo el botón mecánico exacto que suelta tu laringe — para que tu voz deje de pelear por salir y salga sola. Conmigo del otro lado, los 7 días.</p>
+        <div class="hero-ctawrap">
+          <a class="cta-gold js-cta" data-cta="hero" href="https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial">Quiero recuperar mi voz en 7 días &rarr;</a>
+          <p class="cta-reassure" style="color:var(--white-78);">Un solo pago de $822 MXN · acceso de por vida · te acompaño los 7 días.</p>
+        </div>
+        <div class="hero-trust">
+          <span><span class="dot"></span> +1.000 voces liberadas</span>
+          <span><span class="dot"></span> 25 años de experiencia</span>
+          <span><span class="dot"></span> Google 5.0 &#9733;</span>
+        </div>
+      </div>
+
+      <!-- DEVICE MOCKUPS — phone + laptop with swappable img slots -->
+      <div class="devices reveal">
+        <!-- PHONE -->
+        <div class="phone" aria-label="Vista del curso en teléfono">
+          <div class="phone-screen">
+            <div class="shot-slot">
+              <!-- Swap src + remove style to reveal -->
+              <img id="shot-phone" src="" alt="Captura del curso Voz Esencia en el teléfono — reemplazar">
+              <div class="shot-play" aria-hidden="true">
+                <svg width="20" height="24" viewBox="0 0 26 30" fill="none"><path d="M2 2L24 15L2 28V2Z" fill="#146183"/></svg>
+              </div>
+              <div class="shot-badge">App móvil</div>
+              <div class="shot-note">Reemplazar: captura del curso</div>
+            </div>
+          </div>
+        </div>
+        <!-- LAPTOP -->
+        <div class="laptop" aria-label="Vista del curso en computadora">
+          <div class="laptop-screen">
+            <div class="shot-slot">
+              <img id="shot-laptop" src="" alt="Captura del curso Voz Esencia en la computadora — reemplazar">
+              <div class="shot-play" aria-hidden="true">
+                <svg width="22" height="26" viewBox="0 0 26 30" fill="none"><path d="M2 2L24 15L2 28V2Z" fill="#146183"/></svg>
+              </div>
+              <div class="shot-badge">Plataforma del curso</div>
+              <div class="shot-note">Reemplazar: captura del curso</div>
+            </div>
+          </div>
+          <div class="laptop-base"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DIAGNOSTIC DISCLAIMER — lectura, no juicio
+     ============================================================ -->
+<section class="section tight white">
+  <div class="wrap-narrow reveal center">
+    <p class="body" style="font-style:italic;color:var(--ink-soft);max-width:680px;margin:0 auto;">Antes de nada, mi querida: esto no es un juicio. Es una lectura precisa de cómo está tu voz hoy — y la voz se mueve, ¿verdad?, con el biorritmo, con las emociones, con el estado de ánimo. Yo no te estoy juzgando, te estoy leyendo. Vamos a ver juntas la mecánica.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROBLEM / MECHANISM — por qué nada funcionó antes
+     ============================================================ -->
+<section class="section light">
+  <div class="wrap-narrow">
+    <div class="reveal center">
+      <p class="eyebrow">El mecanismo</p>
+      <h2 class="h2">Por qué los tips de internet nunca te resolvieron — <em>y no fue tu culpa.</em></h2>
+    </div>
+    <div class="reveal" style="margin-top:6px;">
+      <p class="body big">Todo lo que probaste hasta hoy trabajaba el síntoma: respira más, relájate, calienta la voz. Pero ninguno tocó el botón mecánico real — la posición de tu laringe.</p>
+      <p class="body">Haz de cuenta que tu mandíbula es una cuchara y tu voz es un huevo: cuando la cuchara se tensa y se cierra, el huevo no tiene dónde reposar. Cuando la laringe baja, tu <strong>catedral vocal</strong> se abre, y la voz deja de pelear para salir: sale sola, flotando sobre tu gran <strong>cuerpo de aire</strong>.</p>
+    </div>
+
+    <div class="mech reveal">
+      <div class="mech-row mech-bad">Laringe arriba <span class="arrow">&rarr;</span> tubo cerrado <span class="arrow">&rarr;</span> voz que se aprieta, se cansa y duele.</div>
+      <div class="mech-row mech-good">Laringe abajo <span class="arrow">&rarr;</span> catedral vocal abierta <span class="arrow">&rarr;</span> voz que sale sola.</div>
+    </div>
+
+    <p class="body reveal" style="text-align:center;font-style:italic;margin-top:10px;">No te faltaba disciplina, mi querida. Te faltaba el ajuste. Y ese ajuste es lo primero que vamos a hacer juntas.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     THREE DIMENSIONS — qué estás comprando (light)
+     ============================================================ -->
+<section class="section white">
+  <div class="wrap">
+    <div class="reveal center" style="max-width:720px;margin:0 auto 10px;">
+      <p class="eyebrow">Qué estás comprando</p>
+      <h2 class="h2">No es un curso genérico de voz. Es tu voz, encontrada.</h2>
+      <p class="body">Mi fuerza es la biomecánica: yo te escucho y sé exactamente qué botón picar para que ya no te ocurra lo que te está ocurriendo. En tus primeros 7 días trabajamos tu voz desde las <strong>tres dimensiones integradas</strong> del método Voz Esencia.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:30px;">
+      <div class="card hoverable reveal">
+        <div class="dim-icon">1</div>
+        <h3 class="h3">La reeducación de la técnica</h3>
+        <p class="body">Para bajar esa laringe y abrir tu catedral vocal — el ajuste físico que lo cambia todo.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="dim-icon">2</div>
+        <h3 class="h3">La voz hablada y la presencia</h3>
+        <p class="body">Para que tu voz llegue sin que tengas que empujarla — en tus ventas, tus clases, tus conversaciones que importan.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="dim-icon">3</div>
+        <h3 class="h3">La dimensión psicoemocional</h3>
+        <p class="body">Porque la voz está intrínsecamente ligada al alma, y, aunque no queramos, todo aparece en ella.</p>
+      </div>
+    </div>
+
+    <p class="body reveal center" style="margin-top:26px;font-style:italic;">La idea no es mejorar tu voz: es encontrarla. Porque <strong>tu voz es tu huella digital en el mundo.</strong></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     DARK BLOCK #1 — "What's inside": 7-day curriculum timeline
+     ============================================================ -->
+<section class="section dark">
+  <div class="wrap">
+    <div class="reveal center" style="max-width:760px;margin:0 auto 8px;">
+      <p class="eyebrow">El camino · lo que hay adentro</p>
+      <h2 class="h2">Tu voz auténtica en 7 días — <em>paso a paso, conmigo del otro lado.</em></h2>
+      <p class="body">Una puerta por día. Sesiones cortas que caben en tu día, un botón mecánico a la vez. Esto es lo que vamos a caminar juntas:</p>
+    </div>
+
+    <div class="timeline reveal" style="margin-top:30px;">
+      <div class="tl-card">
+        <div class="tl-day"><span class="tl-num">1</span> Día 1</div>
+        <div class="tl-title">Tu primer respiro de Voz Esencia</div>
+        <div class="tl-text">El gran cuerpo de aire que lo sostiene todo. Tu primer cambio lo sientes hoy mismo.</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-day"><span class="tl-num">2</span> Día 2</div>
+        <div class="tl-title">Bajar la laringe</div>
+        <div class="tl-text">El botón mecánico que abre el tubo. Hay un ajuste pequeñito que abre muchísimo — te lo enseño aquí.</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-day"><span class="tl-num">3</span> Día 3</div>
+        <div class="tl-title">Cuchara y huevo</div>
+        <div class="tl-text">Soltar la mandíbula sin forzar — para que el huevo por fin tenga dónde reposar.</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-day"><span class="tl-num">4</span> Día 4</div>
+        <div class="tl-title">Impostar sin apretar</div>
+        <div class="tl-text">Que el sonido viaje, no que empuje. Aquí tu voz empieza a llegar lejos sin esfuerzo.</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-day"><span class="tl-num">5</span> Día 5</div>
+        <div class="tl-title">Tu catedral vocal abierta</div>
+        <div class="tl-text">Dejar resonar. Sentir cómo el sonido llena el espacio en lugar de quedarse atrapado.</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-day"><span class="tl-num">6</span> Día 6</div>
+        <div class="tl-title">Una voz que aguanta</div>
+        <div class="tl-text">Sin quedarte sin aire a medio camino. Una voz que dura tanto como tú.</div>
+      </div>
+      <div class="tl-card tl-final">
+        <div class="tl-day"><span class="tl-num">7</span> Día 7</div>
+        <div class="tl-title">Tu voz que sí eres tú</div>
+        <div class="tl-text">La que reconoces como tuya. No suenas «mejor»: suenas como tú. Por fin.</div>
+      </div>
+      <div class="tl-card" style="display:flex;flex-direction:column;justify-content:center;background:transparent;border:none;">
+        <p class="body" style="font-style:italic;margin:0 0 18px;">No tienes que esperar los siete días para sentir el cambio: en la primera sesión hacemos juntas <strong style="color:#fff;">la vaquita feliz</strong> y vas a sentir tu laringe descender hoy mismo.</p>
+        <a class="cta-teal js-cta" data-cta="curriculum" href="https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial">Quiero soltar mi laringe &rarr;</a>
+      </div>
+    </div>
+
+    <p class="social-line reveal">Más de 1.000 voces liberadas con el método Voz Esencia™</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     COUNT-UP STAT STRIP (dark) — +1,000 voces liberadas
+     ============================================================ -->
+<section class="section tight dark" style="background:var(--teal-darker);">
+  <div class="wrap">
+    <div class="stat-strip reveal">
+      <div class="stat">
+        <div class="stat-num"><span data-count="1000" data-prefix="+" data-suffix="">+0</span></div>
+        <div class="stat-label">voces liberadas con el método Voz Esencia™</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span data-count="25" data-prefix="" data-suffix="">0</span></div>
+        <div class="stat-label">años de experiencia, condensados para tu voz</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span data-count="7" data-prefix="" data-suffix="">0</span></div>
+        <div class="stat-label">días para recuperar tu voz auténtica</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FIRST WIN / REASSURANCE — para que entres tranquila (light)
+     ============================================================ -->
+<section class="section white">
+  <div class="wrap-narrow">
+    <div class="reveal center" style="margin-bottom:8px;">
+      <p class="eyebrow">Para que entres tranquila</p>
+      <h2 class="h2">Quiero que sepas dos cosas antes de empezar.</h2>
+    </div>
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card hoverable reveal">
+        <h3 class="h3">No es un conservatorio</h3>
+        <p class="body">No hay solfeo, no hay teoría musical, no hay técnica complicada. Son sesiones cortas que caben en tu día, un botón mecánico a la vez. La gente comprende rápido — mi fuerza es la practicidad — y después usamos el tiempo para disfrutar.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h3 class="h3">No te quedas sola</h3>
+        <p class="body">No te quedas frente a tu computadora viendo videos en soledad. Me tienes a mí, directamente, para esa duda específica que solo tú tienes — me escribes y yo te respondo. La voz no se libera en soledad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOCIAL PROOF MOSAIC + Google 5.0 badge (light)
+     ============================================================ -->
+<section class="section light">
+  <div class="wrap">
+    <div class="reveal center" style="max-width:720px;margin:0 auto;">
+      <p class="eyebrow">Lo que dicen</p>
+      <h2 class="h2">Voces que ya se liberaron.</h2>
+      <div style="margin:18px 0 4px;">
+        <span class="google-badge">
+          <span class="g-logo"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></span>
+          <span class="g-score">5.0</span>
+          <span class="g-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="g-meta">Reseñas verificadas</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="mosaic reveal">
+      <!-- REAL review (verbatim, from repo) -->
+      <div class="review">
+        <div class="review-top">
+          <div class="avatar" style="background:#146183;">J</div>
+          <div>
+            <div class="review-name">Justine Lafortune</div>
+            <div class="review-meta">Canadá</div>
+          </div>
+        </div>
+        <div class="review-stars" aria-label="5 de 5 estrellas">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Mamselle guía los grupos maravillosamente bien. ¡Cambió mi vida (no es broma)! Yo que no creía que podía cantar. »</p>
+      </div>
+
+      <!-- REAL review (verbatim, from repo) -->
+      <div class="review">
+        <div class="review-top">
+          <div class="avatar" style="background:#258ba1;">L</div>
+          <div>
+            <div class="review-name">Léa Plourde-Archer</div>
+            <div class="review-meta">Canadá</div>
+          </div>
+        </div>
+        <div class="review-stars" aria-label="5 de 5 estrellas">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« ¡Una experiencia increíble que recomiendo a todos! »</p>
+      </div>
+
+      <!-- REAL Google reviews (verbatim) -->
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#d4af37;color:#2f1525;">J</div><div><div class="review-name">Julia Lazzarotto</div><div class="review-meta">6 opiniones · Google</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« ¡Un regalo para ti y para los demás! Una maravillosa oportunidad para explorar tu voz con autenticidad en el entorno seguro y de apoyo que ofrece Mamselle Ruiz. Desde el primer taller, experimenté los beneficios: ¡una dosis maravillosa de vitalidad y alegría! »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#146183;">J</div><div><div class="review-name">Joëlle Maguire</div><div class="review-meta">Google · hace 2 años</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Mamselle sabe cómo llegar a nosotros y transportarnos a un espacio y tiempo de reconectarnos con nosotros mismos. Las enseñanzas nos guían a elevarnos con una atmósfera impregnada de amor, confianza y una magnífica creatividad. Su voz poderosa y cautivadora abre un camino de libertad donde podemos (re)descubrir la nuestra, aquella que (re)conecta con nuestra alma. Gracias, Mamselle. »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#258ba1;">G</div><div><div class="review-name">Genevieve Lavoie</div><div class="review-meta">13 opiniones · Google</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Mamselle Ruiz posee un talento único para que el canto suene natural. Sus métodos suaves e intuitivos nos guían a encontrar nuestra propia voz y armonizar con el ritmo del grupo. ¡Es una inspiración artística inigualable! »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#7A6070;">P</div><div><div class="review-name">Peter Graham</div><div class="review-meta">Google · hace 2 años</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Soy ingeniero jubilado. Decidí por primera vez en mi vida recibir clases para cantar. Con su experiencia y los métodos que desarrolló durante años, Mamselle me guió a aprender a respirar, a cantar afinado, a frasear y a desarrollar fluidez — todo en buen humor y con cariño. »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#0d4a66;">N</div><div><div class="review-name">Nikita Thilavanh</div><div class="review-meta">Local Guide · 18 opiniones</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Mamselle tiene un don para crear un ambiente mágico y acogedor. Posee un talento increíble y es maravillosamente amable. Sus clases son experiencias verdaderamente alegres y enriquecedoras. Te guía con mucha paciencia y cariño. ¡La recomiendo muchísimo! »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#d4af37;color:#2f1525;">M</div><div><div class="review-name">Micha Evans</div><div class="review-meta">Google · hace 2 años</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Una enseñanza personalizada y auténtica, basada en sólidos conocimientos, que nos ayuda a conectar con nuestra verdadera esencia. Mamselle Ruiz siente un profundo respeto por sus alumnos de todas las edades. Es un privilegio aprender de ella. »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#146183;">M</div><div><div class="review-name">Maryse Filion</div><div class="review-meta">2 opiniones · Google</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« ¡Mamselle es excelente e increíblemente generosa! Ya sea que prefieras clases grupales o individuales, ella escucha tus necesidades y te transportará a su mundo. Es una inversión que nutre el alma y te permite conectar con tu instrumento cotidiano pero importantísimo: ¡tu voz! »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#258ba1;">F</div><div><div class="review-name">flore lacau</div><div class="review-meta">5 opiniones · hace 7 meses</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Gracias Mamselle: por tu magnífica voz, tu talento, tu capacidad para crear un espacio mágico y seguro para crear, para liberarse, para divertirse, para compartir. »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#7A6070;">C</div><div><div class="review-name">Caroline Tardif</div><div class="review-meta">4 opiniones · hace un año</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Los círculos de canto de Mamselle Ruiz son momentos de puro placer, relajación y compañerismo. Mamselle es una profesora experimentada: amable, divertida y muy cercana. Desde la primera sesión, nos sentimos bienvenidos, sin importar nuestra experiencia. »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#0d4a66;">K</div><div><div class="review-name">Karimé Issa</div><div class="review-meta">10 opiniones · hace 7 meses</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Comprendí que no se trataba sólo de clases de canto, sino de trabajar a partir de la transformación interior. Poco a poco me abrí y comencé a alcanzar notas que no sabía que podía cantar; descubrí mi voz. Aprender a descubrir mi voz es un ejercicio profundo de sanar aquello que mantenía escondido. »</p>
+      </div>
+      <div class="review">
+        <div class="review-top"><div class="avatar" style="background:#d4af37;color:#2f1525;">A</div><div><div class="review-name">amélie nappert</div><div class="review-meta">6 opiniones · hace 7 meses</div></div></div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">« Aprender con Mamselle es liberador e inspirador. Tanto en clases particulares como en grupo, te hace sentir cómodo. Crea momentos mágicos a la vez que proporciona la técnica justa. Las canciones que elige son preciosas. Gracias por todo. »</p>
+      </div>
+    </div>
+
+    <p class="social-line reveal" style="margin-top:6px;">Más de 1.000 voces liberadas — sus 7 Pilares y sus tres dimensiones integradas.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     OFFER STACK + PRICE (white)
+     ============================================================ -->
+<section class="section white">
+  <div class="wrap">
+    <div class="reveal center" style="max-width:720px;margin:0 auto 14px;">
+      <p class="eyebrow">La oferta</p>
+      <h2 class="h2">Todo lo que entra contigo el día de hoy.</h2>
+    </div>
+
+    <div class="offer-grid">
+      <div class="reveal">
+        <ul class="stack">
+          <li>
+            <span class="stack-item"><b>Núcleo · «Tu voz auténtica en 7 días»</b> — el protocolo Voz Esencia para tu patrón de laringe, condensado de 25 años, 7 sesiones cortas día por día.</span>
+            <span class="stack-value">$3,900 MXN</span>
+          </li>
+          <li>
+            <span class="stack-item"><b>Tu Kit Vocal Esencial</b> — el mapa de tus 7 pilares aplicado a tu laringe, las guías filmadas de tus ejercicios fundamentales (la vaquita feliz, el bostezo silencioso, la cuchara y el huevo) y el audio-ritual de 5 minutos para bajar la laringe antes de hablar o cantar.</span>
+            <span class="stack-value">$2,100 MXN</span>
+          </li>
+          <li>
+            <span class="stack-item"><b>De regalo · «Tu primer respiro de Voz Esencia»</b> — el ejercicio que te baja la laringe hoy mismo.</span>
+            <span class="stack-value">$400 MXN</span>
+          </li>
+          <li>
+            <span class="stack-item"><b>De regalo · La biblioteca de la dimensión psicoemocional</b> — los tres botones de la garganta ligados al miedo y a la identidad vocal.</span>
+            <span class="stack-value">$700 MXN</span>
+          </li>
+          <li>
+            <span class="stack-item"><b>Mi acompañamiento directo</b> — lo que más cuesta encontrar en cualquier otro lado: me escribes con tu pregunta y yo te respondo.</span>
+            <span class="stack-value">$1,200 MXN</span>
+          </li>
+          <li>
+            <span class="stack-item"><b>Acceso de por vida</b>, en un solo pago.</span>
+            <span class="stack-value">Incluido</span>
+          </li>
+        </ul>
+        <div class="stack-total">
+          <span class="label">Todo junto vale</span>
+          <span class="val">$8,300 MXN</span>
+        </div>
+        <p class="body" style="margin-top:14px;font-style:italic;">No está tan cara para lo que es, ¿verdad? — es acceso a 25 años de mi trabajo, condensados para tu voz.</p>
+      </div>
+
+      <div class="reveal">
+        <div class="price-box">
+          <p class="price-label">Tu inversión hoy · un solo pago</p>
+          <p class="price-old"><s>Valor real: $8,300 MXN</s> &middot; <strong style="color:var(--gold-deep);">ahorras $7,478</strong></p>
+          <div class="price-amount">822<span class="cur">MXN</span></div>
+          <p class="price-sub">Acceso inmediato · es tuyo para siempre, sin mensualidades.</p>
+          <a class="cta-gold js-cta" data-cta="offer-stack" href="https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial" style="margin-top:20px;">Empiezo mis 7 días &rarr;</a>
+          <p class="cta-reassure">Pago único · acceso de por vida · te acompaño los 7 días.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GUARANTEE / RISK REVERSAL (light)
+     ============================================================ -->
+<section class="section tight light">
+  <div class="wrap-narrow reveal">
+    <div class="guarantee">
+      <p class="eyebrow" style="color:var(--teal-deep);">Y para que entres sin ningún peso encima</p>
+      <p class="body" style="margin:0;">Entra, trabaja conmigo la primera semana completa, haz los ejercicios. Si al terminar sientes de verdad que esto no le sirve a tu voz, me escribes y te devuelvo tu inversión — no necesitas explicarme nada, no hay ningún trámite incómodo. Yo no voy a ir como a cazar tu dinero; yo más bien necesito ver tu progreso. <strong>El único riesgo que te pido correr es el de escucharte.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ (white)
+     ============================================================ -->
+<section class="section white">
+  <div class="wrap-narrow">
+    <div class="reveal center" style="margin-bottom:10px;">
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2 class="h2">Antes de decidir, lo de siempre.</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <p class="faq-q">¿Necesito saber música o solfeo?</p>
+        <p class="faq-a">No. Esto no es un conservatorio — no hay solfeo, ni teoría musical, ni técnica complicada. Son sesiones cortas, un botón mecánico a la vez. Mi fuerza es la practicidad: la gente comprende rápido.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">¿Tengo que esperar los 7 días para notar algo?</p>
+        <p class="faq-a">No. En la primera sesión hacemos juntas la vaquita feliz y vas a sentir tu laringe descender — ese primer respiro te dice que sí se puede, el mismo día.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">¿Me quedo sola viendo videos?</p>
+        <p class="faq-a">No. Me tienes a mí directamente para esa duda específica que solo tú tienes — me escribes y yo te respondo. La voz no se libera en soledad.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">¿Es un pago único o una mensualidad?</p>
+        <p class="faq-a">Un solo pago de $822 MXN, con acceso inmediato y de por vida. Sin mensualidades.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">¿Y si siento que no me sirve?</p>
+        <p class="faq-a">Trabajas conmigo la primera semana completa. Si al terminar sientes de verdad que no le sirve a tu voz, me escribes y te devuelvo tu inversión — sin explicaciones, sin trámites incómodos.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">¿Cuánto tiempo al día necesito?</p>
+        <p class="faq-a">Poco. Las sesiones son cortas y caben en tu día. Comprendes rápido y después usamos el tiempo para disfrutar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DARK BLOCK #2 — Servant-leader close + final CTA
+     ============================================================ -->
+<section class="section dark">
+  <div class="wrap-narrow center reveal">
+    <p class="eyebrow">El cierre</p>
+    <p class="lead-line">Tu voz es tu huella digital en el mundo, mi querida — tu tarjeta de presentación.</p>
+    <p class="body big">Cuando la laringe se suelta, no suenas «mejor»: suenas como tú. Por fin. Y del otro lado de este curso estoy yo, para acompañarte en cada uno de los 7 días.</p>
+    <p class="body">Si te interesa, bienvenida seas a este camino. Si hoy no es el momento, no pasa nada — aquí estaré. Cada quien elige, no hay ninguna presión de nada.</p>
+    <p class="body" style="margin-bottom:4px;">Aquí estoy para servir a tu voz. Te abrazo muy fuerte,</p>
+    <p class="signature" style="color:var(--gold-soft);">Mamselle Ruiz</p>
+
+    <div style="margin-top:28px;display:flex;flex-direction:column;align-items:center;">
+      <a class="cta-gold js-cta" data-cta="close" href="https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial">Quiero recuperar mi voz en 7 días &rarr;</a>
+      <p class="cta-reassure">Un solo pago de $822 MXN · acceso de por vida · te acompaño los 7 días.</p>
+    </div>
+
+    <p class="ps-line" style="color:var(--white-78);border-top-color:rgba(255,255,255,0.18);max-width:560px;margin-left:auto;margin-right:auto;">(Y si te late, sígueme por Instagram — para mí sería un gran apoyo, estoy construyendo mi camino de creadora de contenido.)</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER (no nav links)
+     ============================================================ -->
+<div class="logo-wrap" style="padding-top:34px;background:var(--page-light);">
+  <img src="Logo-es.png" alt="Voz Esencia™ Academy">
+</div>
+<div class="footer" style="background:var(--page-light);">© 2026 Voz Esencia™ Academy · Mamselle Ruiz Coach</div>
+
+<script>
+// ================================================================
+// CONFIGURATION — checkout is the ONLY outbound destination (TOKENS)
+// ================================================================
+var CHECKOUT_URL = 'https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial';
+
+// mc_id — ManyChat subscriber id passed via ?mc_id={{contact_id}} (verbatim passthrough from vsl.html)
+var mcId = (function () {
+  try {
+    return new URLSearchParams(window.location.search).get('mc_id') || '';
+  } catch (e) { return ''; }
+})();
+
+function buildCheckoutUrl() {
+  if (!mcId) return CHECKOUT_URL;
+  // Ignore literal/empty placeholder values (mirrors the worker's mc_id validation).
+  if (mcId === '{{contact_id}}' || mcId === '0' || mcId.trim() === '') return CHECKOUT_URL;
+  var sep = CHECKOUT_URL.indexOf('?') === -1 ? '?' : '&';
+  return CHECKOUT_URL + sep + 'mc_id=' + encodeURIComponent(mcId);
+}
+
+// ================================================================
+// META PIXEL — ViewContent on load
+// ================================================================
+if (typeof fbq !== 'undefined') {
+  fbq('track', 'ViewContent', {
+    content_name: 'VSL v1 · Kit Vocal Esencial',
+    content_category: 'Paywall'
+  });
+}
+
+// ================================================================
+// CTA — InitiateCheckout on every tap, then 300ms-delayed redirect
+// ================================================================
+(function () {
+  var dest = buildCheckoutUrl();
+  var ctas = document.querySelectorAll('.js-cta');
+  for (var i = 0; i < ctas.length; i++) {
+    ctas[i].setAttribute('href', dest);
+    ctas[i].addEventListener('click', function (e) {
+      e.preventDefault();
+      var url = this.getAttribute('href') || dest;
+      var where = this.getAttribute('data-cta') || 'cta';
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+          content_name: 'Tu voz auténtica en 7 días · Kit Vocal Esencial',
+          content_category: 'Paywall',
+          value: 822,
+          currency: 'MXN'
+        });
+        fbq('trackCustom', 'VSLv1_CTAClick', { placement: where });
+      }
+      // Delay nav 300ms so the pixel event flushes.
+      setTimeout(function () { window.location.href = url; }, 300);
+    });
+  }
+})();
+
+// ================================================================
+// SCROLL-REVEAL — IntersectionObserver, staggered fade+rise
+// (verbatim pattern from vsl.html)
+// ================================================================
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    for (var j = 0; j < els.length; j++) els[j].classList.add('is-visible');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  for (var k = 0; k < els.length; k++) io.observe(els[k]);
+})();
+
+// ================================================================
+// COUNT-UP — animate stat numbers once on view (honors reduced motion)
+// ================================================================
+(function () {
+  var nums = document.querySelectorAll('[data-count]');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function fmt(n) { return n.toLocaleString('es-MX'); }
+
+  function setFinal(el) {
+    var t = parseInt(el.getAttribute('data-count'), 10);
+    el.textContent = (el.getAttribute('data-prefix') || '') + fmt(t) + (el.getAttribute('data-suffix') || '');
+  }
+
+  function run(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    var dur = 1400, start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var val = Math.round(eased * target);
+      el.textContent = prefix + fmt(val) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    for (var i = 0; i < nums.length; i++) setFinal(nums[i]);
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { run(entry.target); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.5 });
+  for (var k = 0; k < nums.length; k++) io.observe(nums[k]);
+})();
+
+// ================================================================
+// DEVICE MOCKUP IMG SLOTS — reveal swapped screenshots if present
+// ================================================================
+(function () {
+  ['shot-phone', 'shot-laptop'].forEach(function (id) {
+    var img = document.getElementById(id);
+    if (!img) return;
+    img.addEventListener('load', function () {
+      if (img.getAttribute('src')) { img.style.opacity = '1'; }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
