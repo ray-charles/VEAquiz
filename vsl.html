@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- ===== VERBATIM <head> ESSENTIALS (from vea2.html) ===== -->
+<meta charset="UTF-8">
+
+<!-- Resource hints -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu voz auténtica en 7 días · Kit Vocal Esencial — Voz Esencia™ Academy</title>
+
+<!-- ===== FONTS — DM Sans (body) + Cormorant Garamond (emotional headlines, italic) — matches the quiz ===== -->
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;700&display=swap"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+</noscript>
+
+<!-- ===== META / FACEBOOK PIXEL (VERBATIM — pixel id 1888097325094612) ===== -->
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1888097325094612');
+fbq('track','PageView');
+fbq('trackCustom','VSL_PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+  src="https://www.facebook.com/tr?id=1888097325094612&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
+
+<style>
+/* ===== ROOT TOKENS — teal dominant + gold accent (matches the quiz vea2.html) ===== */
+:root {
+  --teal-deep:   #146183;   /* dominant brand teal (quiz token) */
+  --teal-mid:    #258ba1;
+  --copper:      #d4af37;   /* brand gold — the only accent (quiz token) */
+  --copper-soft: #fee1b6;
+  --ink:         #2f1525;   /* dark text on light surfaces (quiz token) */
+  --ink-soft:    #7A6070;
+  --page-light:  #eef5f7;   /* pale page bg (result/light mode) */
+  --card:        #FFFFFF;
+  --card-border: rgba(212,175,55,0.25);   /* gold hairline (quiz token) */
+  --white-70:    rgba(255,255,255,0.78);
+  --white-50:    rgba(255,255,255,0.52);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--page-light);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  color: var(--ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.65;
+}
+
+/* ===== LAYOUT — single narrow centered column, mobile-first ===== */
+.page-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+}
+@media (max-width: 480px) {
+  .page-wrapper { padding: 22px 16px 48px; }
+}
+
+/* Cards */
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 0.5px solid var(--card-border);
+  padding: 28px 24px;
+  margin-bottom: 18px;
+}
+@media (max-width: 480px) { .card { padding: 22px 18px; } }
+
+.card-teal {
+  background: var(--teal-deep);
+  border: none;
+  color: #FFFFFF;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--copper);
+  margin-bottom: 14px;
+}
+.eyebrow.on-teal { color: var(--copper-soft); }
+
+.headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400; font-style: italic;
+  font-size: clamp(1.9rem, 7vw, 2.7rem);
+  line-height: 1.18; color: var(--teal-deep);
+  margin-bottom: 16px;
+}
+.headline.on-teal { color: #FFFFFF; }
+.headline em { font-style: italic; color: var(--copper); }
+.headline.on-teal em { color: var(--copper-soft); }
+
+.subhead {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500; font-style: italic;
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  line-height: 1.25; color: var(--teal-deep);
+  margin-bottom: 14px;
+}
+.subhead.on-teal { color: #FFFFFF; }
+
+.kicker {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--teal-deep);
+  margin-bottom: 8px;
+}
+
+p.body { font-size: 15px; font-weight: 400; color: var(--ink); line-height: 1.72; margin-bottom: 14px; }
+p.body:last-child { margin-bottom: 0; }
+p.body.on-teal { color: var(--white-70); }
+p.body strong { font-weight: 700; color: var(--teal-deep); }
+p.body.on-teal strong { color: #FFFFFF; }
+
+.lead-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 500;
+  font-size: clamp(1.25rem, 4.5vw, 1.55rem);
+  line-height: 1.4; color: var(--teal-deep);
+  margin-bottom: 16px;
+}
+.lead-line.on-teal { color: #FFFFFF; }
+
+/* ===== PRIMARY CTA — full-width teal pill (the money button) ===== */
+.cta-primary {
+  display: block; width: 100%;
+  background: var(--teal-deep);
+  color: #FFFFFF;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px; font-weight: 700;
+  text-align: center;
+  padding: 18px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+  box-sizing: border-box;
+  transition: background 0.18s ease, transform 0.08s ease;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+.cta-primary:hover { background: var(--teal-mid); }
+.cta-primary:active { transform: scale(0.99); }
+/* On a teal surface, the CTA inverts to copper so it stays visible */
+.card-teal .cta-primary { background: var(--copper); color: var(--teal-deep); }
+.card-teal .cta-primary:hover { background: var(--copper-soft); }
+
+.cta-reassure {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 400; font-style: italic;
+  color: var(--ink-soft);
+  text-align: center; margin: 12px 0 0;
+}
+.cta-reassure.on-teal { color: var(--white-70); }
+
+.social-line {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--teal-deep);
+  text-align: center; margin: 16px 0 0;
+}
+
+/* ===== VSL VIDEO PLACEHOLDER ===== */
+.vsl-bar {
+  background: var(--teal-deep);
+  color: #FFFFFF;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  padding: 12px 16px;
+  border-radius: 12px 12px 0 0;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.14);
+}
+.vsl-frame {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  background:
+    radial-gradient(circle at 50% 42%, #258ba1 0%, #146183 60%, #082f3b 100%);
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+.vsl-inner {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 18px;
+}
+.vsl-play {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--copper);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+  box-shadow: 0 0 0 10px rgba(212,175,55,0.18);
+}
+.vsl-play svg { margin-left: 5px; }
+.vsl-caption {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 500;
+  font-size: clamp(0.95rem, 3.6vw, 1.15rem);
+  color: #FFFFFF; line-height: 1.4;
+  max-width: 88%;
+}
+.vsl-note {
+  position: absolute; left: 0; right: 0; bottom: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+}
+.vsl-sound {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--teal-deep);
+  text-align: center;
+  margin: 16px 0 0;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.vsl-readall {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 400; font-style: italic;
+  color: var(--ink-soft);
+  text-align: center; margin: 6px 0 0;
+}
+
+/* ===== MECHANISM DIAGRAM (two-line, screenshot-able) ===== */
+.mech {
+  margin: 18px 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.mech-row {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 700;
+  padding: 14px 16px;
+  border-radius: 12px;
+  line-height: 1.35;
+}
+.mech-row .arrow { color: var(--copper); font-weight: 900; }
+.mech-bad  { background: rgba(20,97,131,0.06); color: var(--ink); border-left: 4px solid #b07b4a; border-radius: 0 12px 12px 0; }
+.mech-good { background: rgba(20,97,131,0.08); color: var(--teal-deep); border-left: 4px solid var(--copper); border-radius: 0 12px 12px 0; }
+
+/* ===== THREE DIMENSIONS ===== */
+.dim {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 0.5px solid var(--card-border);
+}
+.dim:last-child { border-bottom: none; }
+.dim-num {
+  flex-shrink: 0;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(212,175,55,0.16);
+  color: var(--teal-deep);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 600; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+.dim-title { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: var(--teal-deep); margin-bottom: 3px; }
+.dim-text  { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--ink); line-height: 1.6; }
+
+/* ===== 7-DAY ARC ===== */
+.day-row {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 13px 0;
+  border-bottom: 0.5px solid rgba(212,175,55,0.18);
+}
+.day-row:last-child { border-bottom: none; }
+.day-tag {
+  flex-shrink: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 900; letter-spacing: 0.04em;
+  color: #FFFFFF; background: var(--teal-deep);
+  padding: 6px 9px; border-radius: 8px;
+  min-width: 54px; text-align: center;
+  line-height: 1.15;
+}
+.day-body { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--ink); line-height: 1.55; }
+.day-body b { color: var(--teal-deep); font-weight: 700; }
+
+/* ===== TESTIMONIAL CARD ===== */
+.testi {
+  background: #FFFFFF;
+  border: 0.5px solid var(--card-border);
+  border-radius: 12px;
+  padding: 18px;
+}
+.testi-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.testi-avatar { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: rgba(20,97,131,0.1); }
+.testi-stars { color: var(--copper); font-size: 13px; letter-spacing: 2px; }
+.testi-meta { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; color: var(--ink-soft); margin-top: 3px; }
+.testi-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 500;
+  font-size: 18px; color: var(--ink); line-height: 1.5; margin: 0;
+}
+
+/* ===== OFFER STACK TABLE ===== */
+.stack {
+  list-style: none; margin: 6px 0 0;
+}
+.stack li {
+  display: flex; justify-content: space-between; gap: 14px;
+  padding: 13px 0;
+  border-bottom: 0.5px solid rgba(212,175,55,0.18);
+  font-family: 'DM Sans', sans-serif;
+}
+.stack-item { font-size: 14px; font-weight: 400; color: var(--ink); line-height: 1.5; flex: 1; }
+.stack-item b { font-weight: 700; color: var(--teal-deep); }
+.stack-value { font-size: 13px; font-weight: 700; color: var(--copper); white-space: nowrap; text-align: right; flex-shrink: 0; }
+.stack-total {
+  display: flex; justify-content: space-between; gap: 14px;
+  padding: 14px 0 4px; margin-top: 4px;
+  font-family: 'DM Sans', sans-serif;
+}
+.stack-total .label { font-size: 14px; font-weight: 700; color: var(--ink); }
+.stack-total .val   { font-size: 15px; font-weight: 700; color: var(--ink-soft); text-decoration: line-through; }
+.price-box {
+  text-align: center;
+  background: rgba(20,97,131,0.06);
+  border-radius: 12px;
+  padding: 22px 18px;
+  margin-top: 18px;
+}
+.price-label { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-deep); margin-bottom: 6px; }
+.price-amount { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 44px; color: var(--teal-deep); line-height: 1; }
+.price-sub { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: var(--ink-soft); margin-top: 8px; }
+
+/* ===== RISK REVERSAL ===== */
+.guarantee {
+  background: rgba(212,175,55,0.10);
+  border-left: 4px solid var(--copper);
+  border-radius: 0 12px 12px 0;
+  padding: 18px 18px;
+}
+.guarantee .kicker { color: var(--teal-deep); }
+
+/* ===== FAQ ===== */
+.faq-item {
+  border-bottom: 0.5px solid var(--card-border);
+  padding: 16px 0;
+}
+.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+.faq-q { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: var(--teal-deep); margin-bottom: 6px; }
+.faq-a { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--ink); line-height: 1.6; }
+
+/* ===== CLOSE / SIGNATURE ===== */
+.signature {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 600;
+  font-size: 22px; color: var(--teal-deep); margin-top: 4px;
+}
+.ps-line {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 400; font-style: italic;
+  color: var(--ink-soft); line-height: 1.6;
+  margin-top: 16px;
+  border-top: 0.5px solid var(--card-border);
+  padding-top: 14px;
+}
+
+/* ===== DIVIDER ===== */
+hr.div { border: none; border-top: 0.5px solid var(--card-border); margin: 22px 0; }
+
+/* ===== LOGO + FOOTER ===== */
+.logo-wrap { text-align: center; margin-top: 26px; }
+.logo-wrap img { height: 46px; width: auto; }
+.footer {
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 400;
+  color: var(--ink-soft);
+  padding: 22px 0 8px;
+}
+
+/* ===== SCROLL-REVEAL ANIMATION ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ============================================================
+       BLOQUE 0 — Barra sobre el VSL / invitación sonido-off
+       ============================================================ -->
+  <div class="card reveal" style="padding:0;overflow:hidden;">
+    <div class="vsl-bar">
+      <span aria-hidden="true">&#128266;</span>
+      <span>Sube el sonido para escucharme — o léelo todo aquí abajo, mi querida.</span>
+    </div>
+    <!-- VSL VIDEO PLACEHOLDER — swap this block for the real player -->
+    <div class="vsl-frame">
+      <div class="vsl-inner">
+        <div class="vsl-play" aria-hidden="true">
+          <svg width="26" height="30" viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L24 15L2 28V2Z" fill="#146183"/>
+          </svg>
+        </div>
+        <p class="vsl-caption">«Hola, soy Mamselle Ruiz. Eso que sientes en tu garganta tiene nombre — y hoy te lo explico.»</p>
+      </div>
+      <div class="vsl-note">El video real va aquí — reemplazar este bloque</div>
+    </div>
+  </div>
+  <p class="vsl-sound"><span aria-hidden="true">&#128266;</span> Activa el sonido</p>
+  <p class="vsl-readall">¿Prefieres leer? Está todo aquí abajo, no te pierdes nada.</p>
+
+  <!-- ============================================================
+       BLOQUE 1 — HERO / Titular (espejo de la garganta)
+       ============================================================ -->
+  <div class="card reveal" style="margin-top:18px;">
+    <p class="eyebrow">Para ti, que hiciste tu evaluación</p>
+    <h1 class="headline">Esa garganta que se te aprieta justo cuando más quieres que tu voz salga… <em>no es falta de talento, mi querida.</em></h1>
+    <p class="body">Tu evaluación me dijo algo preciso: tu laringe se está elevando y cierra el tubo por donde debería viajar el sonido. Por eso tu voz reposa sobre las cuerdas en lugar de flotar sobre tu gran cuerpo de aire — y por eso la garganta se aprieta, se cansa, y la voz no sale como la sientes por dentro.</p>
+    <p class="body"><strong>Tiene una mecánica concreta. Y tiene camino.</strong></p>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 2 — Disclaimer diagnóstico (lectura, no juicio)
+       ============================================================ -->
+  <div class="card reveal" style="background:rgba(20,97,131,0.05);border-color:transparent;">
+    <p class="body" style="margin:0;font-style:italic;">Antes de que veas tu resultado, quiero decirte una cosa: esto no es un juicio. Es una lectura precisa de cómo escucho tu voz el día de hoy — y la voz se mueve, ¿verdad?, con el biorritmo, con las emociones, con el estado de ánimo. Yo no estoy juzgándote, te estoy leyendo. Vamos a ver juntas la mecánica.</p>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 3 — Mecanismo único: por qué nada funcionó antes
+       ============================================================ -->
+  <div class="card reveal">
+    <p class="eyebrow">El mecanismo</p>
+    <h2 class="subhead">Por qué los tips de internet nunca te resolvieron — y no fue tu culpa.</h2>
+    <p class="body">Todo lo que probaste hasta hoy trabajaba el síntoma: respira más, relájate, calienta la voz. Pero ninguno tocó el botón mecánico real — la posición de tu laringe. Haz de cuenta que tu mandíbula es una cuchara y tu voz es un huevo: cuando la cuchara se tensa y se cierra, el huevo no tiene dónde reposar, ¿verdad? Cuando la laringe baja, tu catedral vocal se abre, y la voz deja de pelear para salir: sale sola.</p>
+
+    <div class="mech">
+      <div class="mech-row mech-bad">Laringe arriba <span class="arrow">&rarr;</span> tubo cerrado <span class="arrow">&rarr;</span> voz que se aprieta y duele.</div>
+      <div class="mech-row mech-good">Laringe abajo <span class="arrow">&rarr;</span> catedral vocal abierta <span class="arrow">&rarr;</span> voz que sale sola.</div>
+    </div>
+
+    <p class="body">O sea: no te faltaba disciplina, mi querida. Te faltaba el ajuste. Y ese ajuste es lo primero que vamos a hacer juntas.</p>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 4 — Las tres dimensiones del método
+       ============================================================ -->
+  <div class="card reveal">
+    <p class="eyebrow">Qué estás comprando</p>
+    <p class="body">Mi fuerza es la biomecánica: yo te escucho y sé exactamente qué botón picar para que ya no te ocurra lo que te está ocurriendo.</p>
+    <p class="body" style="margin-bottom:18px;">En tus primeros 7 días vamos a trabajar tu voz desde <strong>las tres dimensiones integradas del método Voz Esencia</strong>:</p>
+
+    <div class="dim">
+      <div class="dim-num">1</div>
+      <div>
+        <div class="dim-title">La reeducación de la técnica</div>
+        <div class="dim-text">Para bajar esa laringe y abrir tu catedral vocal.</div>
+      </div>
+    </div>
+    <div class="dim">
+      <div class="dim-num">2</div>
+      <div>
+        <div class="dim-title">La voz hablada y la presencia</div>
+        <div class="dim-text">Para que tu voz llegue sin que tengas que empujarla.</div>
+      </div>
+    </div>
+    <div class="dim">
+      <div class="dim-num">3</div>
+      <div>
+        <div class="dim-title">La dimensión psicoemocional</div>
+        <div class="dim-text">Porque la voz está intrínsecamente ligada al alma, y, aunque no queramos, todo aparece en ella.</div>
+      </div>
+    </div>
+
+    <p class="body" style="margin-top:18px;">No es un curso genérico de voz, mi querida. La idea no es mejorar tu voz: es encontrarla. Porque <strong>tu voz es tu huella digital en el mundo.</strong></p>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 5 — Primer logro hoy / time-to-value
+       ============================================================ -->
+  <div class="card card-teal reveal">
+    <p class="eyebrow on-teal">Tu primer cambio, hoy</p>
+    <h2 class="subhead on-teal">No tienes que esperar los siete días para sentir el cambio.</h2>
+    <p class="body on-teal" style="margin:0;">En la primera sesión vamos a hacer juntas <strong>la vaquita feliz</strong>, y por un momento vas a sentir tu laringe descender — vas a escuchar tu voz reposar sobre el aire en lugar de apretarse sobre las cuerdas. Ese primer respiro te lo dice todo: que sí se puede, que tu voz real estaba ahí debajo, y que el camino ya empezó hoy.</p>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 6 — El arco de 7 días (7 puertas)
+       ============================================================ -->
+  <div class="card reveal">
+    <p class="eyebrow">El camino</p>
+    <h2 class="subhead">Tu voz auténtica en 7 días — paso a paso, conmigo del otro lado.</h2>
+    <p class="body" style="margin-bottom:14px;">Lo que vamos a caminar, un día a la vez:</p>
+
+    <div class="day-row"><span class="day-tag">Día 1</span><div class="day-body"><b>Tu primer respiro de Voz Esencia:</b> el gran cuerpo de aire que lo sostiene todo.</div></div>
+    <div class="day-row"><span class="day-tag">Día 2</span><div class="day-body"><b>Bajar la laringe:</b> el botón mecánico que abre el tubo.</div></div>
+    <div class="day-row"><span class="day-tag">Día 3</span><div class="day-body"><b>Cuchara y huevo:</b> soltar la mandíbula sin forzar.</div></div>
+    <div class="day-row"><span class="day-tag">Día 4</span><div class="day-body"><b>Impostar sin apretar:</b> que el sonido viaje, no que empuje.</div></div>
+    <div class="day-row"><span class="day-tag">Día 5</span><div class="day-body"><b>Tu catedral vocal abierta:</b> dejar resonar.</div></div>
+    <div class="day-row"><span class="day-tag">Día 6</span><div class="day-body"><b>Una voz que aguanta:</b> sin quedarte sin aire a medio camino.</div></div>
+    <div class="day-row"><span class="day-tag">Día 7</span><div class="day-body"><b>Tu voz que sí eres tú:</b> la que reconoces como tuya.</div></div>
+
+    <p class="body" style="margin-top:16px;font-style:italic;">Hay un ajuste pequeñito que abre muchísimo el tubo — te lo enseño adentro, en el Día 2.</p>
+
+    <!-- CTA #1 -->
+    <a class="cta-primary js-cta" data-cta="day-arc" href="#" style="margin-top:20px;">Quiero soltar mi laringe &rarr;</a>
+    <p class="social-line">Más de 1.000 voces liberadas con el método Voz Esencia™</p>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 7 — Minimizador de esfuerzo + diferenciador
+       ============================================================ -->
+  <div class="card reveal">
+    <p class="eyebrow">Para que entres tranquila</p>
+    <p class="body">Y quiero que sepas dos cosas, para que entres tranquila.</p>
+    <p class="body"><strong>La primera:</strong> esto no es un conservatorio. No hay solfeo, no hay teoría musical, no hay técnica complicada. Son sesiones cortas que caben en tu día, un botón mecánico a la vez. La gente comprende rápido — mi fuerza es la practicidad — y después usamos el tiempo para disfrutar.</p>
+    <p class="body"><strong>La segunda:</strong> no te quedas sola frente a tu computadora viendo videos. Me tienes a mí, directamente, para esa duda específica que solo tú tienes — me escribes y yo te respondo. La voz no se libera en soledad.</p>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 8 — Prueba social (testimonio REAL)
+       ============================================================ -->
+  <div class="card reveal">
+    <p class="eyebrow">Lo que dicen</p>
+    <div class="testi">
+      <div class="testi-top">
+        <img class="testi-avatar" src="Justine.png" alt="Justine Lafortune">
+        <div>
+          <div class="testi-stars" aria-label="5 de 5 estrellas">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+          <div class="testi-meta">Justine Lafortune · Canadá</div>
+        </div>
+      </div>
+      <p class="testi-quote">« Mamselle guía los grupos maravillosamente bien. ¡Cambió mi vida (no es broma)! Yo que no creía que podía cantar. »</p>
+    </div>
+    <p class="social-line" style="margin-top:18px;">Más de 1.000 voces liberadas con el método Voz Esencia™ — sus 7 Pilares y sus tres dimensiones integradas.</p>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 9 — Oferta / Offer Stack
+       ============================================================ -->
+  <div class="card reveal">
+    <p class="eyebrow">La oferta</p>
+    <h2 class="subhead">Déjame mostrarte todo lo que entra contigo el día de hoy.</h2>
+
+    <ul class="stack">
+      <li>
+        <span class="stack-item"><b>Núcleo · «Tu voz auténtica en 7 días»</b> — el protocolo Voz Esencia para tu patrón de laringe, condensado de 25 años, 7 sesiones cortas día por día.</span>
+        <span class="stack-value">$3,900 MXN</span>
+      </li>
+      <li>
+        <span class="stack-item"><b>Tu Kit Vocal Esencial</b> — el mapa de tus 7 pilares aplicado a tu laringe, las guías filmadas de tus ejercicios fundamentales (la vaquita feliz, el bostezo silencioso, la cuchara y el huevo) y el audio-ritual de 5 minutos para bajar la laringe antes de hablar o cantar.</span>
+        <span class="stack-value">$2,100 MXN</span>
+      </li>
+      <li>
+        <span class="stack-item"><b>De regalo · «Tu primer respiro de Voz Esencia»</b> — el ejercicio que te baja la laringe hoy mismo.</span>
+        <span class="stack-value">$400 MXN</span>
+      </li>
+      <li>
+        <span class="stack-item"><b>De regalo · La biblioteca de la dimensión psicoemocional</b> — los tres botones de la garganta ligados al miedo y a la identidad vocal.</span>
+        <span class="stack-value">$700 MXN</span>
+      </li>
+      <li>
+        <span class="stack-item"><b>Mi acompañamiento directo</b> — lo que más cuesta encontrar en cualquier otro lado: me escribes con tu pregunta y yo te respondo.</span>
+        <span class="stack-value">$1,200 MXN</span>
+      </li>
+      <li>
+        <span class="stack-item"><b>Acceso de por vida</b>, en un solo pago.</span>
+        <span class="stack-value">Incluido</span>
+      </li>
+    </ul>
+
+    <div class="stack-total">
+      <span class="label">Todo junto vale</span>
+      <span class="val">más de $8,000 MXN</span>
+    </div>
+
+    <div class="price-box">
+      <p class="price-label">Tu inversión hoy · un solo pago</p>
+      <div class="price-amount">$822 MXN</div>
+      <p class="price-sub">Acceso inmediato · es tuyo para siempre, sin mensualidades.</p>
+    </div>
+
+    <p class="body" style="margin-top:16px;font-style:italic;">No está tan cara para lo que es, ¿verdad? — es acceso a 25 años de mi trabajo, condensados para tu voz.</p>
+
+    <!-- CTA #2 -->
+    <a class="cta-primary js-cta" data-cta="offer-stack" href="#" style="margin-top:18px;">Empiezo mis 7 días con mi Kit Vocal Esencial · un solo pago de $822 MXN &rarr;</a>
+    <p class="social-line">Más de 1.000 voces liberadas con el método Voz Esencia™</p>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 10 — Precio + reversión de riesgo
+       ============================================================ -->
+  <div class="card reveal">
+    <p class="body"><strong>$822 MXN — un solo pago.</strong> Acceso inmediato. Es tuyo para siempre, sin mensualidades.</p>
+    <div class="guarantee">
+      <p class="kicker">Y para que entres sin ningún peso encima</p>
+      <p class="body" style="margin:0;">Entra, trabaja conmigo la primera semana completa, haz los ejercicios. Si al terminar sientes de verdad que esto no le sirve a tu voz, me escribes y te devuelvo tu inversión — no necesitas explicarme nada, no hay ningún trámite incómodo. Yo no voy a ir como a cazar tu dinero; yo más bien necesito ver tu progreso. El único riesgo que te pido correr es el de escucharte.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <div class="card reveal">
+    <p class="eyebrow">Preguntas frecuentes</p>
+
+    <div class="faq-item">
+      <p class="faq-q">¿Necesito saber música o solfeo?</p>
+      <p class="faq-a">No. Esto no es un conservatorio — no hay solfeo, ni teoría musical, ni técnica complicada. Son sesiones cortas, un botón mecánico a la vez. Mi fuerza es la practicidad: la gente comprende rápido.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">¿Tengo que esperar los 7 días para notar algo?</p>
+      <p class="faq-a">No. En la primera sesión hacemos juntas la vaquita feliz y vas a sentir tu laringe descender — ese primer respiro te dice que sí se puede, el mismo día.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">¿Me quedo sola viendo videos?</p>
+      <p class="faq-a">No. Me tienes a mí directamente para esa duda específica que solo tú tienes — me escribes y yo te respondo. La voz no se libera en soledad.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">¿Es un pago único o una mensualidad?</p>
+      <p class="faq-a">Un solo pago de $822 MXN, con acceso inmediato y de por vida. Sin mensualidades.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">¿Y si siento que no me sirve?</p>
+      <p class="faq-a">Trabajas conmigo la primera semana completa. Si al terminar sientes de verdad que no le sirve a tu voz, me escribes y te devuelvo tu inversión — sin explicaciones, sin trámites incómodos.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">¿Cuánto tiempo al día necesito?</p>
+      <p class="faq-a">Poco. Las sesiones son cortas y caben en tu día. Comprendes rápido y después usamos el tiempo para disfrutar.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       BLOQUE 11 — Cierre servant-leader + P.D.
+       ============================================================ -->
+  <div class="card reveal">
+    <p class="lead-line">Tu voz es tu huella digital en el mundo, mi querida — tu tarjeta de presentación.</p>
+    <p class="body">Cuando la laringe se suelta, no suenas «mejor»: suenas como tú. Por fin. Y del otro lado de este curso estoy yo, para acompañarte en cada uno de los 7 días.</p>
+    <p class="body">Si te interesa, bienvenida seas a este camino. Si hoy no es el momento, no pasa nada — aquí estaré. Cada quien elige, no hay ninguna presión de nada.</p>
+    <p class="body" style="margin-bottom:4px;">Aquí estoy para servir a tu voz. Te abrazo muy fuerte,</p>
+    <p class="signature">Mamselle Ruiz</p>
+
+    <!-- CTA #3 -->
+    <a class="cta-primary js-cta" data-cta="close" href="#" style="margin-top:22px;">Quiero liberar esta tensión &rarr;</a>
+    <p class="cta-reassure">Un solo pago de $822 MXN · acceso de por vida · te acompaño los 7 días.</p>
+
+    <!-- P.D. Instagram (OPEN LOCK: confirmar handle / intención antes de publicar) -->
+    <p class="ps-line">(Y si te late, sígueme por Instagram — para mí sería un gran apoyo, estoy construyendo mi camino de creadora de contenido.)</p>
+  </div>
+
+  <!-- Logo -->
+  <div class="logo-wrap reveal">
+    <img src="Logo-es.png" alt="Voz Esencia™ Academy">
+  </div>
+
+  <div class="footer">© 2026 Voz Esencia™ Academy · Mamselle Ruiz Coach</div>
+
+</div><!-- /page-wrapper -->
+
+<script>
+// ================================================================
+// CONFIGURATION
+// ================================================================
+// The ONLY outbound destination — the checkout (verbatim from repo).
+var CHECKOUT_URL = 'https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial';
+
+// mc_id — ManyChat subscriber id passed via ?mc_id={{contact_id}}; appended to checkout if present.
+var mcId = (function () {
+  try {
+    return new URLSearchParams(window.location.search).get('mc_id') || '';
+  } catch (e) { return ''; }
+})();
+
+function buildCheckoutUrl() {
+  if (!mcId) return CHECKOUT_URL;
+  // Ignore literal/empty placeholder values (mirrors the worker's mc_id validation).
+  if (mcId === '{{contact_id}}' || mcId === '0' || mcId.trim() === '') return CHECKOUT_URL;
+  var sep = CHECKOUT_URL.indexOf('?') === -1 ? '?' : '&';
+  return CHECKOUT_URL + sep + 'mc_id=' + encodeURIComponent(mcId);
+}
+
+// ================================================================
+// META PIXEL — ViewContent on load
+// ================================================================
+if (typeof fbq !== 'undefined') {
+  fbq('track', 'ViewContent', {
+    content_name: 'VSL Kit Vocal Esencial',
+    content_category: 'Paywall'
+  });
+}
+
+// ================================================================
+// CTA — InitiateCheckout on every tap, then 300ms-delayed redirect
+// ================================================================
+(function () {
+  var dest = buildCheckoutUrl();
+  var ctas = document.querySelectorAll('.js-cta');
+  for (var i = 0; i < ctas.length; i++) {
+    ctas[i].setAttribute('href', dest);
+    ctas[i].addEventListener('click', function (e) {
+      e.preventDefault();
+      var url = this.getAttribute('href') || dest;
+      var where = this.getAttribute('data-cta') || 'cta';
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+          content_name: 'Tu voz auténtica en 7 días · Kit Vocal Esencial',
+          content_category: 'Paywall',
+          value: 822,
+          currency: 'MXN'
+        });
+        fbq('trackCustom', 'VSL_CTAClick', { placement: where });
+      }
+      // Delay nav 300ms so the pixel event flushes.
+      setTimeout(function () { window.location.href = url; }, 300);
+    });
+  }
+})();
+
+// ================================================================
+// SCROLL-REVEAL — IntersectionObserver, staggered fade+rise
+// ================================================================
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    for (var j = 0; j < els.length; j++) els[j].classList.add('is-visible');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  for (var k = 0; k < els.length; k++) io.observe(els[k]);
+})();
+</script>
+
+</body>
+</html>
