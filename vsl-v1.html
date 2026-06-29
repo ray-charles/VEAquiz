@@ -242,6 +242,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 
 /* ===== HERO ===== */
 .hero {
+  padding-top: 28px;
   background:
     radial-gradient(circle at 78% 18%, rgba(83,193,194,0.28) 0%, rgba(83,193,194,0) 45%),
     linear-gradient(155deg, var(--teal-deep) 0%, var(--teal-darker) 100%);
@@ -455,11 +456,11 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 .ba-before .ba-ic { background:rgba(224,122,122,0.16); color:#ed9090; }
 .ba-after .ba-ic { background:rgba(212,175,55,0.2); color:var(--gold-soft); }
 .ba-item .pct { font-family:'Montserrat',sans-serif; font-weight:700; font-size:11px; color:#ed9090; margin-left:4px; white-space:nowrap; }
-.ba-mid { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:4px; align-self:center; }
-.ba-flow { color:#3aa86a; font-size:30px; line-height:1; font-weight:800; }
-.ba-arrow { width:82px;height:82px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;line-height:1;text-align:center;box-shadow:0 12px 34px rgba(212,175,55,0.55),0 0 0 8px rgba(255,255,255,0.65); }
-.ba-arrow .n { font-size:30px;font-weight:700; }
-.ba-arrow .u { font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-top:3px;font-weight:700; }
+.ba-mid { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:4px; align-self:center; }
+.ba-line { position:relative; background:#3aa86a; border-radius:999px; width:84px; height:7px; }
+.ba-line::after { content:''; position:absolute; width:0; height:0; right:-9px; top:50%; transform:translateY(-50%); border-top:9px solid transparent; border-bottom:9px solid transparent; border-left:16px solid #3aa86a; }
+.ba-line-label { color:#3aa86a; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.8rem; letter-spacing:0.03em; text-align:center; max-width:130px; line-height:1.3; }
+@media (max-width:820px){ .ba-line { width:7px; height:58px; } .ba-line::after { right:auto; top:auto; left:50%; bottom:-9px; transform:translateX(-50%); border-top:16px solid #3aa86a; border-bottom:0; border-left:9px solid transparent; border-right:9px solid transparent; } }
 
 /* ===== THREE DIMENSIONS ===== */
 .dim-icon {
@@ -676,7 +677,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
       <p class="ba-cap" style="color:var(--teal-deep);font-weight:500;">«Nadie me escuchó… porque mi voz es frágil.»</p>
       </div>
 
-      <div class="ba-mid"><div class="ba-flow" aria-hidden="true">&#8594;</div><div class="ba-arrow"><span class="n">7</span><span class="u">días</span></div><div class="ba-flow" aria-hidden="true">&#8594;</div></div>
+      <div class="ba-mid"><div class="ba-line-label">Después de tu formación</div><div class="ba-line" aria-hidden="true"></div></div>
 
       <div class="ba-col">
       <div class="ba-card ba-after">
@@ -708,7 +709,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
   <div class="wrap-narrow">
     <div class="reveal center">
       <p class="eyebrow">El mecanismo</p>
-      <h2 class="h2">¿Por qué el método Voz Esencia™ <em>funcionará para ti?</em></h2>
+      <h2 class="h2">¿El método Voz Esencia™ <em>funcionará para mí?</em></h2>
     </div>
     <div class="reveal" style="margin-top:6px;">
       <p class="body big">No te diremos que respires más, te relajes o calientes la voz, como los otros coaches vocales. Nuestro enfoque es único: trabajamos directamente con la <strong>biomecánica del cuerpo</strong> y la <strong>parte psicoemocional</strong>. Nos enfocamos en el diafragma, los pulmones, la laringe, tu «catedral vocal», la identidad y el sistema nervioso. Todos estos elementos son esenciales para comprender tu voz — y por qué suena así.</p>
@@ -780,7 +781,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
     <div class="grid-3" style="margin-top:30px;">
       <div class="card hoverable reveal">
         <div class="dim-icon">1</div>
-        <h3 class="h3">Compacta e Intensiva</h3>
+        <h3 class="h3">Formación compacta e intensiva</h3>
         <p class="body">Hemos comprimido el método Voz Esencia en 7 días — 15 minutos al día — para un aprendizaje más fácil para ti.</p>
       </div>
       <div class="card hoverable reveal">
@@ -835,7 +836,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
     <div class="reveal center" style="max-width:760px;margin:0 auto 8px;">
       <p class="eyebrow">El camino · lo que hay adentro</p>
       <h2 class="h2">Toma tu lugar en el mundo en 7 días.</h2>
-      <p class="body">Una puerta por día. Sesiones cortas que caben en tu día. Un botón a la vez. Esto es lo que vas a caminar:</p>
+      <p class="body">Tras estos siete días, el cambio será perceptible para tus seres queridos y compañeros de trabajo. Te preguntarán: «¿Cómo lo hiciste? ¿Qué cambió?». Solo tú lo sabrás, y ahí radicará tu ventaja.</p>
     </div>
 
     <div class="timeline reveal" style="margin-top:30px;">
@@ -909,33 +910,11 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
       </div>
       <div class="stat">
         <div class="stat-num"><span data-count="25" data-prefix="" data-suffix="">0</span></div>
-        <div class="stat-label">años de experiencia, condensados para tu voz</div>
+        <div class="stat-label">años de experiencia, condensados para ti</div>
       </div>
       <div class="stat">
         <div class="stat-num"><span data-count="7" data-prefix="" data-suffix="">0</span></div>
         <div class="stat-label">días para recuperar tu voz auténtica</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     FIRST WIN / REASSURANCE — para que entres tranquila (light)
-     ============================================================ -->
-<section class="section white">
-  <div class="wrap-narrow">
-    <div class="reveal center" style="margin-bottom:8px;">
-      <p class="eyebrow">Para que entres tranquila</p>
-      <h2 class="h2">Dos cosas que quiero que sepas antes de empezar.</h2>
-    </div>
-    <div class="grid-2" style="margin-top:24px;">
-      <div class="card hoverable reveal">
-        <h3 class="h3">No es un conservatorio</h3>
-        <p class="body">No hay solfeo. No hay teoría musical. No hay técnica complicada. Son sesiones cortas, un botón a la vez. La gente comprende rápido — mi fuerza es la practicidad — y después usamos el tiempo para disfrutar.</p>
-      </div>
-      <div class="card hoverable reveal">
-        <h3 class="h3">No te quedas sola</h3>
-        <p class="body">No te dejo frente a la pantalla viendo videos sola. Me tienes a mí, directo, para esa duda que solo tú tienes. Me escribes y yo te respondo. La voz no se libera en soledad.</p>
       </div>
     </div>
   </div>
@@ -1045,7 +1024,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
       </div>
     </div>
 
-    <p class="social-line reveal" style="margin-top:6px;">Más de 1.000 voces liberadas — sus 7 Pilares y sus tres dimensiones integradas.</p>
+    <p class="social-line reveal" style="margin-top:6px;">Todos ellos han visto cómo su vida mejoraba radicalmente. La pregunta ahora es: ¿estás list@ para el cambio? ¿Para una versión renovada de ti mism@?</p>
   </div>
 </section>
 
@@ -1102,7 +1081,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
           <p class="price-sub">Acceso inmediato · es tuyo para siempre, sin mensualidades.</p>
           <a class="cta-gold js-cta" data-cta="offer-stack" href="https://voz-essencia-academy-cbf28a.circle.so/checkout/tu-voz-autentica-en-7-dias-kit-vocal-esencial" style="margin-top:20px;">Quiero una voz que fluye sin esfuerzo &rarr;</a>
           <p class="cta-reassure">Pago único · acceso de por vida · te acompaño los 7 días.</p>
-          <p class="cta-reassure" style="font-style:normal;margin-top:8px;">Garantía: trabaja la primera semana completa; si no le sirve a tu voz, te devuelvo tu inversión — sin preguntas.</p>
+          <p class="cta-reassure" style="font-style:normal;margin-top:8px;">Mi compromiso: trabaja la primera semana completa; si tu voz no cambia, te hago una evaluación vocal gratuita.</p>
         </div>
       </div>
     </div>
@@ -1115,8 +1094,8 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 <section class="section tight light">
   <div class="wrap-narrow reveal">
     <div class="guarantee">
-      <p class="eyebrow" style="color:var(--teal-deep);">Garantía de 7 días</p>
-      <p class="body" style="margin:0;">Trabaja conmigo los 7 días y haz los ejercicios. Si tu voz no cambia, te devuelvo tu dinero completo. Sin preguntas.</p>
+      <p class="eyebrow" style="color:var(--teal-deep);">Mi compromiso contigo</p>
+      <p class="body" style="margin:0;">Trabaja conmigo los 7 días y haz los ejercicios. Si tu voz no cambia, te hago una evaluación vocal gratuita.</p>
     </div>
   </div>
 </section>
@@ -1157,7 +1136,7 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
       </div>
       <div class="faq-item">
         <p class="faq-q">¿Y si siento que no me sirve?</p>
-        <p class="faq-a">Trabajas conmigo la primera semana completa. Si al terminar sientes que no le sirve a tu voz, me escribes y te devuelvo tu inversión. Sin explicaciones, sin trámites.</p>
+        <p class="faq-a">Trabajas conmigo la primera semana completa. Si al terminar sientes que tu voz no cambia, me escribes y te hago una evaluación vocal gratuita. Sin explicaciones, sin trámites.</p>
       </div>
       <div class="faq-item">
         <p class="faq-q">¿Cuánto tiempo al día necesito?</p>
