@@ -26,11 +26,11 @@
   <meta name="twitter:description" content="Quiz vocal gratis — descubre tu bloqueo y recibe un ejercicio personalizado. Creado por Mamselle Ruiz Coach.">
   <meta name="twitter:image" content="https://quiz.veacademy.studio/favicon_io/android-chrome-512x512.png">
   <link rel="preload"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=Kalam:wght@700&display=swap"
     as="style"
     onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=Kalam:wght@700&display=swap" rel="stylesheet">
   </noscript>
 
   <!-- Elfsight -->
@@ -61,7 +61,7 @@
       --gold-pale:   #fee1b6;
       --burgundy:    #2f1525;
       --burgundy-mid:#40172b;
-      --blush:       #FAEFF7;
+      --blush:       #F8F4EE;
 
       /* Semantic assignments */
       --bg:          #146183;
@@ -72,9 +72,9 @@
       --text-muted:  rgba(255,255,255,0.50);
       --accent:      #d4af37;
       --accent-pale: #fee1b6;
-      --cta-bg:      #d4af37;
+      --cta-bg:      #E6B325;
       --cta-text:    #2f1525;
-      --breath:      #FAEFF7;
+      --breath:      #F8F4EE;
 
       /* Legacy aliases (keep for existing var() references) */
       --green-deep:  #146183;
@@ -115,16 +115,16 @@
     }
 
     .main-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: clamp(2.6rem, 9vw, 3.5rem);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
+      font-family: 'Montserrat', serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      text-transform: none;
+      letter-spacing: -0.01em;
       color: #FFFFFF;
       line-height: 1.15;
       margin-bottom: 14px;
     }
-    .main-headline em { font-style: italic; color: var(--teal-pale); }
+    .main-headline em { font-family: 'Kalam', cursive; font-style: normal; font-weight: 700; color: var(--gold-pale); }
 
     .subheadline {
       font-weight: 300;
@@ -180,7 +180,7 @@
       margin-bottom: 10px;
     }
     .question-text {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Montserrat', serif;
       font-size: clamp(18px, 3.5vw, 21px);
       font-weight: 500;
       color: #FFFFFF;
@@ -263,14 +263,14 @@
       font-size: 13px;
       font-weight: 500;
       color: #2f1525;
-      background: #d4af37;
+      background: #E6B325;
       border: none;
       padding: 11px 24px;
       border-radius: 6px;
       cursor: pointer;
       transition: background 0.15s, opacity 0.15s;
     }
-    .btn-next:hover:not(:disabled) { background: #c9a22e; }
+    .btn-next:hover:not(:disabled) { background: #d3a015; }
     .btn-next:disabled { background: rgba(212,175,55,0.25); color: rgba(47,21,37,0.4); cursor: not-allowed; }
 
     /* ── RESULT SCREEN ── */
@@ -309,7 +309,7 @@
 
     /* ── LEAD SCREEN ── */
     .lead-headline {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Montserrat', serif;
       font-weight: 400;
       font-size: 22px;
       color: #FFFFFF;
@@ -406,7 +406,7 @@
       display: block;
       margin: 24px auto 0;
       padding: 12px 32px;
-      background: #d4af37;
+      background: #E6B325;
       color: #2f1525;
       font-family: 'DM Sans', sans-serif;
       font-size: 13px;
@@ -419,7 +419,7 @@
       transition: background 0.2s ease;
     }
     .siguiente-affordance:hover {
-      background: #c9a22e;
+      background: #d3a015;
     }
 
     /* ── SECONDARY CTA ── */
@@ -474,7 +474,7 @@
 
   <!-- 92% social proof — shown during quiz only -->
   <div id="quiz-social-proof" style="display:none;text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;font-style:italic;color:rgba(255,255,255,0.60);margin-bottom:12px;line-height:1.6;">
-    92% de las personas que comenzaron este quiz lo terminaron y encontraron valor en los ejercicios.
+    92% de las personas que terminaron este quiz encontraron valor en la formación.
   </div>
 
   <!-- QUIZ CARD -->
@@ -581,7 +581,7 @@
       </div>
       <div id="second-cta-block" style="display:none;margin-top:24px;padding-top:20px;border-top:0.5px solid rgba(212,175,55,0.25);">
         <a id="second-cta-btn" href="#"
-          style="display:block;width:100%;background:#146183;color:#FFFFFF;
+          style="display:block;width:100%;background:#E6B325;color:#2f1525;
           font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
           text-align:center;padding:17px 20px;border-radius:8px;
           text-decoration:none;letter-spacing:0.01em;margin-bottom:8px;
@@ -817,7 +817,7 @@ const BG_PROGRESSION = [
   '#7aaabe',  // step 4 — Q4
   '#bad8e4',  // step 5 — Q5
   '#d4ecf5',  // step 6 — Q6
-  '#d9f1f7'   // step 7 — result (light blue)
+  '#F8F4EE'   // step 7 — result (cream)
 ];
 
 function updateBackground(step) {
@@ -831,7 +831,7 @@ function updateBackground(step) {
     // Result page — light mode
     document.body.style.color = '#2f1525';
     if (card) {
-      card.style.background = '#FFFFFF';
+      card.style.background = '#FEFCF8';
       card.style.border = '0.5px solid rgba(212,175,55,0.25)';
     }
     document.querySelectorAll('.option-card').forEach(function(btn) {
@@ -881,7 +881,7 @@ function renderScoreArc(score) {
     + ' stroke-dashoffset="' + circumference.toFixed(1) + '"'
     + ' stroke-linecap="round"'
     + ' transform="rotate(-90 48 48)"/>'
-    + '<text x="48" y="44" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif"'
+    + '<text x="48" y="44" text-anchor="middle" font-family="Montserrat, Georgia, serif"'
     + ' font-size="22" font-weight="400" fill="#2f1525" id="arc-score-number">0</text>'
     + '<text x="48" y="58" text-anchor="middle" font-family="DM Sans, sans-serif"'
     + ' font-size="9" font-weight="400" fill="rgba(47,21,37,0.45)">/100</text>'
@@ -1007,7 +1007,7 @@ function render() {
   document.getElementById('logo-outside-es').style.display = (lang === 'es') ? 'block' : 'none';
 
   var hlEl = document.getElementById('main-headline');
-  hlEl.innerHTML = '¿Tu voz te falla cuando más la necesitas?';
+  hlEl.innerHTML = '¿Tu Voz Te <em>Falla</em> Cuando Más La Necesitas?';
   hlEl.style.display = (!showResult && currentQ === -1) ? 'block' : 'none';
 
   var subEl = document.getElementById('subheadline');
@@ -1337,6 +1337,16 @@ function renderResult() {
   const resultKey = getResultKey();
   const d = BLOCK_DATA[resultKey];
   const score = calcVocalScore(answers);
+
+  // The quiz result IS the personalized VSL. Capture data (keepalive POST), then redirect.
+  submitLead(resultKey, score);
+  var _vids = { mandibulaire:'VfoYECa3lnE', respiration:'uAlIEAIVxgM', nerveux:'pe2XyNkRolo', identite:'dbkzQoZaiJA' };
+  var _vslParams = new URLSearchParams(location.search);
+  _vslParams.set('bloqueo', d.title);
+  _vslParams.set('score', score);
+  if (_vids[resultKey]) _vslParams.set('vid', _vids[resultKey]);   /* TEMP: existing bloqueo video until VSL video is uploaded */
+  window.location.href = '/vsl-v1.html?' + _vslParams.toString();
+  return;
   const mirrorKey = getMirrorAnswer(resultKey, answers);
   const headline = d.mirrorHeadlines[mirrorKey];
 
@@ -1358,7 +1368,7 @@ function renderResult() {
 
   // -- RESULT BODY -- mirror headline --
   document.getElementById('result-body').innerHTML =
-    '<p style="font-family:\'Cormorant Garamond\',serif;font-size:clamp(1.8rem,6vw,2.8rem);font-weight:400;'
+    '<p style="font-family:\'Montserrat\',serif;font-size:clamp(1.8rem,6vw,2.8rem);font-weight:400;'
     + 'font-style:italic;color:#2f1525;line-height:1.35;margin:0 0 14px;">'
     + headline + '</p>';
 
@@ -1376,7 +1386,7 @@ function renderResult() {
         + '<p style="font-family:\'DM Sans\',sans-serif;font-size:11px;font-weight:300;'
         + 'color:rgba(47,21,37,0.45);text-align:center;margin:0 0 16px;">Mamselle — ' + d.title + '</p>'
         + '<a href="' + membershipUrl + '" id="video-cta-btn" '
-        + 'style="display:block;width:100%;background:#146183;color:#FFFFFF;'
+        + 'style="display:block;width:100%;background:#E6B325;color:#2f1525;'
         + 'font-family:\'DM Sans\',sans-serif;font-size:15px;font-weight:500;'
         + 'text-align:center;padding:17px 20px;border-radius:8px;text-decoration:none;'
         + 'letter-spacing:0.01em;margin-bottom:20px;box-sizing:border-box;">'
@@ -1413,7 +1423,7 @@ function renderResult() {
     '<hr style="border:none;border-top:0.5px solid rgba(212,175,55,0.25);margin:24px 0;">'
 
     // Testimonial card
-    + '<div style="background:#FFFFFF;border:0.5px solid rgba(212,175,55,0.25);border-radius:12px;padding:16px;margin-bottom:20px;">'
+    + '<div style="background:#FEFCF8;border:0.5px solid rgba(212,175,55,0.25);border-radius:12px;padding:16px;margin-bottom:20px;">'
     + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">'
     + '<img src="/Justine.png" alt="Justine Lafortune" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;">'
     + '<div><div style="color:#d4af37;font-size:12px;letter-spacing:2px;">★ ★ ★ ★ ★</div>'
@@ -1423,11 +1433,11 @@ function renderResult() {
     + '</div>'
 
     // Pre-CTA question
-    + '<p style="font-family:\'Cormorant Garamond\',serif;font-size:19px;font-weight:400;font-style:italic;color:#2f1525;text-align:center;margin:0 0 14px;line-height:1.4;">¿Quieres resolver tu bloqueo de una vez por todas?</p>'
+    + '<p style="font-family:\'Montserrat\',serif;font-size:19px;font-weight:400;font-style:italic;color:#2f1525;text-align:center;margin:0 0 14px;line-height:1.4;">¿Quieres resolver tu bloqueo de una vez por todas?</p>'
 
     // Primary CTA button
     + '<a href="' + membershipUrl + '" id="main-cta-btn" '
-    + 'style="display:block;width:100%;background:#146183;color:#FFFFFF;'
+    + 'style="display:block;width:100%;background:#E6B325;color:#2f1525;'
     + 'font-family:\'DM Sans\',sans-serif;font-size:15px;font-weight:500;'
     + 'text-align:center;padding:17px 20px;border-radius:8px;text-decoration:none;'
     + 'letter-spacing:0.01em;margin-bottom:10px;box-sizing:border-box;">'
@@ -1625,6 +1635,7 @@ function submitLead(resultKey, vocalScore) {
     };
     fetch(FORMSPREE_ENDPOINT_V2, {
       method:  'POST',
+      keepalive: true,
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body:    JSON.stringify(data)
     })

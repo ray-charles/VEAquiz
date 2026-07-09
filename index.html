@@ -28,7 +28,7 @@
   <meta name="twitter:description" content="Quiz vocal gratuit — découvre ton blocage et reçois un exercice ciblé.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=Kalam:wght@700&display=swap" rel="stylesheet">
 
   <!-- Elfsight -->
   <script src="https://elfsightcdn.com/platform.js" async></script>
@@ -50,13 +50,23 @@
 
   <style>
     :root {
-      --green-deep:  #1B4B3A;
-      --green-mid:   #2D7A5E;
-      --terra:       #C4845A;
-      --dark:        #2C2825;
-      --breath:      #F5F0E8;
-      --breath-mid:  #EDE5D6;
-      --green-ghost: #E1F5EE;
+      /* Brand tokens (locked) */
+      --teal:        #146183;
+      --teal-dark:   #0d3f56;
+      --gold:        #d4af37;
+      --btn:         #E6B325;
+      --btn-hover:   #d3a015;
+      --btn-text:    #2f1525;
+      --surface:     #FEFCF8;
+      --muted:       #6b5560;
+      /* legacy names repointed to brand values */
+      --green-deep:  #146183;
+      --green-mid:   #0d3f56;
+      --terra:       #d4af37;
+      --dark:        #2f1525;
+      --breath:      #F8F4EE;
+      --breath-mid:  #EAE3D6;
+      --green-ghost: #E4EEF2;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -88,22 +98,22 @@
     }
 
     .main-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: clamp(2.6rem, 9vw, 3.5rem);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      text-transform: none;
+      letter-spacing: -0.01em;
       color: var(--dark);
-      line-height: 1.15;
+      line-height: 1.12;
       margin-bottom: 14px;
     }
-    .main-headline em { font-style: italic; color: var(--green-deep); }
+    .main-headline em { font-family: 'Kalam', cursive; font-style: normal; font-weight: 700; color: var(--gold); }
 
 
     .subheadline {
       font-weight: 300;
       font-size: 14px;
-      color: #7A706A;
+      color: #6b5560;
       line-height: 1.65;
       max-width: 440px;
       margin: 0 auto;
@@ -111,9 +121,9 @@
 
     /* ── QUIZ CARD ── */
     .quiz-card {
-      background: #fff;
+      background: var(--surface);
       border-radius: 16px;
-      border: 0.5px solid #D8CDB5;
+      border: 0.5px solid #EAE3D6;
       padding: 32px 28px;
       box-shadow: 0 4px 24px rgba(27,75,58,0.06);
     }
@@ -140,11 +150,11 @@
       font-size: 11px;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: #7A706A;
+      color: #6b5560;
       margin-bottom: 10px;
     }
     .question-text {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Montserrat', serif;
       font-size: clamp(18px, 3.5vw, 21px);
       font-weight: 500;
       color: var(--dark);
@@ -153,7 +163,7 @@
     .question-hint {
       font-size: 12px;
       font-style: italic;
-      color: #7A706A;
+      color: #6b5560;
       margin-top: 6px;
     }
 
@@ -184,10 +194,10 @@
       min-width: 48px;
       min-height: 48px;
       border-radius: 50%;
-      border: 1.5px solid #1B4B3A;
-      background: #fff;
-      color: #1B4B3A;
-      font-family: 'Cormorant Garamond', serif;
+      border: 1.5px solid var(--teal);
+      background: var(--surface);
+      color: var(--teal);
+      font-family: 'Montserrat', sans-serif;
       font-size: 22px;
       font-weight: 600;
       cursor: pointer;
@@ -202,15 +212,15 @@
       transform: scale(1.05);
     }
     .scale-btn.selected {
-      background: #1B4B3A;
+      background: var(--teal);
       color: #fff;
-      border-color: #1B4B3A;
+      border-color: var(--teal);
       animation: scalePulse 0.42s ease forwards;
     }
     .scale-label {
       font-family: 'DM Sans', sans-serif;
       font-size: 0.72rem;
-      color: #7A706A;
+      color: #6b5560;
       text-align: center;
       line-height: 1.3;
       min-height: 2.6em;
@@ -229,8 +239,8 @@
       gap: 12px;
       padding: 13px 15px;
       border-radius: 10px;
-      border: 0.5px solid #D8CDB5;
-      background: #FAF8F4;
+      border: 0.5px solid #EAE3D6;
+      background: #FEFCF8;
       cursor: pointer;
       transition: border-color 0.15s, background 0.15s;
       user-select: none;
@@ -251,7 +261,7 @@
       font-weight: 500;
       flex-shrink: 0;
       background: var(--breath-mid);
-      color: #7A706A;
+      color: #6b5560;
       transition: background 0.15s, color 0.15s;
     }
     .option-card.selected .option-badge { background: var(--green-deep); color: #fff; }
@@ -270,7 +280,7 @@
       font-size: 13px;
       color: var(--dark);
       background: transparent;
-      border: 1px solid #D8CDB5;
+      border: 1px solid #EAE3D6;
       padding: 10px 18px;
       border-radius: 6px;
       cursor: pointer;
@@ -283,28 +293,28 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 13px;
       font-weight: 500;
-      color: #fff;
-      background: var(--green-deep);
+      color: var(--btn-text);
+      background: var(--btn);
       border: none;
       padding: 11px 24px;
       border-radius: 6px;
       cursor: pointer;
       transition: background 0.15s, opacity 0.15s;
     }
-    .btn-next:hover:not(:disabled) { background: var(--green-mid); }
+    .btn-next:hover:not(:disabled) { background: var(--btn-hover); }
     .btn-next:disabled { opacity: 0.3; cursor: not-allowed; }
 
     /* ── RESULT SCREEN ── */
     .result-body {
       font-weight: 500;
       font-size: 15px;
-      color: #7A706A;
+      color: #6b5560;
       line-height: 1.7;
       margin-bottom: 20px;
     }
     #cost-block {
-      border-left: 3px solid #C4845A;
-      background: #FDF6F0;
+      border-left: 3px solid #d4af37;
+      background: #FEFCF8;
       border-radius: 0 8px 8px 0;
       padding: 14px 16px;
       margin-bottom: 20px;
@@ -315,14 +325,14 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #C4845A;
+      color: #d4af37;
       margin-bottom: 8px;
     }
     #cost-block .cost-body {
       font-family: 'DM Sans', sans-serif;
       font-size: 15px;
       font-weight: 500;
-      color: #7A706A;
+      color: #6b5560;
       line-height: 1.7;
     }
     .btn-next, .btn-back, .option-card {
@@ -331,7 +341,7 @@
 
     /* ── LEAD SCREEN ── */
     .lead-headline {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Montserrat', serif;
       font-weight: 400;
       font-size: 22px;
       color: var(--dark);
@@ -340,7 +350,7 @@
     .lead-subtext {
       font-size: 13px;
       font-weight: 300;
-      color: #7A706A;
+      color: #6b5560;
       line-height: 1.6;
       margin-bottom: 24px;
     }
@@ -360,7 +370,7 @@
       font-weight: 300;
       text-transform: none;
       letter-spacing: 0;
-      color: #A89E97;
+      color: #8a7d76;
     }
     .field-input {
       width: 100%;
@@ -368,8 +378,8 @@
       font-size: 16px;
       font-weight: 300;
       color: var(--dark);
-      background: #FAF8F4;
-      border: 0.5px solid #D8CDB5;
+      background: #FEFCF8;
+      border: 0.5px solid #EAE3D6;
       border-radius: 8px;
       padding: 11px 14px;
       outline: none;
@@ -377,11 +387,11 @@
       -webkit-appearance: none;
     }
     .field-input:focus        { border-color: var(--green-deep); border-width: 1.5px; }
-    .field-input::placeholder { color: #C4BAB0; }
+    .field-input::placeholder { color: #cabfb4; }
     .lead-privacy {
       font-size: 11px;
       font-style: italic;
-      color: #A89E97;
+      color: #8a7d76;
       text-align: center;
       margin-top: 16px;
     }
@@ -390,7 +400,7 @@
     .footer {
       text-align: center;
       font-size: 11px;
-      color: #A89E97;
+      color: #8a7d76;
       padding: 24px 0 40px;
     }
 
@@ -419,14 +429,14 @@
   <!-- Elfsight Google Reviews — hidden on result page -->
   <div id="elfsight-top" style="margin-bottom:24px;min-height:100px;">
     <div class="elfsight-app-a2033325-ad8d-4b3e-a377-0415fc2e43eb" data-elfsight-app-lazy></div>
-    <p id="widget-caption" style="text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;color:#7A706A;margin-top:10px;">
+    <p id="widget-caption" style="text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;color:#6b5560;margin-top:10px;">
       <span class="cred-fr">Quiz 100% Gratuit — nous permet de mieux vous servir. 🙂</span>
       <span class="cred-es" style="display:none;">Quiz 100% Gratuito — nos permite servirte mejor. 🙂</span>
     </p>
   </div>
 
   <!-- 92% social proof — shown during quiz only -->
-  <div id="quiz-social-proof" style="display:none;text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;font-style:italic;color:#7A706A;margin-bottom:12px;line-height:1.6;">
+  <div id="quiz-social-proof" style="display:none;text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;font-style:italic;color:#6b5560;margin-bottom:12px;line-height:1.6;">
     <span id="proof-fr">92% des personnes qui ont commencé ce quiz l'ont terminé et ont trouvé de la valeur dans les exercices.</span>
     <span id="proof-es" style="display:none;">92% de las personas que comenzaron este quiz lo terminaron y encontraron valor en los ejercicios.</span>
   </div>
@@ -461,10 +471,10 @@
         font-size: 11px;
         font-weight: 300;
         font-style: italic;
-        color: #A89E97;
+        color: #8a7d76;
         margin: 16px 0 0;
         line-height: 1.6;
-        border-top: 0.5px solid #EDE5D6;
+        border-top: 0.5px solid #EAE3D6;
         padding-top: 14px;
       ">
         <span class="cred-fr">Créé par Mamselle Ruiz Coach — 25 ans d'expérience · plus de 1 000 voix accompagnées · quiz construit avec les principes de biomécanique vocale</span>
@@ -495,19 +505,19 @@
       <div id="result-body"></div>
       <div id="result-badge-label"
         style="display:inline-block;font-size:11px;font-weight:500;
-        letter-spacing:0.07em;text-transform:uppercase;color:#085041;
-        background:#E1F5EE;padding:4px 12px;border-radius:20px;
+        letter-spacing:0.07em;text-transform:uppercase;color:#0d3f56;
+        background:#E4EEF2;padding:4px 12px;border-radius:20px;
         margin-bottom:20px;"></div>
       <div id="video-container"></div>
       <div id="cost-block" style="display:none;"></div>
       <div id="conversion-section"></div>
       <!-- Elfsight Google Reviews — bottom of result page (bilingual) -->
-      <div id="elfsight-result" style="margin-top:16px;padding-top:16px;border-top:0.5px solid #D8CDB5;transform:scale(0.85);transform-origin:top center;">
+      <div id="elfsight-result" style="margin-top:16px;padding-top:16px;border-top:0.5px solid #EAE3D6;transform:scale(0.85);transform-origin:top center;">
         <div class="elfsight-app-a2033325-ad8d-4b3e-a377-0415fc2e43eb" data-elfsight-app-lazy></div>
       </div>
-      <div id="second-cta-block" style="display:none;margin-top:24px;padding-top:20px;border-top:0.5px solid #D8CDB5;">
+      <div id="second-cta-block" style="display:none;margin-top:24px;padding-top:20px;border-top:0.5px solid #EAE3D6;">
         <a id="second-cta-btn" href="#"
-          style="display:block;width:100%;background:#1B4B3A;color:#F5F0E8;
+          style="display:block;width:100%;background:#E6B325;color:#2f1525;
           font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
           text-align:center;padding:17px 20px;border-radius:8px;
           text-decoration:none;letter-spacing:0.01em;margin-bottom:8px;
@@ -909,23 +919,23 @@ function renderScoreArc(score) {
   var circumference = 2 * Math.PI * radius;
   return '<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">'
     + '<svg width="96" height="96" viewBox="0 0 96 96">'
-    + '<circle cx="48" cy="48" r="' + radius + '" fill="none" stroke="#EDE5D6" stroke-width="6"/>'
-    + '<circle id="arc-progress-circle" cx="48" cy="48" r="' + radius + '" fill="none" stroke="#1B4B3A" stroke-width="6"'
+    + '<circle cx="48" cy="48" r="' + radius + '" fill="none" stroke="#EAE3D6" stroke-width="6"/>'
+    + '<circle id="arc-progress-circle" cx="48" cy="48" r="' + radius + '" fill="none" stroke="#146183" stroke-width="6"'
     + ' stroke-dasharray="' + circumference.toFixed(1) + '"'
     + ' stroke-dashoffset="' + circumference.toFixed(1) + '"'
     + ' stroke-linecap="round"'
     + ' transform="rotate(-90 48 48)"/>'
-    + '<text x="48" y="44" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif"'
-    + ' font-size="22" font-weight="400" fill="#2C2825" id="arc-score-number">0</text>'
+    + '<text x="48" y="44" text-anchor="middle" font-family="Montserrat, Georgia, serif"'
+    + ' font-size="22" font-weight="400" fill="#2f1525" id="arc-score-number">0</text>'
     + '<text x="48" y="58" text-anchor="middle" font-family="DM Sans, sans-serif"'
-    + ' font-size="9" font-weight="400" fill="#A89E97">/100</text>'
+    + ' font-size="9" font-weight="400" fill="#8a7d76">/100</text>'
     + '</svg>'
     + '<span style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;'
-    + 'letter-spacing:0.05em;text-transform:uppercase;color:#7A706A;margin-top:4px;'
+    + 'letter-spacing:0.05em;text-transform:uppercase;color:#6b5560;margin-top:4px;'
     + (lang === 'fr' ? '' : 'display:none;') + '" '
     + 'class="score-label-fr score-label">Santé vocale actuelle</span>'
     + '<span style="font-family:\'DM Sans\',sans-serif;font-size:10px;font-weight:500;'
-    + 'letter-spacing:0.05em;text-transform:uppercase;color:#7A706A;margin-top:4px;'
+    + 'letter-spacing:0.05em;text-transform:uppercase;color:#6b5560;margin-top:4px;'
     + (lang === 'es' ? '' : 'display:none;') + '" '
     + 'class="score-label-es score-label">Salud vocal actual</span>'
     + '</div>';
@@ -993,8 +1003,8 @@ function render() {
   var subEl = document.getElementById('subheadline');
   if (!showResult && currentQ === -1) {
     subEl.innerHTML = lang === 'fr'
-      ? '<span style="display:block;font-size:15px;font-weight:300;color:#7A706A;line-height:1.65;">Ta voix est l\'outil que tu utilises le plus — et celui que tu comprends le moins. Ce quiz identifie en moins de 3 minutes pourquoi ta voix te lâche exactement quand tu en as le plus besoin.</span>'
-      : '<span style="display:block;font-size:15px;font-weight:300;color:#7A706A;line-height:1.65;">Este quiz identifica en menos de 3 minutos por qué tu voz te falla cuando más la necesitas.</span>';
+      ? '<span style="display:block;font-size:15px;font-weight:300;color:#6b5560;line-height:1.65;">Ta voix est l\'outil que tu utilises le plus — et celui que tu comprends le moins. Ce quiz identifie en moins de 3 minutes pourquoi ta voix te lâche exactement quand tu en as le plus besoin.</span>'
+      : '<span style="display:block;font-size:15px;font-weight:300;color:#6b5560;line-height:1.65;">Este quiz identifica en menos de 3 minutos por qué tu voz te falla cuando más la necesitas.</span>';
   }
 
   var footerEl = document.getElementById('site-footer');
@@ -1122,15 +1132,15 @@ function renderOptions(q) {
   if (q.type === 'textarea') {
     const ta = document.createElement('textarea');
     ta.id = 'q8-textarea';
-    ta.style.cssText = 'width:100%;min-height:100px;border:0.5px solid #D8CDB5;'
+    ta.style.cssText = 'width:100%;min-height:100px;border:0.5px solid #EAE3D6;'
       + 'border-radius:8px;padding:12px 14px;font-family:\'DM Sans\',sans-serif;'
-      + 'font-size:13px;font-weight:300;color:#2C2825;background:#FAF8F4;'
+      + 'font-size:13px;font-weight:300;color:#2f1525;background:#FEFCF8;'
       + 'resize:vertical;outline:none;box-sizing:border-box;';
     ta.placeholder = qData.placeholder || '';
     ta.value = answers[q.id] || '';
     ta.addEventListener('input', function() { answers[q.id] = ta.value; });
-    ta.addEventListener('focus', function() { ta.style.border = '1px solid #1B4B3A'; });
-    ta.addEventListener('blur',  function() { ta.style.border = '0.5px solid #D8CDB5'; });
+    ta.addEventListener('focus', function() { ta.style.border = '1px solid #146183'; });
+    ta.addEventListener('blur',  function() { ta.style.border = '0.5px solid #EAE3D6'; });
     container.appendChild(ta);
     return;
   }
@@ -1267,11 +1277,11 @@ function renderResult() {
   var costEl = document.getElementById('cost-block');
   if (costEl) {
     costEl.innerHTML =
-      '<div style="border-left:3px solid #D8CDB5;padding:14px 16px;margin:0 0 20px;">'
+      '<div style="border-left:3px solid #EAE3D6;padding:14px 16px;margin:0 0 20px;">'
       + '<p style="font-family:\'DM Sans\',sans-serif;font-size:14px;font-weight:300;'
-      + 'color:#2C2825;line-height:1.7;margin:0;">'
+      + 'color:#2f1525;line-height:1.7;margin:0;">'
       + d.body + ' '
-      + '<span style="color:#1B4B3A;font-weight:500;">' + PROMO_SENTENCE[lang] + '</span>'
+      + '<span style="color:#146183;font-weight:500;">' + PROMO_SENTENCE[lang] + '</span>'
       + '</p>'
       + '</div>';
     costEl.style.display = 'block';
@@ -1328,7 +1338,7 @@ function renderResult() {
         + 'border:none;" allowfullscreen loading="lazy"></iframe>'
         + '</div>'
         + '<p style="font-family:\'DM Sans\',sans-serif;font-size:11px;font-weight:300;'
-        + 'color:#A89E97;text-align:center;margin:0 0 20px;">Mamselle — ' + d.title + '</p>';
+        + 'color:#8a7d76;text-align:center;margin:0 0 20px;">Mamselle — ' + d.title + '</p>';
     } else {
       videoContainer.innerHTML = '';
     }
@@ -1339,45 +1349,45 @@ function renderResult() {
   var testiMeta    = (lang === 'fr') ? TESTI_META_FR : TESTI_META_ES;
 
   var conversionHTML =
-    '<hr style="border:none;border-top:0.5px solid #D8CDB5;margin:24px 0;">'
+    '<hr style="border:none;border-top:0.5px solid #EAE3D6;margin:24px 0;">'
 
     // Testimonial card
-    + '<div style="background:#fff;border:0.5px solid #D8CDB5;border-radius:12px;'
+    + '<div style="background:#FEFCF8;border:0.5px solid #EAE3D6;border-radius:12px;'
     + 'padding:16px;margin-bottom:20px;">'
     + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">'
-    + '<div style="width:48px;height:48px;border-radius:50%;background:#2D7A5E;'
+    + '<div style="width:48px;height:48px;border-radius:50%;background:#146183;'
     + 'display:flex;align-items:center;justify-content:center;flex-shrink:0;'
     + 'font-family:\'DM Sans\',sans-serif;font-size:14px;font-weight:600;color:#fff;">'
     + 'JL</div>'
     + '<div>'
-    + '<div style="color:#C4845A;font-size:12px;letter-spacing:2px;">★ ★ ★ ★ ★</div>'
+    + '<div style="color:#d4af37;font-size:12px;letter-spacing:2px;">★ ★ ★ ★ ★</div>'
     + '<div style="font-family:\'DM Sans\',sans-serif;font-size:12px;font-weight:500;'
-    + 'color:#7A706A;margin-top:2px;">' + testiMeta + '</div>'
+    + 'color:#6b5560;margin-top:2px;">' + testiMeta + '</div>'
     + '</div>'
     + '</div>'
     + '<p style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;'
-    + 'color:#2C2825;line-height:1.65;margin:0;font-style:italic;">'
+    + 'color:#2f1525;line-height:1.65;margin:0;font-style:italic;">'
     + testiText + '</p>'
     + '</div>'
 
     // Social proof sentence
     + (lang === 'fr'
-        ? '<p style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#2C2825;line-height:1.65;text-align:center;margin:0 0 6px;">La plupart des personnes qui rejoignent notre communauté <strong style="font-weight:500;">résolvent leur blocage.</strong></p>'
-        : '<p style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#2C2825;line-height:1.65;text-align:center;margin:0 0 6px;">La mayoría de las personas que se unen a nuestra comunidad <strong style="font-weight:500;">resuelven su bloqueo.</strong></p>')
+        ? '<p style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#2f1525;line-height:1.65;text-align:center;margin:0 0 6px;">La plupart des personnes qui rejoignent notre communauté <strong style="font-weight:500;">résolvent leur blocage.</strong></p>'
+        : '<p style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:300;color:#2f1525;line-height:1.65;text-align:center;margin:0 0 6px;">La mayoría de las personas que se unen a nuestra comunidad <strong style="font-weight:500;">resuelven su bloqueo.</strong></p>')
 
     // Social count
     + (lang === 'fr'
-        ? '<p style="font-family:\'DM Sans\',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:#1B4B3A;text-align:center;margin:0 0 20px;">Plus de 1 000 voix libérées avec le Protocole Voz Esencia™</p>'
-        : '<p style="font-family:\'DM Sans\',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:#1B4B3A;text-align:center;margin:0 0 20px;">Más de 1.000 voces liberadas con el Protocolo Voz Esencia™</p>')
+        ? '<p style="font-family:\'DM Sans\',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:#146183;text-align:center;margin:0 0 20px;">Plus de 1 000 voix libérées avec le Protocole Voz Esencia™</p>'
+        : '<p style="font-family:\'DM Sans\',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:#146183;text-align:center;margin:0 0 20px;">Más de 1.000 voces liberadas con el Protocolo Voz Esencia™</p>')
 
     // Pre-CTA question
     + (lang === 'fr'
-        ? '<p style="font-family:\'Cormorant Garamond\',serif;font-size:19px;font-weight:400;font-style:italic;color:#2C2825;text-align:center;margin:0 0 14px;line-height:1.4;">Tu veux résoudre ton blocage une bonne fois pour toutes ?</p>'
-        : '<p style="font-family:\'Cormorant Garamond\',serif;font-size:19px;font-weight:400;font-style:italic;color:#2C2825;text-align:center;margin:0 0 14px;line-height:1.4;">¿Quieres resolver tu bloqueo de una vez por todas?</p>')
+        ? '<p style="font-family:\'Montserrat\',serif;font-size:19px;font-weight:400;font-style:italic;color:#2f1525;text-align:center;margin:0 0 14px;line-height:1.4;">Tu veux résoudre ton blocage une bonne fois pour toutes ?</p>'
+        : '<p style="font-family:\'Montserrat\',serif;font-size:19px;font-weight:400;font-style:italic;color:#2f1525;text-align:center;margin:0 0 14px;line-height:1.4;">¿Quieres resolver tu bloqueo de una vez por todas?</p>')
 
     // CTA button
     + '<a href="' + membershipUrl + '" id="main-cta-btn" '
-    + 'style="display:block;width:100%;background:#1B4B3A;color:#F5F0E8;'
+    + 'style="display:block;width:100%;background:#E6B325;color:#2f1525;'
     + 'font-family:\'DM Sans\',sans-serif;font-size:15px;font-weight:500;'
     + 'text-align:center;padding:17px 20px;border-radius:8px;text-decoration:none;'
     + 'letter-spacing:0.01em;margin-bottom:20px;box-sizing:border-box;">'
