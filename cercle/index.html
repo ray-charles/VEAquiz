@@ -19,10 +19,10 @@
 <meta property="og:type" content="website">
 
 <link rel="preload"
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;700&family=Kalam:wght@700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;700&family=Dancing+Script:wght@600;700&display=swap"
   as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;700&family=Kalam:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 </noscript>
 
 <!-- ============================================================
@@ -56,10 +56,10 @@ fbq('track','PageView');
 <style>
 /* ===== TOKENS — burgundy dominant + gold accent + cream ===== */
 :root{
-  --wine-deep:  #6B2140;
-  --wine-mid:   #8E3357;
-  --wine-dark:  #45152A;
-  --wine-pale:  #C9748F;
+  --wine-deep:  #7A1B30;   /* claret — redder than the previous #6B2140 */
+  --wine-mid:   #9B2F43;
+  --wine-dark:  #4A0F1C;   /* oxblood, gradient end */
+  --wine-pale:  #C9707E;
   --gold:       #d4af37;
   --gold-deep:  #b8952c;
   --gold-soft:  #f6e0b0;
@@ -124,7 +124,7 @@ h1{
   font-size:clamp(1.9rem,6.6vw,3.2rem);line-height:1.12;letter-spacing:-.022em;
   color:#fff;
 }
-h1 em{font-family:'Kalam',cursive;font-style:normal;font-weight:700;color:var(--gold-soft)}
+h1 em{font-family:'Dancing Script',cursive;font-style:normal;font-weight:700;color:var(--gold-soft);font-size:1.14em;line-height:1.05}
 
 h2{
   font-family:'Montserrat',sans-serif;font-weight:400;
@@ -179,7 +179,7 @@ strong{font-weight:700;color:var(--wine-deep)}
 /* ===== HERO ===== */
 .hero{
   background:
-    radial-gradient(circle at 82% 12%,rgba(201,116,143,.30) 0%,rgba(201,116,143,0) 48%),
+    radial-gradient(circle at 82% 12%,rgba(201,112,126,.30) 0%,rgba(201,112,126,0) 48%),
     linear-gradient(158deg,var(--wine-deep) 0%,var(--wine-dark) 100%);
   color:#fff;padding:var(--s6) var(--s4) var(--s7);
 }
@@ -202,7 +202,7 @@ strong{font-weight:700;color:var(--wine-deep)}
 .hero-media img{width:100%;height:100%;object-fit:cover}
 .hero-media figcaption{
   position:absolute;left:0;right:0;bottom:0;
-  background:linear-gradient(to top,rgba(69,21,42,.92),rgba(69,21,42,0));
+  background:linear-gradient(to top,rgba(74,15,28,.92),rgba(74,15,28,0));
   padding:26px var(--s4) var(--s3);
   font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--w-82);
   text-align:center;
@@ -237,7 +237,7 @@ strong{font-weight:700;color:var(--wine-deep)}
   display:flex;flex-direction:column;
   transition:transform .2s ease,box-shadow .2s ease;
 }
-.slot:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(69,21,42,.18)}
+.slot:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(74,15,28,.18)}
 .slot-top{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s2);flex-wrap:wrap}
 .slot-day{
   font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.06rem;
@@ -245,7 +245,7 @@ strong{font-weight:700;color:var(--wine-deep)}
 }
 .slot-time{font-size:.82rem;font-weight:600;color:var(--ink-soft);font-variant-numeric:tabular-nums}
 .slot-track{
-  height:8px;border-radius:999px;background:rgba(107,33,64,.14);
+  height:8px;border-radius:999px;background:rgba(122,27,48,.14);
   margin:var(--s3) 0 var(--s2);overflow:hidden;
 }
 .slot-fill{height:100%;background:var(--btn);border-radius:999px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
@@ -301,6 +301,67 @@ strong{font-weight:700;color:var(--wine-deep)}
 .dark .slot-note:hover{background:rgba(246,224,176,.32)}
 .dark .slot-note:disabled{background:rgba(255,255,255,.08);color:var(--w-58)}
 
+/* ===== WAITLIST DIALOG ===== */
+.wl{
+  border:none;padding:0;border-radius:20px;
+  max-width:440px;width:calc(100% - 32px);
+  background:var(--card);color:var(--ink);
+  box-shadow:0 30px 70px rgba(74,15,28,.45);
+}
+.wl::backdrop{background:rgba(74,15,28,.66);backdrop-filter:blur(3px)}
+.wl-head{
+  background:linear-gradient(160deg,var(--wine-deep),var(--wine-dark));
+  color:#fff;padding:var(--s5);border-radius:20px 20px 0 0;position:relative;
+}
+.wl-head h3{color:#fff;font-size:1.22rem;font-weight:600;margin-bottom:6px;padding-right:38px}
+.wl-head p{font-size:.9rem;color:var(--w-82);line-height:1.5}
+.wl-x{
+  position:absolute;top:10px;right:10px;
+  width:40px;height:40px;border-radius:50%;border:none;
+  background:rgba(255,255,255,.15);color:#fff;
+  font-size:1.4rem;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s ease;
+}
+.wl-x:hover{background:rgba(255,255,255,.28)}
+.wl-body{padding:var(--s5)}
+.wl-row{margin-bottom:var(--s3)}
+.wl-row label{
+  display:block;font-family:'Montserrat',sans-serif;
+  font-size:.74rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--wine-deep);margin-bottom:5px;
+}
+.wl-row input{
+  width:100%;min-height:48px;padding:12px var(--s3);
+  font-family:'DM Sans',sans-serif;font-size:16px;color:var(--ink);
+  background:var(--cream);border:1.5px solid var(--line);border-radius:10px;
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+.wl-row input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.24)}
+.wl-row input:user-invalid{border-color:var(--alert)}
+.wl-two{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
+@media(max-width:420px){.wl-two{grid-template-columns:1fr;gap:0}}
+.wl-submit{
+  width:100%;min-height:52px;margin-top:var(--s2);
+  background:var(--btn);color:var(--ink);border:none;border-radius:11px;
+  font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;
+  cursor:pointer;box-shadow:0 8px 22px rgba(230,179,37,.38);
+  transition:background .2s ease,transform .1s ease;
+}
+.wl-submit:hover{background:var(--btn-deep)}
+.wl-submit:active{transform:scale(.985)}
+.wl-submit:disabled{opacity:.55;cursor:default;transform:none}
+.wl-fine{font-size:.76rem;color:var(--ink-soft);text-align:center;margin-top:var(--s3);line-height:1.5}
+.wl-err{font-size:.86rem;color:var(--alert);text-align:center;margin-top:var(--s2);font-weight:600}
+.wl-done{padding:var(--s6) var(--s5);text-align:center}
+.wl-done h3{font-size:1.25rem;margin-bottom:6px}
+.wl-done p{font-size:.94rem;color:var(--ink-soft);line-height:1.55}
+.wl-tick{
+  width:58px;height:58px;border-radius:50%;background:rgba(212,175,55,.22);
+  color:var(--wine-deep);display:flex;align-items:center;justify-content:center;
+  margin:0 auto var(--s3);
+}
+
 /* ===== TRUST ROW ===== */
 .trust{
   display:flex;flex-wrap:wrap;justify-content:center;
@@ -324,11 +385,11 @@ strong{font-weight:700;color:var(--wine-deep)}
   display:flex;gap:var(--s3);align-items:flex-start;
   transition:transform .2s ease,box-shadow .2s ease;
 }
-.ben:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(69,21,42,.13)}
+.ben:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(74,15,28,.13)}
 .ben.hero-ben{background:rgba(212,175,55,.15);border-color:var(--gold)}
 .ben-ic{
   flex-shrink:0;width:40px;height:40px;border-radius:11px;
-  background:rgba(107,33,64,.10);color:var(--wine-deep);
+  background:rgba(122,27,48,.10);color:var(--wine-deep);
   display:flex;align-items:center;justify-content:center;
 }
 .ben.hero-ben .ben-ic{background:rgba(212,175,55,.30)}
@@ -340,7 +401,7 @@ strong{font-weight:700;color:var(--wine-deep)}
   display:inline-flex;align-items:center;gap:var(--s3);
   background:var(--card);border:1px solid var(--line);
   border-radius:999px;padding:9px var(--s4);margin-top:var(--s3);
-  box-shadow:0 5px 16px rgba(69,21,42,.09);
+  box-shadow:0 5px 16px rgba(74,15,28,.09);
 }
 .g-badge .g{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:-.02em}
 .g-badge .g .b1{color:#4285F4}.g-badge .g .r1{color:#EA4335}
@@ -356,7 +417,7 @@ strong{font-weight:700;color:var(--wine-deep)}
   border-radius:16px;padding:var(--s4);
   transition:transform .2s ease,box-shadow .2s ease;
 }
-.rev:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(69,21,42,.13)}
+.rev:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(74,15,28,.13)}
 .rev-top{display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s2)}
 .rev-av{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;background:var(--wine-mid)}
 .rev-nm{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;color:var(--ink);line-height:1.2}
@@ -367,7 +428,7 @@ strong{font-weight:700;color:var(--wine-deep)}
 .marquee{overflow:hidden;margin-top:var(--s5)}
 .marquee-track{display:flex;gap:var(--s3);width:max-content;animation:mq 58s linear infinite}
 .marquee:hover .marquee-track{animation-play-state:paused}
-.marquee img{height:170px;width:auto;border-radius:13px;object-fit:cover;flex-shrink:0;box-shadow:0 12px 28px rgba(69,21,42,.2)}
+.marquee img{height:170px;width:auto;border-radius:13px;object-fit:cover;flex-shrink:0;box-shadow:0 12px 28px rgba(74,15,28,.2)}
 @media(min-width:768px){.marquee img{height:250px}}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
@@ -416,12 +477,12 @@ strong{font-weight:700;color:var(--wine-deep)}
   padding:var(--s3) var(--s4);margin-top:var(--s4);text-align:left;
   text-decoration:none;transition:box-shadow .2s ease;
 }
-.venue:hover{box-shadow:0 10px 24px rgba(69,21,42,.14)}
+.venue:hover{box-shadow:0 10px 24px rgba(74,15,28,.14)}
 .venue .vt{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;color:var(--wine-deep)}
 .venue .vs{font-size:.82rem;color:var(--ink-soft)}
 
 /* ===== SIGNATURE / FOOTER ===== */
-.sig{font-family:'Kalam',cursive;font-weight:700;font-size:1.7rem;color:var(--gold-soft);margin-top:var(--s2)}
+.sig{font-family:'Dancing Script',cursive;font-weight:700;font-size:2.1rem;color:var(--gold-soft);margin-top:var(--s2)}
 .portrait{
   width:150px;height:150px;object-fit:cover;object-position:center 20%;
   border-radius:50%;margin:var(--s4) auto 0;
@@ -461,8 +522,9 @@ footer p{font-size:.78rem;color:var(--ink-soft)}
     <p class="eyebrow reveal">Plateau Mont-Royal &middot; 961 rue Rachel Est</p>
     <h1 class="reveal">Pourquoi ta voix se serre<br><em>dès que quelqu'un écoute&nbsp;?</em></h1>
     <p class="hero-sub reveal">
-      Ce n'est pas un manque de talent. C'est une gorge qui a appris à se fermer,
-      et un souffle qui n'arrive plus jusqu'en bas. Ça se travaille.
+      Ce n'est pas un manque de talent. C'est la même gorge qui se serre quand tu
+      retiens tes larmes — elle a appris à se fermer, et ton souffle n'arrive plus
+      jusqu'en bas. Ça se travaille.
       <b>Douze semaines, douze personnes, un soir par semaine</b> — pour la rouvrir.
     </p>
 
@@ -627,7 +689,8 @@ footer p{font-size:.78rem;color:var(--ink-soft)}
     <div class="narrow center reveal">
       <p class="eyebrow">Qui t'accompagne</p>
       <h2>Qui va t'accompagner <em>pendant ces douze semaines&nbsp;?</em></h2>
-      <p class="lede">Moi. Mamselle Ruiz — chanteuse, artiste de scène et coach vocale depuis <strong>25 ans</strong>. Près de <strong>1000 concerts</strong>, plusieurs années avec le <strong>Cirque du Soleil</strong>, 5 albums. J'ai fondé la méthode <strong>Voix Essence™</strong> parce que j'en avais assez de voir des gens croire qu'ils n'avaient pas de voix.</p>
+      <p class="lede">Tu reconnais quelqu'un au téléphone avant qu'il dise son nom. C'est dire à quel point ta voix, c'est toi — et à quel point ça vaut la peine de s'en occuper.</p>
+      <p class="lede">Moi, c'est Mamselle Ruiz — chanteuse, artiste de scène et coach vocale depuis <strong>25 ans</strong>. Près de <strong>1000 concerts</strong>, plusieurs années avec le <strong>Cirque du Soleil</strong>, 5 albums. J'ai fondé la méthode <strong>Voix Essence™</strong> parce que j'en avais assez de voir des gens croire qu'ils n'avaient pas de voix.</p>
     </div>
     <div class="marquee reveal" aria-label="Mamselle Ruiz en concert">
       <div class="marquee-track">
@@ -671,7 +734,7 @@ footer p{font-size:.78rem;color:var(--ink-soft)}
     <div class="faq reveal">
       <details open>
         <summary>« Je chante faux. »</summary>
-        <p>Presque tout le monde arrive en le disant. Un cercle n'est pas une audition : on chante ensemble, jamais seul devant les autres. Ta voix se pose sur celles du groupe — et c'est exactement ce qui la libère.</p>
+        <p>Presque tout le monde arrive en le disant. Chanter à plusieurs est plus facile que chanter seul — tu le sais déjà, c'est pour ça que tu chantes dans ta voiture et pas devant une salle. Un cercle n'est pas une audition : ta voix se pose sur celles du groupe, et c'est exactement ce qui la libère.</p>
       </details>
       <details>
         <summary>« Je n'ai jamais chanté en groupe. »</summary>
@@ -723,6 +786,53 @@ footer p{font-size:.78rem;color:var(--ink-soft)}
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     WAITLIST DIALOG — opened by the locked cohort buttons
+     ============================================================ -->
+<dialog class="wl" id="wl" aria-labelledby="wl-title">
+  <div id="wl-panel">
+    <div class="wl-head">
+      <button type="button" class="wl-x" id="wl-x" aria-label="Fermer">&times;</button>
+      <h3 id="wl-title">On te garde une place&nbsp;?</h3>
+      <p id="wl-sub">Ce créneau n'est pas encore ouvert. Laisse-moi tes coordonnées — tu seras prévenu·e en premier.</p>
+    </div>
+    <div class="wl-body">
+      <form id="wl-form">
+        <div class="wl-two">
+          <div class="wl-row">
+            <label for="wl-first">Prénom</label>
+            <input id="wl-first" name="prenom" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="wl-row">
+            <label for="wl-last">Nom</label>
+            <input id="wl-last" name="nom" type="text" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="wl-row">
+          <label for="wl-tel">Téléphone</label>
+          <input id="wl-tel" name="telephone" type="tel" inputmode="tel" autocomplete="tel" required>
+        </div>
+        <div class="wl-row">
+          <label for="wl-email">Courriel</label>
+          <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" required>
+        </div>
+        <button type="submit" class="wl-submit" id="wl-submit">Préviens-moi à l'ouverture</button>
+        <p class="wl-err" id="wl-err" hidden></p>
+        <p class="wl-fine">Aucun paiement. Je t'écris seulement quand ce créneau ouvre.</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="wl-done" id="wl-done" hidden>
+    <div class="wl-tick" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5"/></svg>
+    </div>
+    <h3>C'est noté.</h3>
+    <p>Tu es sur la liste pour le créneau <b id="wl-slot"></b>. Je t'écris dès qu'il ouvre.</p>
+    <button type="button" class="wl-submit" id="wl-close2" style="margin-top:20px">Fermer</button>
+  </div>
+</dialog>
 
 <footer>
   <img src="../Logo-fr.png" alt="Voix Essence" width="150" height="40" loading="lazy">
@@ -855,13 +965,73 @@ document.addEventListener('click', function(e){
   }
 
   if(lock){
-    if(typeof fbq !== 'undefined'){
-      fbq('trackCustom','SeatLocked_Click',{ creneau: lock.getAttribute('data-day') });
-    }
-    lock.textContent = 'Noté — on te préviendra à l\'ouverture.';
-    lock.disabled = true;
-    lock.style.cursor = 'default';
+    openWaitlist(lock.getAttribute('data-day'));
   }
+});
+
+/* ================================================================
+   WAITLIST — native <dialog> gives us Escape, backdrop and focus
+   handling; native form validation gives us the error states.
+   Leads land in the existing Formspree box, tagged by `source`
+   so cercle sign-ups stay separable from quiz leads.
+   ponytail: reuses the quiz endpoint. Split it out if the volume
+   makes one inbox annoying, or wire straight to Kit.
+   ================================================================ */
+var FORMSPREE = 'https://formspree.io/f/xdawrzrj';
+var dlg = document.getElementById('wl');
+var wlSlot = '';
+
+function openWaitlist(slotLabel){
+  wlSlot = slotLabel || '';
+  document.getElementById('wl-sub').textContent =
+    'Le créneau ' + wlSlot + ' n\'est pas encore ouvert. Laisse-moi tes coordonnées — tu seras prévenu·e en premier.';
+  if(typeof fbq !== 'undefined') fbq('trackCustom','SeatLocked_Click',{ creneau: wlSlot });
+  if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+  setTimeout(function(){ document.getElementById('wl-first').focus(); }, 60);
+}
+
+function closeWaitlist(){
+  if(dlg.close) dlg.close(); else dlg.removeAttribute('open');
+}
+
+document.getElementById('wl-x').addEventListener('click', closeWaitlist);
+document.getElementById('wl-close2').addEventListener('click', closeWaitlist);
+/* click on the backdrop (outside the panel) closes */
+dlg.addEventListener('click', function(e){ if(e.target === dlg) closeWaitlist(); });
+
+document.getElementById('wl-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var f   = e.target;
+  var btn = document.getElementById('wl-submit');
+  var err = document.getElementById('wl-err');
+  err.hidden = true;
+  btn.disabled = true;
+  btn.textContent = 'Envoi…';
+
+  fetch(FORMSPREE, {
+    method:'POST',
+    headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+    body: JSON.stringify({
+      prenom:    f.prenom.value.trim(),
+      nom:       f.nom.value.trim(),
+      telephone: f.telephone.value.trim(),
+      email:     f.email.value.trim(),
+      creneau:   wlSlot,
+      source:    'cercle-locked-slot',
+      _subject:  'Cercle de Voix — liste d\'attente (' + wlSlot + ')'
+    })
+  }).then(function(r){
+    if(!r.ok) throw new Error('http ' + r.status);
+    if(typeof fbq !== 'undefined') fbq('trackCustom','Cercle_WaitlistLead',{ creneau: wlSlot });
+    document.getElementById('wl-slot').textContent = wlSlot;
+    document.getElementById('wl-panel').hidden = true;
+    document.getElementById('wl-done').hidden = false;
+  }).catch(function(){
+    err.textContent = 'Envoi impossible. Réessaie dans un instant.';
+    err.hidden = false;
+    btn.disabled = false;
+    btn.textContent = 'Préviens-moi à l\'ouverture';
+  });
 });
 
 /* ================================================================
