@@ -976,12 +976,12 @@ document.addEventListener('click', function(e){
 /* ================================================================
    WAITLIST — native <dialog> gives us Escape, backdrop and focus
    handling; native form validation gives us the error states.
-   Leads land in the existing Formspree box, tagged by `source`
-   so cercle sign-ups stay separable from quiz leads.
-   ponytail: reuses the quiz endpoint. Split it out if the volume
-   makes one inbox annoying, or wire straight to Kit.
+   Leads land in the dedicated "Cercle de Voix - liste d'attente"
+   Formspree form, which webhooks the Worker, which tags them in Kit
+   (idioma-fr + the créneau tag). Separate form from the quiz on
+   purpose — separate inbox, separate volume, no shared automations.
    ================================================================ */
-var FORMSPREE = 'https://formspree.io/f/xdawrzrj';
+var FORMSPREE = 'https://formspree.io/f/maqrgbrl';
 var dlg = document.getElementById('wl');
 var wlSlot = '';
 
