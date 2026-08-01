@@ -305,6 +305,10 @@ strong{font-weight:700;color:var(--wine-deep)}
 .wl{
   border:none;padding:0;border-radius:20px;
   max-width:440px;width:calc(100% - 32px);
+  /* the global *{margin:0} reset kills the UA's margin:auto on <dialog>,
+     which is what centres a modal — restore it here. */
+  margin:auto;
+  max-height:calc(100dvh - 32px);overflow:auto;
   background:var(--card);color:var(--ink);
   box-shadow:0 30px 70px rgba(74,15,28,.45);
 }
@@ -987,12 +991,16 @@ function openWaitlist(slotLabel){
     'Le créneau ' + wlSlot + ' n\'est pas encore ouvert. Laisse-moi tes coordonnées — tu seras prévenu·e en premier.';
   if(typeof fbq !== 'undefined') fbq('trackCustom','SeatLocked_Click',{ creneau: wlSlot });
   if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+  document.documentElement.style.overflow = 'hidden';   /* no scrolling behind the modal */
   setTimeout(function(){ document.getElementById('wl-first').focus(); }, 60);
 }
 
 function closeWaitlist(){
   if(dlg.close) dlg.close(); else dlg.removeAttribute('open');
+  document.documentElement.style.overflow = '';
 }
+/* Escape closes natively — catch it so the scroll lock is released too */
+dlg.addEventListener('close', function(){ document.documentElement.style.overflow = ''; });
 
 document.getElementById('wl-x').addEventListener('click', closeWaitlist);
 document.getElementById('wl-close2').addEventListener('click', closeWaitlist);
