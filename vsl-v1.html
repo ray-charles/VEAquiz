@@ -595,7 +595,10 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 
 /* ===== SCROLL-REVEAL ANIMATION (verbatim pattern from vsl.html) ===== */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
+/* Must settle to `none`, not translateY(0): any transform — even an identity one —
+   makes this element the containing block for position:fixed descendants, which
+   breaks the floating VSL player nested inside .hero-single.reveal. */
+.reveal.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .card.hoverable:hover, .review:hover, .tl-card:hover { transform: none; }
@@ -1302,6 +1305,7 @@ if (typeof fbq !== 'undefined') {
 // ================================================================
 // FLOATING VSL — once the hero player scrolls out, pin it bottom-right.
 // Same <video> element (never re-parented), so playback and audio keep going.
+// Floats whether or not it is playing; only the close button dismisses it.
 // ================================================================
 (function () {
   var slot = document.getElementById('vsl-slot');
@@ -1310,20 +1314,12 @@ if (typeof fbq !== 'undefined') {
   var closeBtn = document.getElementById('vsl-close');
   if (!slot || !box || !video) return;
   var dismissed = false;
-  var observer = new IntersectionObserver(function (entries) {
-    // Only float a video the visitor actually started.
-    var offscreen = !entries[0].isIntersecting;
-    box.classList.toggle('floating', offscreen && !dismissed && !video.paused);
-  }, { threshold: 0 });
-  observer.observe(slot);
-  // Playing/pausing while scrolled away should also toggle the mini-player.
-  video.addEventListener('play', function () {
-    if (!dismissed && slot.getBoundingClientRect().bottom < 0) box.classList.add('floating');
-  });
-  video.addEventListener('pause', function () { box.classList.remove('floating'); });
+  new IntersectionObserver(function (entries) {
+    box.classList.toggle('floating', !entries[0].isIntersecting && !dismissed);
+  }, { threshold: 0 }).observe(slot);
   if (closeBtn) closeBtn.addEventListener('click', function () {
     dismissed = true;
-    video.pause();
+    video.pause();          // never leave audio playing from an invisible player
     box.classList.remove('floating');
   });
 })();
