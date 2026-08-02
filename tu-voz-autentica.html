@@ -148,7 +148,9 @@ h1.hero-h1 {
   line-height: 1.12; letter-spacing: -0.015em;
   color: #FFFFFF; margin-bottom: 18px;
 }
-h1.hero-h1 em { font-family: 'Kalam', cursive; font-style: normal; font-weight: 700; color: var(--gold-soft); }
+/* Accent word carries the cream colour only — same face/weight as the rest of
+   the headline (inherit, so it follows if h1.hero-h1 ever changes). */
+h1.hero-h1 em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(--gold-soft); }
 
 h2.h2 {
   font-family: 'Montserrat', sans-serif;
