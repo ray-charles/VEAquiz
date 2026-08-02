@@ -273,29 +273,33 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 .hero-trust .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
 
 /* ===== HERO VSL VIDEO ===== */
+/* .hero-vsl-slot holds the space so the page doesn't jump when the player floats. */
+.hero-vsl-slot { max-width: 720px; margin: 30px auto; aspect-ratio: 16/9; }
 .hero-vsl {
-  position: relative; max-width: 720px; margin: 30px auto 30px;
+  position: relative; width: 100%;
   border-radius: 18px; overflow: hidden;
   box-shadow: 0 24px 54px rgba(0,0,0,0.45);
   border: 1px solid rgba(255,255,255,0.14);
+  background: #0a2c3a;
 }
-.hero-vsl-inner {
-  position: relative; aspect-ratio: 16/9;
-  background: radial-gradient(circle at 50% 40%, #258ba1 0%, #146183 58%, #0a2c3a 100%);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 18px;
+.hero-vsl video { display: block; width: 100%; aspect-ratio: 16/9; background: #0a2c3a; }
+
+/* Floating mini-player once the hero player scrolls away */
+.hero-vsl.floating {
+  position: fixed; right: 20px; bottom: 20px; z-index: 90;
+  width: 360px; max-width: 42vw;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.55);
 }
-.hero-vsl-cap {
-  font-family: 'Montserrat', sans-serif; font-weight: 400;
-  font-size: clamp(0.95rem, 2.3vw, 1.2rem); color: #FFFFFF;
-  max-width: 82%; margin-top: 14px; line-height: 1.4;
+@media (max-width: 700px) {
+  .hero-vsl.floating { right: 10px; left: 10px; bottom: 10px; width: auto; max-width: none; }
 }
-.hero-vsl-note {
-  position: absolute; left: 0; right: 0; bottom: 9px;
-  font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  color: rgba(255,255,255,0.5); text-align: center;
+.vsl-close {
+  position: absolute; top: 6px; right: 6px; z-index: 2;
+  width: 28px; height: 28px; border: none; border-radius: 50%;
+  background: rgba(0,0,0,0.6); color: #fff; font-size: 17px; line-height: 1;
+  cursor: pointer; display: none;
 }
+.hero-vsl.floating .vsl-close { display: block; }
 
 /* ===== DEVICE MOCKUPS ===== */
 .devices {
@@ -632,15 +636,14 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
       <h1 class="hero-h1">¡Finalmente!… Proyecta Tu Voz <em>Sin Esfuerzo</em> En <span style="text-decoration:underline;text-decoration-color:#ffffff;text-decoration-thickness:1px;text-underline-offset:6px;">7 Días</span>.</h1>
       <p class="hero-proof" style="margin:14px auto 0;max-width:560px;font-style:italic;color:var(--white-78);font-size:0.98rem;line-height:1.5;"><span style="color:var(--gold);letter-spacing:2px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br>«Desde la primera clase sentí la diferencia: ahora proyecto mejor mi voz y mi garganta ya no me duele.» — <strong style="color:#fff;font-style:normal;">Bea Triz</strong></p>
 
-      <!-- VSL VIDEO — swap this block for the real player (iframe / video) -->
-      <div class="hero-vsl">
-        <div class="hero-vsl-inner">
-          <div class="shot-play" aria-hidden="true">
-            <svg width="26" height="30" viewBox="0 0 26 30" fill="none"><path d="M2 2L24 15L2 28V2Z" fill="#146183"/></svg>
-          </div>
-          <p class="hero-vsl-cap">«Hola, soy Mamselle Ruiz. Eso que sientes en tu garganta tiene nombre. Y tiene camino. Hoy te lo muestro.»</p>
+      <!-- VSL VIDEO — native controls give sound on/off + fullscreen for free -->
+      <div class="hero-vsl-slot" id="vsl-slot">
+        <div class="hero-vsl" id="vsl-box">
+          <button class="vsl-close" id="vsl-close" type="button" aria-label="Cerrar video">&times;</button>
+          <video id="vsl-video" controls playsinline preload="metadata" poster="vsl-poster.jpg">
+            <source src="vsl-esp.mp4" type="video/mp4">
+          </video>
         </div>
-        <div class="hero-vsl-note">El video (VSL) va aquí — reemplazar este bloque</div>
       </div>
 
             <ul style="list-style:none;max-width:560px;margin:6px auto 0;padding:0;display:inline-block;text-align:left;">
@@ -1297,6 +1300,35 @@ if (typeof fbq !== 'undefined') {
 })();
 
 // ================================================================
+// FLOATING VSL — once the hero player scrolls out, pin it bottom-right.
+// Same <video> element (never re-parented), so playback and audio keep going.
+// ================================================================
+(function () {
+  var slot = document.getElementById('vsl-slot');
+  var box = document.getElementById('vsl-box');
+  var video = document.getElementById('vsl-video');
+  var closeBtn = document.getElementById('vsl-close');
+  if (!slot || !box || !video) return;
+  var dismissed = false;
+  var observer = new IntersectionObserver(function (entries) {
+    // Only float a video the visitor actually started.
+    var offscreen = !entries[0].isIntersecting;
+    box.classList.toggle('floating', offscreen && !dismissed && !video.paused);
+  }, { threshold: 0 });
+  observer.observe(slot);
+  // Playing/pausing while scrolled away should also toggle the mini-player.
+  video.addEventListener('play', function () {
+    if (!dismissed && slot.getBoundingClientRect().bottom < 0) box.classList.add('floating');
+  });
+  video.addEventListener('pause', function () { box.classList.remove('floating'); });
+  if (closeBtn) closeBtn.addEventListener('click', function () {
+    dismissed = true;
+    video.pause();
+    box.classList.remove('floating');
+  });
+})();
+
+// ================================================================
 // DEVICE MOCKUP IMG SLOTS — reveal swapped screenshots if present
 // ================================================================
 (function () {
@@ -1325,19 +1357,8 @@ if (typeof fbq !== 'undefined') {
   if(hs){
     var eb=hs.querySelector('.eyebrow'); if(eb) eb.style.display='none';
     var oldH1=hs.querySelector('.hero-h1'); if(oldH1) oldH1.style.display='none';
-    var vid=hs.querySelector('.hero-vsl'), proof=hs.querySelector('.hero-proof');
+    var vid=hs.querySelector('.hero-vsl-slot'), proof=hs.querySelector('.hero-proof');
     if(vid && proof) proof.parentNode.insertBefore(vid, proof);
-  }
-  /* TEMP: show the bloqueo-specific YouTube video (?vid=) until the real VSL video is uploaded. */
-  var ytid=p.get('vid');
-  if(ytid && hs){
-    var box=hs.querySelector('.hero-vsl');
-    if(box){
-      var wrap=document.createElement('div');
-      wrap.style.cssText='position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;margin:0 auto;max-width:860px;box-shadow:0 20px 50px rgba(0,0,0,0.28);';
-      wrap.innerHTML='<iframe src="https://www.youtube.com/embed/'+encodeURIComponent(ytid)+'?rel=0&modestbranding=1" title="Voz Esencia" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
-      box.parentNode.replaceChild(wrap, box);
-    }
   }
   var nameEl=document.getElementById('qh-bloqueo'); if(nameEl) nameEl.textContent=bloqueo;
   var arc=document.getElementById('qh-arc');

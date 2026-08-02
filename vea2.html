@@ -1340,11 +1340,9 @@ function renderResult() {
 
   // The quiz result IS the personalized VSL. Capture data (keepalive POST), then redirect.
   submitLead(resultKey, score);
-  var _vids = { mandibulaire:'VfoYECa3lnE', respiration:'uAlIEAIVxgM', nerveux:'pe2XyNkRolo', identite:'dbkzQoZaiJA' };
   var _vslParams = new URLSearchParams(location.search);
   _vslParams.set('bloqueo', d.title);
   _vslParams.set('score', score);
-  if (_vids[resultKey]) _vslParams.set('vid', _vids[resultKey]);   /* TEMP: existing bloqueo video until VSL video is uploaded */
   window.location.href = '/vsl-v1.html?' + _vslParams.toString();
   return;
   const mirrorKey = getMirrorAnswer(resultKey, answers);
