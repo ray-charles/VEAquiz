@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <script>
@@ -17,15 +17,28 @@
   </noscript>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz — VEA</title>
-  <meta name="description" content="Découvrez votre blocage vocal principal et recevez un exercice ciblé. Quiz gratuit créé par Mamselle Ruiz Coach — 25 ans d'expérience · plus de 1 000 voix accompagnées.">
-  <meta property="og:title" content="Quel est ton blocage vocal ? — Voice Essence Academy">
-  <meta property="og:description" content="Quiz vocal gratuit — découvre ton blocage et reçois un exercice ciblé. Créé par Mamselle Ruiz Coach.">
+  <title>¿Frustrado/a de perder el control de tu voz? — Voz Esencia Academy</title>
+  <meta name="description" content="Descubre tu bloqueo vocal principal y recibe un ejercicio personalizado. Quiz gratis creado por Mamselle Ruiz Coach — 25 años de experiencia · más de 1 000 voces acompañadas.">
+
+  <!-- The page is bilingual but the tags can only speak one language, and the
+       audience that shares this link cold is the Spanish one. French readers
+       still get French content on ?lang=fr — only the preview is fixed. -->
+  <meta property="og:title" content="¿Frustrado/a de perder el control de tu voz?">
+  <meta property="og:description" content="9 preguntas, 3 minutos. Descubre por qué tu voz te falla cuando más la necesitas — y qué hacer al respecto.">
+  <meta property="og:image" content="https://quiz.veacademy.studio/og-quiz-root-es.jpg">
+  <meta property="og:image:secure_url" content="https://quiz.veacademy.studio/og-quiz-root-es.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="¿Frustrado/a de perder el control de tu voz? Quiz gratis de 9 preguntas — Voz Esencia Academy.">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:locale:alternate" content="fr_CA">
+  <meta property="og:site_name" content="Voz Esencia Academy">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://quiz.veacademy.studio">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Quel est ton blocage vocal ? — Voice Essence Academy">
-  <meta name="twitter:description" content="Quiz vocal gratuit — découvre ton blocage et reçois un exercice ciblé.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="¿Frustrado/a de perder el control de tu voz?">
+  <meta name="twitter:description" content="9 preguntas, 3 minutos. Por qué tu voz te falla cuando más la necesitas.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=Kalam:wght@700&display=swap" rel="stylesheet">
@@ -944,7 +957,10 @@ function renderScoreArc(score) {
 // ================================================================
 // APP STATE
 // ================================================================
-let lang          = 'fr';
+// Spanish is the default: every cold share and the Messenger catch-all
+// land here, and that audience is Spanish. French is unchanged and
+// still one query string away — quiz.veacademy.studio/?lang=fr
+let lang          = 'es';
 (function() {
   var urlParams = new URLSearchParams(window.location.search);
   var urlLang = urlParams.get('lang');
