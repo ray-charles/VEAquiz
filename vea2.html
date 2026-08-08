@@ -1345,7 +1345,7 @@ function renderResult() {
   _rp.set('bloqueo', d.title);
   _rp.set('score', score);
   if (_vids[resultKey]) _rp.set('vid', _vids[resultKey]);   /* per-bloqueo explainer video on the bridge page */
-  window.location.href = '/resultado.html?' + _rp.toString();
+  window.location.href = '/tu-voz-autentica.html?' + _rp.toString();
   return;
   const mirrorKey = getMirrorAnswer(resultKey, answers);
   const headline = d.mirrorHeadlines[mirrorKey];
