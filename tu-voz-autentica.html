@@ -303,6 +303,22 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 }
 .hero-vsl.floating .vsl-close { display: block; }
 
+/* Minimal custom player — thin + auto-hiding controls so they don't cover the burned-in captions */
+.hero-vsl .vsl-play-big { position:absolute; inset:0; z-index:1; display:flex; align-items:center; justify-content:center; background:transparent; border:none; cursor:pointer; padding:0; }
+.hero-vsl .vsl-play-big svg { width:76px; height:76px; filter:drop-shadow(0 3px 10px rgba(0,0,0,0.5)); }
+.hero-vsl.playing .vsl-play-big { display:none; }
+.hero-vsl .vsl-ctrl { position:absolute; left:0; right:0; bottom:0; z-index:2;
+  display:flex; align-items:center; gap:9px; padding:14px 12px 8px;
+  background:linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0));
+  opacity:1; transition:opacity .3s ease; pointer-events:none; }
+.hero-vsl .vsl-ctrl > * { pointer-events:auto; }
+.hero-vsl.ctrl-hidden .vsl-ctrl { opacity:0; }
+.hero-vsl .vsl-btn { background:none; border:none; padding:2px; cursor:pointer; line-height:0; opacity:.92; }
+.hero-vsl .vsl-btn svg { width:19px; height:19px; display:block; fill:#fff; }
+.hero-vsl .vsl-prog { position:relative; flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,0.30); cursor:pointer; }
+.hero-vsl .vsl-prog-fill { position:absolute; left:0; top:0; bottom:0; width:0; background:var(--gold); border-radius:3px; }
+.hero-vsl .vsl-time { color:#fff; font-size:11px; font-variant-numeric:tabular-nums; opacity:.85; min-width:32px; text-align:right; }
+
 /* ===== DEVICE MOCKUPS ===== */
 .devices {
   display: flex; align-items: flex-end; justify-content: center; gap: 28px; flex-wrap: wrap;
@@ -641,13 +657,23 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
       <h1 class="hero-h1">¡Finalmente!… Proyecta Tu Voz <em>Sin Esfuerzo</em> En <span style="text-decoration:underline;text-decoration-color:#ffffff;text-decoration-thickness:1px;text-underline-offset:6px;">7 Días</span>.</h1>
       <p class="hero-proof" style="margin:14px auto 0;max-width:560px;font-style:italic;color:var(--white-78);font-size:0.98rem;line-height:1.5;"><span style="color:var(--gold);letter-spacing:2px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br>«Desde la primera clase sentí la diferencia: ahora proyecto mejor mi voz y mi garganta ya no me duele.» — <strong style="color:#fff;font-style:normal;">Bea Triz</strong></p>
 
-      <!-- VSL VIDEO — native controls give sound on/off + fullscreen for free -->
+      <!-- VSL VIDEO — custom minimal player: thin auto-hiding bar so it never covers the burned-in captions -->
       <div class="hero-vsl-slot" id="vsl-slot">
         <div class="hero-vsl" id="vsl-box">
           <button class="vsl-close" id="vsl-close" type="button" aria-label="Cerrar video">&times;</button>
-          <video id="vsl-video" controls playsinline preload="metadata" poster="vsl-poster.jpg">
+          <video id="vsl-video" playsinline preload="metadata" poster="vsl-poster.jpg">
             <source src="vsl-esp.mp4" type="video/mp4">
           </video>
+          <button class="vsl-play-big" id="vsl-playbig" type="button" aria-label="Reproducir">
+            <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="40" fill="rgba(0,0,0,0.45)"/><path d="M32 25l26 15-26 15z" fill="#fff"/></svg>
+          </button>
+          <div class="vsl-ctrl" id="vsl-ctrl">
+            <button class="vsl-btn" id="vsl-pp" type="button" aria-label="Play / Pausa"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+            <div class="vsl-prog" id="vsl-prog"><div class="vsl-prog-fill" id="vsl-progfill"></div></div>
+            <span class="vsl-time" id="vsl-time">0:00</span>
+            <button class="vsl-btn" id="vsl-mute" type="button" aria-label="Silenciar"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/></svg></button>
+            <button class="vsl-btn" id="vsl-fs" type="button" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M7 7h4V5H5v6h2V7zm10 0v4h2V5h-6v2h4zM7 17v-4H5v6h6v-2H7zm10 0h-4v2h6v-6h-2v4z"/></svg></button>
+          </div>
         </div>
       </div>
 
@@ -791,9 +817,9 @@ p.body.big { font-size: clamp(17px,2vw,20px); }
 </section>
 
 <!-- ============================================================
-     THREE DIMENSIONS — qué estás comprando (light)
+     THREE DIMENSIONS — qué estás comprando (blue / brand teal)
      ============================================================ -->
-<section class="section white">
+<section class="section dark">
   <div class="wrap">
     <div class="reveal center" style="max-width:720px;margin:0 auto 10px;">
       <h2 class="h2">¿Qué Estoy <em>Comprando?</em></h2>
@@ -1322,6 +1348,57 @@ if (typeof fbq !== 'undefined') {
     video.pause();          // never leave audio playing from an invisible player
     box.classList.remove('floating');
   });
+})();
+
+// ================================================================
+// MINIMAL VSL PLAYER — thin, auto-hiding controls (so the bar never
+// covers the burned-in captions). Replaces native <video controls>.
+// ================================================================
+(function () {
+  var box = document.getElementById('vsl-box');
+  var v = document.getElementById('vsl-video');
+  var big = document.getElementById('vsl-playbig');
+  var pp = document.getElementById('vsl-pp');
+  var prog = document.getElementById('vsl-prog');
+  var fill = document.getElementById('vsl-progfill');
+  var timeEl = document.getElementById('vsl-time');
+  var muteBtn = document.getElementById('vsl-mute');
+  var fsBtn = document.getElementById('vsl-fs');
+  if (!box || !v || !pp) return;
+
+  var PLAY = 'M8 5v14l11-7z', PAUSE = 'M6 5h4v14H6zM14 5h4v14h-4z';
+  var SND = 'M4 9v6h4l5 5V4L8 9H4z';
+  var MUTED = 'M4 9v6h4l5 5V4L8 9H4zm14.5 3l2-2-1-1-2 2-2-2-1 1 2 2-2 2 1 1 2-2 2 2 1-1-2-2z';
+  function setIcon(btn, d){ var p = btn.querySelector('path'); if (p) p.setAttribute('d', d); }
+  function fmt(s){ s = Math.max(0, Math.floor(s)); return Math.floor(s/60) + ':' + ('0' + (s%60)).slice(-2); }
+
+  var hideTimer;
+  function showCtrl(){
+    box.classList.remove('ctrl-hidden');
+    clearTimeout(hideTimer);
+    if (!v.paused) hideTimer = setTimeout(function(){ box.classList.add('ctrl-hidden'); }, 2600);
+  }
+  function toggle(){ if (v.paused) v.play(); else v.pause(); }
+
+  v.addEventListener('play',  function(){ box.classList.add('playing');    setIcon(pp, PAUSE); showCtrl(); });
+  v.addEventListener('pause', function(){ box.classList.remove('playing'); setIcon(pp, PLAY);  showCtrl(); });
+  v.addEventListener('timeupdate', function(){
+    if (v.duration){ fill.style.width = (v.currentTime / v.duration * 100) + '%'; timeEl.textContent = fmt(v.duration - v.currentTime); }
+  });
+
+  big.addEventListener('click', toggle);
+  v.addEventListener('click', toggle);
+  pp.addEventListener('click', function(e){ e.stopPropagation(); toggle(); });
+  prog.addEventListener('click', function(e){ e.stopPropagation(); var r = prog.getBoundingClientRect(); if (v.duration) v.currentTime = (e.clientX - r.left) / r.width * v.duration; });
+  muteBtn.addEventListener('click', function(e){ e.stopPropagation(); v.muted = !v.muted; setIcon(muteBtn, v.muted ? MUTED : SND); });
+  fsBtn.addEventListener('click', function(e){ e.stopPropagation();
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else if (box.requestFullscreen) { box.requestFullscreen(); }
+    else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
+  });
+
+  ['mousemove','touchstart'].forEach(function(ev){ box.addEventListener(ev, showCtrl, { passive: true }); });
+  showCtrl();
 })();
 
 // ================================================================
