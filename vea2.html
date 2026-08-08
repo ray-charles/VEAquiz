@@ -1357,12 +1357,14 @@ function renderResult() {
     // Each sentence carries ONE unique verb; ManyChat routes on "message contains <verb>":
     //   conocer -> Laríngeo | saber -> Respiratorio | descubrir -> Sist. Nervioso | entender -> Identidad
     // (No verb appears in another sentence, so branches never cross-fire.) Reveal = audio only.
+    var _nm = ((typeof leadData !== 'undefined' && leadData && leadData.name) ? String(leadData.name) : ((document.getElementById('lead-name') || {}).value || '')).trim().split(/\s+/)[0];
+    var _soy = _nm ? ('Soy ' + _nm + '. ') : '';
     var _msg = ({
-      mandibulaire: '¡Hola Mamselle! Ya terminé el quiz y quiero conocer mi resultado 💛',
-      respiration:  '¡Hola Mamselle! Acabo de terminar el quiz, quiero saber mi resultado 💛',
-      nerveux:      '¡Hola Mamselle! Terminé el quiz y me gustaría descubrir mi resultado 💛',
-      identite:     '¡Hola Mamselle! Hice el quiz y quiero entender mi resultado 💛'
-    })[resultKey] || '¡Hola Mamselle! Terminé el quiz y quiero saber mi resultado 💛';
+      mandibulaire: '¡Hola Mamselle! ' + _soy + 'Ya terminé el quiz y quiero conocer mi resultado 💛',
+      respiration:  '¡Hola Mamselle! ' + _soy + 'Acabo de terminar el quiz, quiero saber mi resultado 💛',
+      nerveux:      '¡Hola Mamselle! ' + _soy + 'Terminé el quiz y me gustaría descubrir mi resultado 💛',
+      identite:     '¡Hola Mamselle! ' + _soy + 'Hice el quiz y quiero entender mi resultado 💛'
+    })[resultKey] || ('¡Hola Mamselle! ' + _soy + 'Terminé el quiz y quiero saber mi resultado 💛');
     var _wa = 'https://wa.me/18122863678?text=' + encodeURIComponent(_msg);
     document.getElementById('result-screen').innerHTML =
       '<div style="text-align:center;padding:8px 4px;">'
