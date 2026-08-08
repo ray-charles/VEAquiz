@@ -1353,10 +1353,16 @@ function renderResult() {
     // WhatsApp-as-reveal: the blockage is NEVER shown on the web. The quiz ends on a
     // teaser; Mamselle reveals + explains it in a personal audio in WhatsApp. The
     // pre-filled keyword routes the ManyChat automation to the right audio.
-    // Opaque code (VE7-A..D) so the blockage is NEVER revealed in the message/URL —
-    // only in Mamselle's audio. ManyChat matches "message contains" the code.
-    var _kw = ({ mandibulaire:'VE7-A', respiration:'VE7-B', nerveux:'VE7-C', identite:'VE7-D' })[resultKey] || 'VE7';
-    var _msg = 'Hola Mamselle 💛 Terminé el quiz y quiero mi resultado. (ref ' + _kw + ')';
+    // The blockage is hidden inside a natural sentence — never shown in the message/URL.
+    // Each sentence carries ONE unique verb; ManyChat routes on "message contains <verb>":
+    //   conocer -> Laríngeo | saber -> Respiratorio | descubrir -> Sist. Nervioso | entender -> Identidad
+    // (No verb appears in another sentence, so branches never cross-fire.) Reveal = audio only.
+    var _msg = ({
+      mandibulaire: '¡Hola Mamselle! Ya terminé el quiz y quiero conocer mi resultado 💛',
+      respiration:  '¡Hola Mamselle! Acabo de terminar el quiz, quiero saber mi resultado 💛',
+      nerveux:      '¡Hola Mamselle! Terminé el quiz y me gustaría descubrir mi resultado 💛',
+      identite:     '¡Hola Mamselle! Hice el quiz y quiero entender mi resultado 💛'
+    })[resultKey] || '¡Hola Mamselle! Terminé el quiz y quiero saber mi resultado 💛';
     var _wa = 'https://wa.me/18122863678?text=' + encodeURIComponent(_msg);
     document.getElementById('result-screen').innerHTML =
       '<div style="text-align:center;padding:8px 4px;">'
