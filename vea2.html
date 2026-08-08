@@ -1345,7 +1345,17 @@ function renderResult() {
   _rp.set('bloqueo', d.title);
   _rp.set('score', score);
   if (_vids[resultKey]) _rp.set('vid', _vids[resultKey]);   /* per-bloqueo explainer video on the bridge page */
-  window.location.href = '/tu-voz-autentica.html?' + _rp.toString();
+
+  // Where the quiz delivers the result. Flip to 'whatsapp' once the 4 Mamselle audios
+  // are live in ManyChat (keyword flows: LARINGE / RESPIRACION / NERVIOS / IDENTIDAD).
+  var RESULT_CHANNEL = 'vsl';   // 'vsl' | 'whatsapp'
+  if (RESULT_CHANNEL === 'whatsapp') {
+    var _kw = ({ mandibulaire:'LARINGE', respiration:'RESPIRACION', nerveux:'NERVIOS', identite:'IDENTIDAD' })[resultKey] || 'RESULTADO';
+    var _msg = 'Hola Mamselle 💛 Terminé el quiz, quiero mi resultado 👉 ' + _kw;
+    window.location.href = 'https://wa.me/18122863678?text=' + encodeURIComponent(_msg);
+  } else {
+    window.location.href = '/tu-voz-autentica.html?' + _rp.toString();
+  }
   return;
   const mirrorKey = getMirrorAnswer(resultKey, answers);
   const headline = d.mirrorHeadlines[mirrorKey];
