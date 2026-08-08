@@ -642,6 +642,10 @@ const FORMSPREE_ENDPOINT_V2 = 'https://formspree.io/f/xdawrzrj';
 // ================================================================
 // QUESTIONS
 // ================================================================
+// Capture ?channel=whatsapp at load (before the quiz rewrites the URL to ?q=N) so the
+// end-to-end click-through can preview the WhatsApp ending. Testing only; remove-safe.
+try { var _ch = new URLSearchParams(location.search).get('channel'); if (_ch === 'whatsapp') sessionStorage.setItem('vea_force_channel','whatsapp'); else if (_ch) sessionStorage.removeItem('vea_force_channel'); } catch (e) {}
+
 const QUESTIONS = [
   {
     id: 0, type: 'single',
@@ -1268,21 +1272,40 @@ function handleNext() {
   advanceQuestion();
 }
 
+// Effective result channel. Live default is 'vsl'; FLIP THIS ONE LINE to 'whatsapp' when
+// the 4 Mamselle audios are live in ManyChat. ?channel=whatsapp (captured at load into
+// sessionStorage) overrides for testing without touching the default.
+function resultChannel() {
+  var c = 'whatsapp';   // 'vsl' | 'whatsapp'  <- cutover switch (LIVE on WhatsApp 2026-08-08)
+  try { if (sessionStorage.getItem('vea_force_channel') === 'whatsapp') c = 'whatsapp'; } catch (e) {}
+  return c;
+}
+
 function showTransitionThenResult() {
-  // Show all screens hidden, transition visible
+  // Show all screens hidden
   document.getElementById('lead-screen').style.display       = 'none';
   document.getElementById('quiz-screen').style.display       = 'none';
   document.getElementById('tiebreak-screen').style.display   = 'none';
-  document.getElementById('transition-screen').style.display = 'block';
-  document.getElementById('result-screen').style.display     = 'none';
   document.getElementById('quiz-social-proof').style.display = 'none';
 
-  setTimeout(function() {
+  function go() {
     showResult = true;
     sessionStorage.setItem('veaQuizState', JSON.stringify({ answers: answers, profile: profile, leadData: leadData, tiebreakAnswer: tiebreakAnswer }));
     pushURL();
     render();
-  }, 3000);
+  }
+
+  // WhatsApp funnel: no loading page — the teaser IS the destination (with the review on it).
+  // Go straight there. The VSL channel keeps its 3s "Preparando tu diagnóstico…" transition.
+  if (resultChannel() === 'whatsapp') {
+    document.getElementById('transition-screen').style.display = 'none';
+    go();
+    return;
+  }
+
+  document.getElementById('transition-screen').style.display = 'block';
+  document.getElementById('result-screen').style.display     = 'none';
+  setTimeout(go, 3000);
 }
 
 // ================================================================
@@ -1348,7 +1371,7 @@ function renderResult() {
 
   // Where the quiz delivers the result. Flip to 'whatsapp' once the 4 Mamselle audios
   // are live in ManyChat (keyword flows: LARINGE / RESPIRACION / NERVIOS / IDENTIDAD).
-  var RESULT_CHANNEL = 'vsl';   // 'vsl' | 'whatsapp'
+  var RESULT_CHANNEL = resultChannel();
   if (RESULT_CHANNEL === 'whatsapp') {
     // WhatsApp-as-reveal: the blockage is NEVER shown on the web. The quiz ends on a
     // teaser; Mamselle reveals + explains it in a personal audio in WhatsApp. The
@@ -1360,18 +1383,32 @@ function renderResult() {
     var _nm = ((typeof leadData !== 'undefined' && leadData && leadData.name) ? String(leadData.name) : ((document.getElementById('lead-name') || {}).value || '')).trim().split(/\s+/)[0];
     var _soy = _nm ? ('Soy ' + _nm + '. ') : '';
     var _msg = ({
-      mandibulaire: '¡Hola Mamselle! ' + _soy + 'Ya terminé el quiz y quiero conocer mi resultado 💛',
-      respiration:  '¡Hola Mamselle! ' + _soy + 'Acabo de terminar el quiz, quiero saber mi resultado 💛',
-      nerveux:      '¡Hola Mamselle! ' + _soy + 'Terminé el quiz y me gustaría descubrir mi resultado 💛',
-      identite:     '¡Hola Mamselle! ' + _soy + 'Hice el quiz y quiero entender mi resultado 💛'
-    })[resultKey] || ('¡Hola Mamselle! ' + _soy + 'Terminé el quiz y quiero saber mi resultado 💛');
+      mandibulaire: '¡Hola Mamselle! ' + _soy + 'Ya terminé el quiz y quiero conocer mi resultado',
+      respiration:  '¡Hola Mamselle! ' + _soy + 'Acabo de terminar el quiz, quiero saber mi resultado',
+      nerveux:      '¡Hola Mamselle! ' + _soy + 'Terminé el quiz y me gustaría descubrir mi resultado',
+      identite:     '¡Hola Mamselle! ' + _soy + 'Hice el quiz y quiero entender mi resultado'
+    })[resultKey] || ('¡Hola Mamselle! ' + _soy + 'Terminé el quiz y quiero saber mi resultado');
     var _wa = 'https://wa.me/18122863678?text=' + encodeURIComponent(_msg);
+    // Keep the exact quiz-question chrome (dark teal card, white text) so this
+    // WhatsApp step feels like part of the quiz, not a separate "results" page.
+    // updateBackground(7) above flipped to light result mode — undo it.
+    updateBackground(6);
+    // Wrap in a flex column at a quiz-question's content height (~489px inside the
+    // card's 32px padding = ~553px card, matching a 4-option question on mobile) so
+    // the box is the same height as the questions and the CTA sits at the bottom
+    // like the quiz's nav button — it reads as one more question, not a results page.
     document.getElementById('result-screen').innerHTML =
-      '<div style="text-align:center;padding:8px 4px;">'
-      + '<div style="font-family:\'Montserrat\',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#146183;margin-bottom:14px;">Tu resultado está listo</div>'
-      + '<div style="font-family:\'Montserrat\',sans-serif;font-weight:700;font-size:clamp(22px,5vw,30px);line-height:1.18;color:#146183;">¿Quieres que Mamselle te explique <span style="font-family:\'Kalam\',cursive;font-weight:700;color:#d4af37;">tu bloqueo</span>?</div>'
-      + '<a href="' + _wa + '" style="display:block;max-width:420px;margin:24px auto 0;background:#E6B325;color:#2f1525;font-family:\'Montserrat\',sans-serif;font-weight:700;font-size:16px;text-align:center;padding:17px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 22px rgba(230,179,37,.35);"><svg viewBox="0 0 32 32" width="20" height="20" fill="#2f1525" style="vertical-align:-4px;margin-right:9px;"><path d="M16 3C9 3 3.5 8.5 3.5 15.4c0 2.4.7 4.7 1.9 6.7L3 29l7.1-2.3c1.9 1 4 1.6 6.1 1.6 6.9 0 12.5-5.5 12.5-12.4C28.7 8.5 23 3 16 3zm0 22.6c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.2 1.4 1.4-4.1-.3-.4a10 10 0 0 1-1.6-5.4C5.6 9.9 10.2 5.4 16 5.4S26.4 9.9 26.4 15.4 21.8 25.6 16 25.6zm5.8-7.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>Quiero mi resultado &rarr;</a>'
-      + '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:16px auto 0;font-family:\'DM Sans\',sans-serif;font-size:12.5px;color:#6b5560;"><span>⭐ 5.0 en Google</span><span>🔒 100% gratis, sin spam</span><span>⚡ Respuesta inmediata</span></div>'
+      '<div style="display:flex;flex-direction:column;min-height:505px;text-align:center;">'
+      + '<div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>'
+      + '<div style="flex:1;display:flex;flex-direction:column;justify-content:center;">'
+      + '<div class="question-text" style="text-align:center;">¿Quieres que Mamselle te explique <span style="font-family:\'Kalam\',cursive;font-weight:700;color:#d4af37;">tu bloqueo</span>?</div>'
+      + '<div style="background:rgba(255,255,255,0.06);border-left:3px solid #53c1c2;border-radius:12px;padding:15px 16px;margin:22px auto 0;max-width:420px;text-align:left;">'
+      + '<p style="font-family:\'DM Sans\',sans-serif;font-size:13.5px;font-style:italic;color:rgba(255,255,255,0.90);line-height:1.6;margin:0 0 12px;">«&nbsp;¡Una experiencia increíble que recomiendo a todos!&nbsp;»</p>'
+      + '<div style="display:flex;align-items:center;gap:10px;"><img src="/Lea.png" alt="Léa Plourde-Archer" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;"><span style="font-family:\'DM Sans\',sans-serif;font-size:12px;color:rgba(255,255,255,0.65);">Léa Plourde-Archer · Canada</span></div>'
+      + '</div>'
+      + '<a href="' + _wa + '" class="btn-next" style="display:block;width:100%;box-sizing:border-box;text-align:center;font-size:16px;font-weight:700;padding:16px 20px;margin:22px 0 0;border-radius:10px;text-decoration:none;"><svg viewBox="0 0 32 32" width="20" height="20" fill="#2f1525" style="vertical-align:-4px;margin-right:9px;"><path d="M16 3C9 3 3.5 8.5 3.5 15.4c0 2.4.7 4.7 1.9 6.7L3 29l7.1-2.3c1.9 1 4 1.6 6.1 1.6 6.9 0 12.5-5.5 12.5-12.4C28.7 8.5 23 3 16 3zm0 22.6c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.2 1.4 1.4-4.1-.3-.4a10 10 0 0 1-1.6-5.4C5.6 9.9 10.2 5.4 16 5.4S26.4 9.9 26.4 15.4 21.8 25.6 16 25.6zm5.8-7.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>Quiero mi resultado &rarr;</a>'
+      + '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:18px 0 0;font-family:\'DM Sans\',sans-serif;font-size:12.5px;color:rgba(255,255,255,0.55);"><span>⭐ 5.0 en Google</span><span>🔒 100% gratis, sin spam</span><span>⚡ Respuesta inmediata</span></div>'
+      + '</div>'
       + '</div>';
     return;
   }
