@@ -1350,12 +1350,23 @@ function renderResult() {
   // are live in ManyChat (keyword flows: LARINGE / RESPIRACION / NERVIOS / IDENTIDAD).
   var RESULT_CHANNEL = 'vsl';   // 'vsl' | 'whatsapp'
   if (RESULT_CHANNEL === 'whatsapp') {
+    // WhatsApp-as-reveal: the blockage is NEVER shown on the web. The quiz ends on a
+    // teaser; Mamselle reveals + explains it in a personal audio in WhatsApp. The
+    // pre-filled keyword routes the ManyChat automation to the right audio.
     var _kw = ({ mandibulaire:'LARINGE', respiration:'RESPIRACION', nerveux:'NERVIOS', identite:'IDENTIDAD' })[resultKey] || 'RESULTADO';
     var _msg = 'Hola Mamselle 💛 Terminé el quiz, quiero mi resultado 👉 ' + _kw;
-    window.location.href = 'https://wa.me/18122863678?text=' + encodeURIComponent(_msg);
-  } else {
-    window.location.href = '/tu-voz-autentica.html?' + _rp.toString();
+    var _wa = 'https://wa.me/18122863678?text=' + encodeURIComponent(_msg);
+    document.getElementById('result-screen').innerHTML =
+      '<div style="text-align:center;padding:8px 4px;">'
+      + '<div style="font-family:\'Montserrat\',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#146183;margin-bottom:14px;">Tu resultado está listo</div>'
+      + '<div style="font-family:\'Montserrat\',sans-serif;font-weight:700;font-size:clamp(22px,5vw,30px);line-height:1.15;color:#146183;">Mamselle te explica tu bloqueo <span style="font-family:\'Kalam\',cursive;font-weight:700;color:#d4af37;">en un audio</span></div>'
+      + '<p style="font-family:\'DM Sans\',sans-serif;font-size:15px;line-height:1.6;color:#2f1525;margin:14px auto 0;max-width:420px;">Grabó un mensaje personal explicándote tu bloqueo — y exactamente cómo resolverlo. Te lo manda por WhatsApp, ahora mismo.</p>'
+      + '<a href="' + _wa + '" style="display:block;max-width:420px;margin:22px auto 0;background:#E6B325;color:#2f1525;font-family:\'Montserrat\',sans-serif;font-weight:700;font-size:16px;text-align:center;padding:17px 20px;border-radius:12px;text-decoration:none;box-shadow:0 8px 22px rgba(230,179,37,.35);">Quiero mi resultado 🎧 &rarr;</a>'
+      + '<p style="font-family:\'DM Sans\',sans-serif;font-size:12px;color:#8a7d76;margin:12px 0 0;">También te lo enviamos por correo.</p>'
+      + '</div>';
+    return;
   }
+  window.location.href = '/tu-voz-autentica.html?' + _rp.toString();
   return;
   const mirrorKey = getMirrorAnswer(resultKey, answers);
   const headline = d.mirrorHeadlines[mirrorKey];
