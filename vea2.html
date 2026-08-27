@@ -1428,10 +1428,32 @@ function renderResult() {
       + '<p style="font-family:\'DM Sans\',sans-serif;font-size:13.5px;font-style:italic;color:rgba(255,255,255,0.90);line-height:1.6;margin:0 0 12px;">«&nbsp;¡Una experiencia increíble que recomiendo a todos!&nbsp;»</p>'
       + '<div style="display:flex;align-items:center;gap:10px;"><img src="/Lea.png" alt="Léa Plourde-Archer" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;"><span style="font-family:\'DM Sans\',sans-serif;font-size:12px;color:rgba(255,255,255,0.65);">Léa Plourde-Archer · Canada</span></div>'
       + '</div>'
-      + '<a href="' + _wa + '" class="btn-next" style="display:block;width:100%;box-sizing:border-box;text-align:center;font-size:16px;font-weight:700;padding:16px 20px;margin:22px 0 0;border-radius:10px;text-decoration:none;"><svg viewBox="0 0 32 32" width="20" height="20" fill="#2f1525" style="vertical-align:-4px;margin-right:9px;"><path d="M16 3C9 3 3.5 8.5 3.5 15.4c0 2.4.7 4.7 1.9 6.7L3 29l7.1-2.3c1.9 1 4 1.6 6.1 1.6 6.9 0 12.5-5.5 12.5-12.4C28.7 8.5 23 3 16 3zm0 22.6c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.2 1.4 1.4-4.1-.3-.4a10 10 0 0 1-1.6-5.4C5.6 9.9 10.2 5.4 16 5.4S26.4 9.9 26.4 15.4 21.8 25.6 16 25.6zm5.8-7.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>Quiero mi resultado &rarr;</a>'
+      + '<a href="' + _wa + '" id="wa-cta-btn" class="btn-next" style="display:block;width:100%;box-sizing:border-box;text-align:center;font-size:16px;font-weight:700;padding:16px 20px;margin:22px 0 0;border-radius:10px;text-decoration:none;"><svg viewBox="0 0 32 32" width="20" height="20" fill="#2f1525" style="vertical-align:-4px;margin-right:9px;"><path d="M16 3C9 3 3.5 8.5 3.5 15.4c0 2.4.7 4.7 1.9 6.7L3 29l7.1-2.3c1.9 1 4 1.6 6.1 1.6 6.9 0 12.5-5.5 12.5-12.4C28.7 8.5 23 3 16 3zm0 22.6c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.2 1.4 1.4-4.1-.3-.4a10 10 0 0 1-1.6-5.4C5.6 9.9 10.2 5.4 16 5.4S26.4 9.9 26.4 15.4 21.8 25.6 16 25.6zm5.8-7.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>Quiero mi resultado &rarr;</a>'
       + '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:18px 0 0;font-family:\'DM Sans\',sans-serif;font-size:12.5px;color:rgba(255,255,255,0.55);"><span>⭐ 5.0 en Google</span><span>🔒 100% gratis, sin spam</span><span>⚡ Respuesta inmediata</span></div>'
       + '</div>'
       + '</div>';
+
+    // They answered all 6 questions and reached the reveal step. Until now the WhatsApp
+    // branch returned before any of this fired, so everything after the opt-in was invisible.
+    if (!pixelFired && typeof fbq !== 'undefined') {
+      pixelFired = true;
+      fbq('track', 'CompleteRegistration', { content_name: resultKey, status: lang });
+      fbq('trackCustom', 'Quiz_ResultViewed', {
+        vocal_block: resultKey, vocal_score: score, language: lang
+      });
+    }
+
+    // The real handoff. Standard Contact so Meta can optimize on it immediately;
+    // Quiz_WhatsAppClick keeps the per-bloqueo breakdown for reporting.
+    // No preventDefault: blocking the tap would delay opening WhatsApp.
+    var _waBtn = document.getElementById('wa-cta-btn');
+    if (_waBtn) _waBtn.addEventListener('click', function () {
+      if (typeof fbq === 'undefined') return;
+      fbq('track', 'Contact', { content_name: 'Quiz WhatsApp Reveal', content_category: resultKey });
+      fbq('trackCustom', 'Quiz_WhatsAppClick', {
+        vocal_block: resultKey, vocal_score: score, language: lang
+      });
+    });
     return;
   }
   window.location.href = '/tu-voz-autentica.html?' + _rp.toString();
