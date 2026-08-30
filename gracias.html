@@ -68,12 +68,16 @@ src="https://www.facebook.com/tr?id=1888097325094612&ev=PageView&noscript=1" alt
     padding:17px 20px;border-radius:9px;box-sizing:border-box;
   }
   .btn-gold{background:var(--gold);color:#2f1525}
-  .btn-ghost{background:transparent;color:var(--deep);border:1.5px solid var(--deep)}
   .btns{display:flex;flex-direction:column;gap:11px}
   .sig{
     border-top:1px solid var(--line);padding-top:22px;
-    display:flex;flex-direction:column;gap:5px;
+    display:flex;align-items:flex-start;gap:16px;
   }
+  .avatar{
+    width:76px;height:76px;border-radius:50%;object-fit:cover;flex:none;
+    border:2px solid #fff;box-shadow:0 1px 6px rgba(12,24,32,.14);
+  }
+  .sig-text{display:flex;flex-direction:column;gap:5px}
   .sig .name{font-family:'Montserrat',serif;font-style:italic;font-size:1.05rem;color:var(--deep)}
   a.plain{color:var(--blue)}
   @media(max-width:420px){.wrap{padding:40px 18px 56px;gap:24px}}
@@ -105,14 +109,16 @@ src="https://www.facebook.com/tr?id=1888097325094612&ev=PageView&noscript=1" alt
   </div>
 
   <div class="btns">
-    <a class="btn btn-gold" href="https://voz-esencia-academy-cbf28a.circle.so/">Entrar a mi curso</a>
-    <a class="btn btn-ghost" id="wa-btn" href="https://wa.me/18122863678?text=%C2%A1Hola%20Mamselle!%20Acabo%20de%20entrar%20al%20curso">Escribirme por WhatsApp</a>
+    <a class="btn btn-gold" href="https://voz-esencia-academy-cbf28a.circle.so/c/revela-tu-voz">Entrar a mi curso</a>
   </div>
 
   <div class="sig">
-    <p>Si algo no te queda claro, escríbeme. Lo leo yo.</p>
-    <p class="name">Mamselle Ruiz</p>
-    <p class="muted">Cantar a diario, hace bien.</p>
+    <img class="avatar" src="/mamselle-close.jpg" alt="Mamselle Ruiz" width="76" height="76" loading="lazy">
+    <div class="sig-text">
+      <p>Si algo no te queda claro, escríbeme dentro de la comunidad. Lo leo yo.</p>
+      <p class="name">Mamselle Ruiz</p>
+      <p class="muted">Cantar a diario, hace bien.</p>
+    </div>
   </div>
 
 </div>
