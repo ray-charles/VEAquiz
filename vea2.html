@@ -1218,7 +1218,7 @@ function getMicrofeedback(qId, idx, currentAnswer) {
   return q.microfeedback || null;
 }
 
-function showMicrofeedback(text, container, useDarkColor) {
+function showMicrofeedback(text, container) {
   // Remove any existing microfeedback/siguiente (by ID and class)
   var oldFb = document.getElementById('microfeedback-text');
   if (oldFb) oldFb.remove();
@@ -1231,7 +1231,6 @@ function showMicrofeedback(text, container, useDarkColor) {
   mf.textContent = text;
   mf.style.opacity = '0';
   mf.style.transition = 'opacity 0.3s ease';
-  if (useDarkColor) mf.style.color = 'var(--dark)';
   container.appendChild(mf);
   microfeedbackShown = true;
 
@@ -1272,9 +1271,7 @@ function handleOptionClick(qId, idx, q) {
   var feedbackText = getMicrofeedback(qId, idx, answers[qId]);
   var quizScreen = document.getElementById('quiz-screen');
   if (feedbackText) {
-    // Q5 (index 4) and Q6 (index 5) have light backgrounds — use dark text
-    var isLightQ = (currentQ === 4 || currentQ === 5);
-    showMicrofeedback(feedbackText, quizScreen, isLightQ);
+    showMicrofeedback(feedbackText, quizScreen);
   } else if (q.type === 'single') {
     // Single with no feedback — advance immediately
     microfeedbackShown = true;
