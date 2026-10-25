@@ -227,22 +227,28 @@ details:first-child{border-top:1px solid var(--line)}
 }
 .hero-vsl video { display: block; width: 100%; aspect-ratio: 16/9; background: #03121A; }
 
-/* Floating mini-player once the hero player scrolls away */
+/* Small player pinned top-right (below the top bar) once the hero player scrolls away while playing.
+   --vsl-top is measured in JS from the top bar. Bottom controls hidden so the captions stay clear. */
 .hero-vsl.floating {
-  position: fixed; right: 20px; bottom: 20px; z-index: 90;
-  width: 360px; max-width: 42vw;
-  box-shadow: 0 18px 44px rgba(0,0,0,0.55);
+  position: fixed; top: var(--vsl-top, 12px); right: 12px; z-index: 90;
+  width: 260px; border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
 }
 @media (max-width: 700px) {
-  .hero-vsl.floating { right: 10px; left: 10px; bottom: 10px; width: auto; max-width: none; }
+  .hero-vsl.floating { right: 10px; width: max(150px, 44vw); }
 }
-.vsl-close {
-  position: absolute; top: 6px; right: 6px; z-index: 2;
-  width: 28px; height: 28px; border: none; border-radius: 50%;
-  background: rgba(0,0,0,0.6); color: #fff; font-size: 17px; line-height: 1;
-  cursor: pointer; display: none;
+.hero-vsl.floating .vsl-ctrl { display: none; }
+.hero-vsl.floating .vsl-play-big { align-items: center; justify-content: center; padding: 0; }
+.hero-vsl.floating .vsl-play-big svg { width: 40px; height: 40px; }
+.vsl-close, .vsl-mini-fs {
+  position: absolute; top: 6px; right: 6px; z-index: 3;
+  width: 32px; height: 32px; padding: 0; border: none; border-radius: 50%;
+  background: rgba(0,0,0,0.6); color: #fff; font-size: 19px; line-height: 1;
+  cursor: pointer; display: none; align-items: center; justify-content: center;
 }
-.hero-vsl.floating .vsl-close { display: block; }
+.vsl-mini-fs { right: auto; left: 6px; }
+.vsl-mini-fs svg { width: 18px; height: 18px; fill: #fff; }
+.hero-vsl.floating .vsl-close, .hero-vsl.floating .vsl-mini-fs { display: flex; }
 
 /* Minimal custom player — thin + auto-hiding controls so they don't cover the burned-in captions */
 .hero-vsl .vsl-play-big { position:absolute; inset:0; z-index:1; display:flex; align-items:center; justify-content:center; background:transparent; border:none; cursor:pointer; padding:0; }
@@ -302,6 +308,7 @@ details:first-child{border-top:1px solid var(--line)}
       <div class="hero-vsl-slot" id="vsl-slot">
         <div class="hero-vsl" id="vsl-box">
           <button class="vsl-close" id="vsl-close" type="button" aria-label="Cerrar video">&times;</button>
+          <button class="vsl-mini-fs" id="vsl-minifs" type="button" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M7 7h4V5H5v6h2V7zm10 0v4h2V5h-6v2h4zM7 17v-4H5v6h6v-2H7zm10 0h-4v2h6v-6h-2v4z"/></svg></button>
           <video id="vsl-video" playsinline preload="metadata" poster="vsl-poster.jpg">
             <source src="vsl-esp.mp4" type="video/mp4">
           </video>
@@ -579,20 +586,36 @@ if (typeof fbq !== 'undefined') {
 })();
 
 // ================================================================
-// FLOATING VSL — once the hero player scrolls out, pin it bottom-right.
+// FLOATING VSL: once the hero player scrolls out WHILE PLAYING, shrink it
+// to a small player top-right, just below the top bar.
 // Same <video> element (never re-parented), so playback and audio keep going.
-// Floats whether or not it is playing; only the close button dismisses it.
+// A video never started (or paused) does not float; the close button dismisses it for good.
 // ================================================================
 (function () {
   var slot = document.getElementById('vsl-slot');
   var box = document.getElementById('vsl-box');
   var video = document.getElementById('vsl-video');
   var closeBtn = document.getElementById('vsl-close');
+  var fsBtn = document.getElementById('vsl-minifs');
+  var bar = document.querySelector('body > header');
   if (!slot || !box || !video) return;
   var dismissed = false;
+  // Sit 12px below the top bar's bottom edge (0 once a non-sticky bar has scrolled away).
+  function placeBelowBar() {
+    var b = bar ? Math.max(0, bar.getBoundingClientRect().bottom) : 0;
+    box.style.setProperty('--vsl-top', (b + 12) + 'px');
+  }
   new IntersectionObserver(function (entries) {
-    box.classList.toggle('floating', !entries[0].isIntersecting && !dismissed);
+    var float = !entries[0].isIntersecting && !dismissed && !video.paused;
+    if (float) placeBelowBar();
+    box.classList.toggle('floating', float);
   }, { threshold: 0 }).observe(slot);
+  window.addEventListener('resize', function () { if (box.classList.contains('floating')) placeBelowBar(); });
+  if (fsBtn) fsBtn.addEventListener('click', function () {
+    var go = video.requestFullscreen || video.webkitRequestFullscreen;
+    if (go) { var p = go.call(video); if (p && p.catch) p.catch(function () {}); }
+    else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();   // iPhone Safari
+  });
   if (closeBtn) closeBtn.addEventListener('click', function () {
     dismissed = true;
     video.pause();          // never leave audio playing from an invisible player
